@@ -1,0 +1,47 @@
+.container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+
+  --level-size: 80px;
+  --active-color: pink;
+  --inactive-color: lightgray;
+  --connector-width: 40;
+}
+
+.svg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.connector {
+  fill: none;
+  stroke: var(--inactive-color);
+  stroke-width: var(--connector-width);
+}
+
+.connector.active {
+  fill: none;
+  stroke: var(--active-color);
+  stroke-width: var(--connector-width);
+}
+
+.level {
+  position: absolute;
+  width: var(--level-size);
+  height: var(--level-size);
+  border-radius: 50%;
+  background-color: var(--inactive-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transform: translate(-50%, 0);
+}
+
+.level.active {
+  background-color: var(--active-color);
+}
