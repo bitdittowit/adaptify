@@ -1,7 +1,9 @@
+import ProgressStepper from "@/components/Progress/ProgressStepper";
+
 export default function Home() {
   return (
     <main>
-      <div>Sync test</div>
+      <ProgressStepper />
     </main>
   );
 }

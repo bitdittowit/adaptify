@@ -1,16 +1,16 @@
 "use client";
 
 import { useState, useRef } from 'react';
+import Level from './Level';
 import { LEVELS } from '@/utils/constants';
 import usePaths from '@/hooks/usePaths';
-import Level from './Level';
 import styles from './ProgressStepper.module.css';
 
 
 const ProgressStepper: React.FC = () => {
   const [activeLevel, setActiveLevel] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const paths = usePaths(LEVELS, activeLevel, containerRef, styles.connector, styles.active, styles.back);
+  const paths = usePaths(LEVELS, activeLevel, containerRef, styles.connector, styles.active);
 
   const handleLevelClick = (levelId: number) => {
     if (levelId <= activeLevel + 1) {
@@ -19,10 +19,7 @@ const ProgressStepper: React.FC = () => {
   };
 
   return (
-    <div
-    className={styles.container}
-    ref={containerRef}
-    style={{minHeight: LEVELS[LEVELS.length - 1].position.bottom + 120}}>
+    <div className={styles.container} ref={containerRef}>
       <svg className={styles.svg}>{paths}</svg>
       {LEVELS.map(({ id, position }) => (
         <Level
