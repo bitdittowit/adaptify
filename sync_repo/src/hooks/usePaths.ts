@@ -1,4 +1,4 @@
-import { calculatePosition, createPath } from '@/utils/connectors';
+import { calculatePathType, calculatePosition, createPath } from '@/utils/connectors';
 import { useEffect, useState, RefObject } from 'react';
 
 interface Level {
@@ -22,11 +22,29 @@ const usePaths = (
       const { offsetWidth, offsetHeight } = containerRef.current;
 
       const newPaths = levels.slice(0, -1).map((_, index) => {
-        const start = calculatePosition(levels[index].position, offsetWidth, offsetHeight);
-        const end = calculatePosition(levels[index + 1].position, offsetWidth, offsetHeight);
+        const currentEndPointPosition = levels[index].position;
+        const nextEndPointPosition = levels[index + 1].position;
+
+        const pathType = calculatePathType(
+          currentEndPointPosition.left,
+          nextEndPointPosition.left,
+        );
+
+        const start = calculatePosition(currentEndPointPosition, offsetWidth, offsetHeight);
+        const end = calculatePosition(nextEndPointPosition, offsetWidth, offsetHeight);
         const isActive = index < activeLevel - 1;
 
-        return createPath(start, end, isActive, index, pathClassName, activePathClassName, activeBackPathClassName);
+        return createPath(
+            {start, end},
+            pathType,
+            {
+              isActive,
+              key: index,
+              pathClassName,
+              activePathClassName,
+              activeBackPathClassName,
+            }
+          );
       });
 
       setPaths(newPaths);
