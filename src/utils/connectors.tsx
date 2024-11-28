@@ -1,8 +1,9 @@
-import { Coordinates } from "@/types";
+import { Coordinates, Path, PathEndpoint, PathType, Position } from "@/types";
 import { Fragment } from "react";
+import { getCenterToLeftPathD, getCenterToRightPathD, getLeftToCenterPathD, getRightToLeftPathD } from "@/utils/pathD";
 
 export const calculatePosition = (
-  position: { bottom: number; left: string },
+  position: Position,
   containerWidth: number,
   offsetHeight: number
 ): Coordinates => ({
@@ -10,17 +11,57 @@ export const calculatePosition = (
   y: offsetHeight - position.bottom - 40,
 });
 
+export const convertPercentToPosition = (percent: string): PathEndpoint => {
+  const percentValue = parseFloat(percent);
+
+  if (percentValue >= 40 && percentValue <= 60) return PathEndpoint.CENTER;
+  if (percentValue >= 0 && percentValue < 40) return PathEndpoint.LEFT;
+  if (percentValue > 60 && percentValue <= 100) return PathEndpoint.RIGHT;
+
+  throw new Error(`Invalid percent: ${percent}`);
+};
+
+export const calculatePathType = (start: string, end: string): PathType => {
+  const startPosition = convertPercentToPosition(start);
+  const endPosition = convertPercentToPosition(end);
+
+  return `${startPosition}_${endPosition}` as PathType;
+};
+
+const createPathD = (path: Path, pathType: PathType): string => {
+  switch (pathType) {
+    case (PathType.CENTER_LEFT):
+      return getCenterToLeftPathD(path);
+    case (PathType.RIGHT_LEFT):
+      return getRightToLeftPathD(path);
+    case (PathType.CENTER_RIGHT):
+      return getCenterToRightPathD(path);
+    default:
+      return getLeftToCenterPathD(path);
+  }
+};
+
 export const createPath = (
-  start: Coordinates,
-  end: Coordinates,
-  isActive: boolean,
-  key?: number,
-  pathClassName?: string,
-  activePathClassName?: string,
-  activeBackPathClassName?: string,
+  path: Path,
+  pathType: PathType,
+  options: {
+    isActive: boolean,
+    key?: number,
+    pathClassName?: string,
+    activePathClassName?: string,
+    activeBackPathClassName?: string,
+  },
 ): JSX.Element => {
-  const controlPointX = (start.x + end.x) / 2;
-  const verticalOffset = Math.abs(start.y - end.y) / 3;
+  const {
+    isActive,
+    key,
+    pathClassName,
+    activePathClassName,
+    activeBackPathClassName,
+  } = options;
+
+  const pathD = createPathD(path, pathType);
+  const pathLength = Math.min(window.innerWidth, 1024) * 1.2;
 
   return (
     <Fragment key={key}>
@@ -28,26 +69,26 @@ export const createPath = (
         (
           <path
             key={`path-active-back-${key}`}
-            d={`M ${start.x} ${start.y} C ${controlPointX} ${end.y - verticalOffset} ${controlPointX} ${start.y + verticalOffset} ${end.x} ${end.y}`}
+            d={pathD}
             className={`${pathClassName} ${activePathClassName ?? 'active'} ${activeBackPathClassName ?? 'back'}`}
-            strokeDasharray={window.innerWidth}
-            strokeDashoffset={window.innerWidth}
+            strokeDasharray={pathLength}
+            strokeDashoffset={pathLength}
           />
         )
       }
       <path
         key={`path-${key}`}
-        d={`M ${start.x} ${start.y} C ${controlPointX} ${end.y - verticalOffset} ${controlPointX} ${start.y + verticalOffset} ${end.x} ${end.y}`}
+        d={pathD}
         className={`${pathClassName}`}
       />
       {isActive && 
         (
           <path
             key={`path-active-${key}`}
-            d={`M ${start.x} ${start.y} C ${controlPointX} ${end.y - verticalOffset} ${controlPointX} ${start.y + verticalOffset} ${end.x} ${end.y}`}
+            d={pathD}
             className={`${pathClassName} ${activePathClassName ?? 'active'}`}
-            strokeDasharray={window.innerWidth}
-            strokeDashoffset={window.innerWidth}
+            strokeDasharray={pathLength}
+            strokeDashoffset={pathLength}
           />
         )
       }
