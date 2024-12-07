@@ -1,0 +1,10 @@
+html {
+  scroll-behavior: smooth;
+}
+
+main {
+  min-height: 100vh;
+  background-color: #fafafa;
+
+  display: grid;
+}
