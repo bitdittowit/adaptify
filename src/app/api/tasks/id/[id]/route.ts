@@ -3,11 +3,11 @@ import { getDefaultUser } from '@/app/constants/user';
 
 export async function GET(
   _request: Request,
-  { params }: { params: { id: string } },
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const user = await getDefaultUser();
   
-  const { id } = params;
+  const { id } = (await params);
 
   const task = user.tasks.find((task) => task.id === parseInt(id));
 
