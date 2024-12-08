@@ -6,6 +6,8 @@ import usePaths from '@/hooks/usePaths';
 import Level from './Level';
 import styles from './ProgressStepper.module.css';
 
+const LAYOUT_OFFSET_PX = 120;
+
 const ProgressStepper: React.FC = () => {
   const [activeLevel, setActiveLevel] = useState(0);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -25,7 +27,9 @@ const ProgressStepper: React.FC = () => {
     <div
     className={styles.container}
     ref={containerRef}
-    style={{minHeight: LEVELS[LEVELS.length - 1].position.bottom + 120}}>
+    style={{
+      minHeight: LEVELS[LEVELS.length - 1].position.bottom + LAYOUT_OFFSET_PX,
+    }}>
       <svg className={styles.svg}>{paths}</svg>
       {LEVELS.map(({ id, position }) => (
         <Level
