@@ -1,6 +1,6 @@
 import { User } from '@/types';
-import { generateTasks } from '@/utils/generateTasks';
-import { getCountryVisaType } from '@/utils/getCountryVisaType';
+import { generateTasks } from '@/utils/backend_potential/generateTasks';
+import { getCountryVisaType } from '@/utils/backend_potential/getCountryVisaType';
 
 const DEFAULT_USER: User = {
   id: 1,

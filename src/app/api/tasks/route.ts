@@ -2,5 +2,6 @@ import { getDefaultUser } from '@/app/constants/user';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  return NextResponse.json(getDefaultUser());
+  const user = await getDefaultUser();
+  return NextResponse.json(user.tasks);
 }
