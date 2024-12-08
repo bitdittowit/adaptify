@@ -9,8 +9,8 @@ const DEFAULT_USER: User = {
   sex: 'male',
   country: 'kz',
   study_group: 'КИ21-22Б',
-  experience: 0,
-  level: 0,
+  experience: 800,
+  level: 4,
   tasks: [],
 };
 

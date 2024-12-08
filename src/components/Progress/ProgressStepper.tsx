@@ -1,27 +1,31 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { LEVELS } from '@/utils/constants';
 import usePaths from '@/hooks/usePaths';
+import { useGetUserLevelSummary } from '@/hooks/api/entities/users/useGetUserLevel';
 import Level from './Level';
 import styles from './ProgressStepper.module.css';
 
 const LAYOUT_OFFSET_PX = 120;
 
 const ProgressStepper: React.FC = () => {
-  const [activeLevel, setActiveLevel] = useState(0);
+  const { data: userLevelSummary } = useGetUserLevelSummary();
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const paths = usePaths(LEVELS, activeLevel, containerRef, styles.connector, styles.active, styles.back);
+
+  const currentLevel = userLevelSummary?.level ?? 0;
+  const paths = usePaths(
+    LEVELS,
+    currentLevel,
+    containerRef,
+    styles.connector,
+    styles.active,
+    styles.back,
+  );
 
   useEffect(() => {
     window.scrollTo(0, document.body.scrollHeight);
   }, []);
-
-  const handleLevelClick = (levelId: number) => {
-    if (levelId <= activeLevel + 1) {
-      setActiveLevel(levelId);
-    }
-  };
 
   return (
     <div
@@ -36,8 +40,7 @@ const ProgressStepper: React.FC = () => {
           key={id}
           id={id}
           position={position}
-          isActive={id <= activeLevel}
-          onClick={handleLevelClick}
+          isActive={id <= currentLevel}
         />
       ))}
     </div>

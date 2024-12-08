@@ -10,6 +10,12 @@ export interface User {
   tasks: UserTask[];
 }
 
+export interface UserLevelSummary {
+  level: number;
+  experience: number;
+  totalExperience: number;
+}
+
   // TODO (dbo) add Country enum
 export type Country = string;
 
