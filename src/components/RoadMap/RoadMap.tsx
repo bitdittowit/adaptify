@@ -5,11 +5,11 @@ import { LEVELS } from '@/utils/constants';
 import usePaths from '@/hooks/usePaths';
 import { useGetUserLevelSummary } from '@/hooks/api/entities/users/useGetUserLevel';
 import Level from './Level';
-import styles from './ProgressStepper.module.css';
+import styles from './RoadMap.module.css';
 
 const LAYOUT_OFFSET_PX = 120;
 
-const ProgressStepper: React.FC = () => {
+const RoadMap: React.FC = () => {
   const { data: userLevelSummary } = useGetUserLevelSummary();
   const containerRef = useRef<HTMLDivElement | null>(null);
 
@@ -47,4 +47,4 @@ const ProgressStepper: React.FC = () => {
   );
 };
 
-export default ProgressStepper;
+export default RoadMap;

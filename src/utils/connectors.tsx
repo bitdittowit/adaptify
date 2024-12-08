@@ -1,97 +1,84 @@
-import { Coordinates, Path, PathEndpoint, PathType, Position } from "@/types";
-import { Fragment } from "react";
-import { getCenterToLeftPathD, getCenterToRightPathD, getLeftToCenterPathD, getRightToLeftPathD } from "@/utils/pathD";
+import { Coordinates } from "@/types";
+import getPathLength from "@/utils/getPathLength";
 
-export const calculatePosition = (
-  position: Position,
-  containerWidth: number,
-  offsetHeight: number
-): Coordinates => ({
-  x: (parseFloat(position.left) / 100) * containerWidth,
-  y: offsetHeight - position.bottom - 40,
-});
+function createCurvedPathD(points: Coordinates[]): string {
+  if (points.length < 2) return '';
 
-export const convertPercentToPosition = (percent: string): PathEndpoint => {
-  const percentValue = parseFloat(percent);
+  const path: string[] = [];
+  
+  path.push(`M ${points[0].x},${points[0].y}`);
 
-  if (percentValue >= 40 && percentValue <= 60) return PathEndpoint.CENTER;
-  if (percentValue >= 0 && percentValue < 40) return PathEndpoint.LEFT;
-  if (percentValue > 60 && percentValue <= 100) return PathEndpoint.RIGHT;
+  for (let i = 0; i < points.length - 1; i++) {
+    const curr = points[i];
+    const next = points[i + 1];
 
-  throw new Error(`Invalid percent: ${percent}`);
-};
+    const smoothing = 0.2;
 
-export const calculatePathType = (start: string, end: string): PathType => {
-  const startPosition = convertPercentToPosition(start);
-  const endPosition = convertPercentToPosition(end);
+    const controlPointPrev = i > 0 ? points[i - 1] : curr;
+    const controlPointNext = i < points.length - 2 ? points[i + 2] : next;
 
-  return `${startPosition}_${endPosition}` as PathType;
-};
+    const controlPointX1 = curr.x + (next.x - controlPointPrev.x) * smoothing;
+    const controlPointY1 = curr.y + (next.y - controlPointPrev.y) * smoothing;
 
-const createPathD = (path: Path, pathType: PathType): string => {
-  switch (pathType) {
-    case (PathType.CENTER_LEFT):
-      return getCenterToLeftPathD(path);
-    case (PathType.RIGHT_LEFT):
-      return getRightToLeftPathD(path);
-    case (PathType.CENTER_RIGHT):
-      return getCenterToRightPathD(path);
-    default:
-      return getLeftToCenterPathD(path);
+    const controlPointX2 = next.x - (controlPointNext.x - curr.x) * smoothing;
+    const controlPointY2 = next.y - (controlPointNext.y - curr.y) * smoothing;
+
+    path.push(`C ${controlPointX1},${controlPointY1} ${
+      controlPointX2},${controlPointY2} ${
+      next.x},${next.y}`);
   }
-};
+  
+  return path.join(' ');
+}
+
 
 export const createPath = (
-  path: Path,
-  pathType: PathType,
+  coordinates: Coordinates[],
+  activeLevel: number,
   options: {
-    isActive: boolean,
-    key?: number,
     pathClassName?: string,
     activePathClassName?: string,
     activeBackPathClassName?: string,
   },
 ): JSX.Element => {
   const {
-    isActive,
-    key,
     pathClassName,
     activePathClassName,
     activeBackPathClassName,
   } = options;
+  const activeCoordinates = coordinates.slice(0, activeLevel);
 
-  const pathD = createPathD(path, pathType);
-  const pathLength = Math.min(window.innerWidth, 1024) * 1.2;
+  const pathD = createCurvedPathD(coordinates);
+  const activePathD = createCurvedPathD(activeCoordinates);
+
+  const pathElement = document.querySelector<SVGPathElement>(
+      '#path')!;
+  const activePathElement = document.querySelector<SVGPathElement>(
+      '#path-active')!;
+
+  const pathLength = getPathLength(pathElement);
+  const activePathLength = getPathLength(activePathElement);
 
   return (
-    <Fragment key={key}>
-      {isActive && 
-        (
-          <path
-            key={`path-active-back-${key}`}
-            d={pathD}
-            className={`${pathClassName} ${activePathClassName ?? 'active'} ${activeBackPathClassName ?? 'back'}`}
-            strokeDasharray={pathLength}
-            strokeDashoffset={pathLength}
-          />
-        )
-      }
+    <>
       <path
-        key={`path-${key}`}
+        d={activePathD}
+        className={`${pathClassName} ${activePathClassName} ${activeBackPathClassName}`}
+        strokeDasharray={`${activePathLength}`}
+        strokeDashoffset={pathLength}
+      />
+      <path
+        id="path"
         d={pathD}
         className={`${pathClassName}`}
       />
-      {isActive && 
-        (
-          <path
-            key={`path-active-${key}`}
-            d={pathD}
-            className={`${pathClassName} ${activePathClassName ?? 'active'}`}
-            strokeDasharray={pathLength}
-            strokeDashoffset={pathLength}
-          />
-        )
-      }
-    </Fragment>
+      <path
+        id="path-active"
+        d={activePathD}
+        className={`${pathClassName} ${activePathClassName}`}
+        strokeDasharray={`${activePathLength}`}
+        strokeDashoffset={pathLength}
+      />
+    </>
   );
 };

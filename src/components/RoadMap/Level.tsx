@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Position } from '@/types';
-import styles from './ProgressStepper.module.css';
+import styles from './RoadMap.module.css';
 
 interface LevelProps {
   id: number;
