@@ -1,8 +1,20 @@
 export interface User {
   id: number,
   name: string,
+  sex: Sex,
+  country: Country,
   arrival_date: Date;
+  study_group: StudyGroup;
+  experience: number;
+  level: number;
+  tasks: UserTask[];
 }
+
+  // TODO (dbo) add Country enum
+export type Country = string;
+
+  // TODO (dbo) add StudyGroup enum
+export type StudyGroup = string;
 
 export type Sex = 'male' | 'female';
 
