@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import '../../styles/index.css';
+import '@/styles/index.css';
 
 export const metadata: Metadata = {
   title: "Adaptify",
