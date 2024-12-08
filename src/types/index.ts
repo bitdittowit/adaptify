@@ -4,16 +4,37 @@ export interface User {
   arrival_date: Date;
 }
 
+export type Sex = 'male' | 'female';
+
+export type VisaType = 'visa_free' | 'visa_required';
+
+export const enum Status {
+  OPEN = 'open',
+  PENDING = 'pending',
+  FINISHED = 'finished',
+};
+
 export interface Task {
+  id: number,
+  title: string;
   description: string;
-  short_description: string;
-  start_date: Date;
-  end_date: Date;
 }
 
-export interface Step {
-  id: number,
-  tasks: Task[];
+// Temp type for json properties.
+export interface RawTask extends Task {
+  required: boolean;
+  position: number;
+}
+
+export interface UserTask extends Task {
+  status: Status;
+  picked_date: Date;
+}
+
+export interface DocumentTask extends Task {
+  // TODO (dbo) add Schedule type
+  schedule: string;
+  possible_dates: Date[];
 }
 
 export interface Coordinates {
