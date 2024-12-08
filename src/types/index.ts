@@ -41,6 +41,7 @@ export interface RawTask extends Task {
 export interface UserTask extends Task {
   status: Status;
   picked_date: Date;
+  experience_points: number;
 }
 
 export interface DocumentTask extends Task {
