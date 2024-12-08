@@ -9,7 +9,7 @@ const convertRawToUserTask = (tasks: RawTask[]): UserTask[] => {
   }));
 };
 
-export const generateTasks = async (
+export const getTasks = async (
   sex: Sex,
   visaType: VisaType,
 ): Promise<UserTask[]> => {

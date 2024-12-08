@@ -1,5 +1,5 @@
 import { User } from '@/types';
-import { generateTasks } from '@/utils/backend_potential/generateTasks';
+import { getTasks } from '@/utils/backend_potential/getTasks';
 import { getCountryVisaType } from '@/utils/backend_potential/getCountryVisaType';
 
 const DEFAULT_USER: User = {
@@ -15,7 +15,7 @@ const DEFAULT_USER: User = {
 };
 
 export const getDefaultUser = async (): Promise<User> => {
-  const tasks = await generateTasks(
+  const tasks = await getTasks(
     DEFAULT_USER.sex,
     getCountryVisaType(DEFAULT_USER.country),
   );
