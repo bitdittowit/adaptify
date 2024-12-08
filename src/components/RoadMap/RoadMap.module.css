@@ -21,6 +21,7 @@
   fill: none;
   stroke: var(--inactive-color);
   stroke-width: var(--connector-width);
+  stroke-linecap: round;
 
   transition: stroke-dashoffset 2s ease;
 }

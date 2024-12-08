@@ -5,10 +5,11 @@ const convertRawToUserTask = (tasks: RawTask[]): UserTask[] => {
     ...task,
     status: Status.OPEN,
     picked_date: new Date(),
+    experience_points: 200,
   }));
 };
 
-export const generateTasks = async (
+export const getTasks = async (
   sex: Sex,
   visaType: VisaType,
 ): Promise<UserTask[]> => {

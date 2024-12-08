@@ -10,6 +10,12 @@ export interface User {
   tasks: UserTask[];
 }
 
+export interface UserLevelSummary {
+  level: number;
+  experience: number;
+  totalExperience: number;
+}
+
   // TODO (dbo) add Country enum
 export type Country = string;
 
@@ -41,6 +47,7 @@ export interface RawTask extends Task {
 export interface UserTask extends Task {
   status: Status;
   picked_date: Date;
+  experience_points: number;
 }
 
 export interface DocumentTask extends Task {
@@ -63,26 +70,3 @@ export interface Level {
   id: number;
   position: Position;
 }
-
-export interface Path {
-  start: Coordinates,
-  end: Coordinates,
-}
-
-export const enum PathEndpoint {
-  LEFT = 'LEFT',
-  CENTER = 'CENTER',
-  RIGHT = 'RIGHT',
-};
-
-export const enum PathType {
-  LEFT_LEFT = 'LEFT_LEFT',
-  LEFT_CENTER = 'LEFT_CENTER',
-  LEFT_RIGHT = 'LEFT_RIGHT',
-  CENTER_LEFT = 'CENTER_LEFT',
-  CENTER_CENTER = 'CENTER_CENTER',
-  CENTER_RIGHT = 'CENTER_RIGHT',
-  RIGHT_LEFT = 'RIGHT_LEFT',
-  RIGHT_CENTER = 'RIGHT_CENTER',
-  RIGHT_RIGHT = 'RIGHT_RIGHT',
-};
