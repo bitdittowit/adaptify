@@ -62,15 +62,15 @@ export const createPath = (
   return (
     <>
       <path
+        id="path"
+        d={pathD}
+        className={`${pathClassName}`}
+      />
+      <path
         d={activePathD}
         className={`${pathClassName} ${activePathClassName} ${activeBackPathClassName}`}
         strokeDasharray={`${activePathLength}`}
         strokeDashoffset={pathLength}
-      />
-      <path
-        id="path"
-        d={pathD}
-        className={`${pathClassName}`}
       />
       <path
         id="path-active"
