@@ -9,8 +9,8 @@ export async function GET(
 
   const { date } = (await params);
 
-  const tasksOnDate = user.tasks.filter(
-      (task) => task.picked_date.getDate() === new Date(date).getDate());
+  const tasksOnDate = user.tasks.filter((task) =>
+      new Date(task.picked_date).getDate() === new Date(date).getDate());
 
   if (tasksOnDate.length === 0) {
     return NextResponse.json(
