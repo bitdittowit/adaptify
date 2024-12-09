@@ -66,19 +66,23 @@ export const createPath = (
         d={pathD}
         className={`${pathClassName}`}
       />
-      <path
-        d={activePathD}
-        className={`${pathClassName} ${activePathClassName} ${activeBackPathClassName}`}
-        strokeDasharray={`${activePathLength}`}
-        strokeDashoffset={pathLength}
-      />
-      <path
-        id="path-active"
-        d={activePathD}
-        className={`${pathClassName} ${activePathClassName}`}
-        strokeDasharray={`${activePathLength}`}
-        strokeDashoffset={pathLength}
-      />
+      {activeCoordinates.length && (
+        <>
+          <path
+            d={activePathD}
+            className={`${pathClassName} ${activePathClassName} ${activeBackPathClassName}`}
+            strokeDasharray={`${activePathLength}`}
+            strokeDashoffset={pathLength}
+          />
+          <path
+            id="path-active"
+            d={activePathD}
+            className={`${pathClassName} ${activePathClassName}`}
+            strokeDasharray={`${activePathLength}`}
+            strokeDashoffset={pathLength}
+          />
+        </>
+      )}
     </>
   );
 };
