@@ -4,6 +4,7 @@ import * as React from "react"
 import {
   CalendarDays,
   ListChecks,
+  Route,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -23,8 +24,13 @@ const data = {
   },
   navMain: [
     {
+      title: "Route map",
+      url: "/",
+      icon: Route,
+    },
+    {
       title: "Task list",
-      url: "#",
+      url: "/tasks",
       icon: ListChecks,
     },
     {
