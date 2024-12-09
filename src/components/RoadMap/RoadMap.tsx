@@ -10,7 +10,7 @@ import styles from './RoadMap.module.css';
 const LAYOUT_OFFSET_PX = 120;
 
 const RoadMap: React.FC = () => {
-  const { data: userLevelSummary, loading } = useGetUserLevelSummary();
+  const { data: userLevelSummary } = useGetUserLevelSummary();
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const currentLevel = userLevelSummary?.level ?? 0;
