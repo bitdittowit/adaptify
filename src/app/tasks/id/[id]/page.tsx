@@ -9,10 +9,10 @@ const TaskPage = () => {
   const params = useParams();
   const id = Array.isArray(params.id) ? params.id[0]! : params.id!;
 
-  const { data: task, error } = useGetTaskById(id);
+  const { data: task, error, loading } = useGetTaskById(id);
 
   if (error) return <div>Error loading task: {error.message}</div>;
-  if (!task) return <div>Loading...</div>;
+  if (loading || !task) return <div>Loading...</div>;
 
   return (
     <main className="p-4">

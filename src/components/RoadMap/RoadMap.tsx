@@ -3,14 +3,14 @@
 import { useRef, useEffect } from 'react';
 import { LEVELS } from '@/utils/constants';
 import usePaths from '@/hooks/usePaths';
-import { useGetUserLevelSummary } from '@/hooks/api/entities/users/useGetUserLevel';
+import { useGetUserLevelSummary } from '@/hooks/api/entities/users/useGetUserLevelSummary';
 import Level from './Level';
 import styles from './RoadMap.module.css';
 
 const LAYOUT_OFFSET_PX = 120;
 
 const RoadMap: React.FC = () => {
-  const { data: userLevelSummary } = useGetUserLevelSummary();
+  const { data: userLevelSummary, loading } = useGetUserLevelSummary();
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const currentLevel = userLevelSummary?.level ?? 0;
@@ -26,6 +26,8 @@ const RoadMap: React.FC = () => {
   useEffect(() => {
     window.scrollTo(0, document.body.scrollHeight);
   }, []);
+
+  if (loading) return <div>Loading...</div> 
 
   return (
     <div
