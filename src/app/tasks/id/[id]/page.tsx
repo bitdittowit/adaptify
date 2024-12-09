@@ -7,11 +7,7 @@ import { TaskCard } from '@/components/task-card';
 
 const TaskPage = () => {
   const params = useParams();
-  const id = Array.isArray(params.id) ? params.id[0] : params.id;
-
-  if (!id) {
-    return <div>Error: No ID provided</div>;
-  }
+  const id = Array.isArray(params.id) ? params.id[0]! : params.id!;
 
   const { data: task, error } = useGetTaskById(id);
 
