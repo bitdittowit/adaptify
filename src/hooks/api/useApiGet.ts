@@ -13,15 +13,26 @@ function useApiGet<T>(url: string): ApiResult<T> {
       null as InitialData<T>
   );
 
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
+    setLoading(true);
     axios.get<T>(url)
-      .then((response) => setData(response.data))
-      .catch((err) => setError(err));
+      .then((response) => {
+        setData(response.data);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err);
+        setData(null as InitialData<T>);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [url]);
 
-  return { data, error };
+  return { data, error, loading };
 }
 
 export default useApiGet;

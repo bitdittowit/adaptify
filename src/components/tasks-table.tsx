@@ -134,7 +134,7 @@ export function TasksTable() {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
-  const { data } = useGetTasks();
+  const { data, loading } = useGetTasks();
 
   const table = useReactTable({
     data,
@@ -153,7 +153,9 @@ export function TasksTable() {
       columnVisibility,
       rowSelection,
     },
-  })
+  });
+
+  if (loading) return <div>Loading...</div> 
 
   return (
     <div className="w-full">

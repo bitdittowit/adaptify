@@ -10,7 +10,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { UserTask } from "@/types"
+import { Status, UserTask } from "@/types"
+import { useApiPost } from "@/hooks/api/useApiPost"
+import { TaskStatus } from "@/components/task-status"
 
 type TaskCardProps = React.ComponentProps<typeof Card> & { task: UserTask };
 
@@ -26,6 +28,17 @@ function formatDate(isoDate: string) {
 }
 
 export function TaskCard({ className, task,  ...props }: TaskCardProps) {
+  const { postData } = useApiPost<{ id: number }>();
+
+  const markAsDone = async () => {
+    const data = { id: task.id };
+    const result = await postData('/api/tasks/finish', data);
+    if (result) {
+      console.log('User experience updated:', result);
+      task.status = Status.FINISHED;
+    }
+  };
+
   return (
     <Card className={cn("w-[380px] h-[max-content]", className)} {...props}>
       <CardContent className="grid gap-4 mt-4">
@@ -38,14 +51,17 @@ export function TaskCard({ className, task,  ...props }: TaskCardProps) {
           </div>
         </div>
       </CardContent>
-      <CardHeader className="mt-[-40px]">
+      <CardHeader className="mt-[-40px] flex">
         <CardTitle className="mb-1">{task.title}</CardTitle>
         <CardDescription>{task.description}</CardDescription>
       </CardHeader>
-      <CardFooter>
-        <Button className="w-full">
-          <Check /> Mark as done
-        </Button>
+      <CardFooter className="gap-4">
+        <TaskStatus status={task.status} />
+        {task.status !== Status.FINISHED &&
+          <Button className="w-full" onClick={markAsDone}>
+            <Check /> Mark as done
+          </Button>
+        }
       </CardFooter>
     </Card>
   )

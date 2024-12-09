@@ -6,11 +6,11 @@ const DEFAULT_USER: User = {
   id: 1,
   name: 'John Doe',
   arrival_date: new Date(),
-  sex: 'male',
+  sex: 'female',
   country: 'kz',
   study_group: 'КИ21-22Б',
-  experience: 800,
-  level: 4,
+  experience: 0,
+  level: 0,
   tasks: [],
 };
 

@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react';
 import { LEVELS } from '@/utils/constants';
 import usePaths from '@/hooks/usePaths';
-import { useGetUserLevelSummary } from '@/hooks/api/entities/users/useGetUserLevel';
+import { useGetUserLevelSummary } from '@/hooks/api/entities/users/useGetUserLevelSummary';
 import Level from './Level';
 import styles from './RoadMap.module.css';
 
