@@ -1,9 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ApiResult } from "@/types/api";
+import { ApiResult, InitialData } from "@/types/api";
 
 function useApiGet<T>(url: string): ApiResult<T> {
-  const [data, setData] = useState<T | null>(null);
+  const [data, setData] = useState<T | InitialData<T>>(() => {
+    return ([] as unknown as T) instanceof Array ?
+        ([] as T) :
+        (null as InitialData<T>);
+  });
+
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
