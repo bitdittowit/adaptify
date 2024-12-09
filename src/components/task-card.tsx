@@ -59,8 +59,8 @@ export function TaskCard({ className, task,  ...props }: TaskCardProps) {
         <TaskStatus status={task.status} />
         {task.status !== Status.FINISHED &&
           <Button className="w-full" onClick={markAsDone}>
-              <Check /> Mark as done
-            </Button>
+            <Check /> Mark as done
+          </Button>
         }
       </CardFooter>
     </Card>
