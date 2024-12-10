@@ -4,7 +4,7 @@ import { db } from '@vercel/postgres';
 
 const client = db;
 
-export async function getDefaultUser(): Promise<User | null> {
+async function getDefaultUser(): Promise<User | null> {
   try {
     const userQuery = await client.query(`
       SELECT u.id, u.name, u.arrival_date, u.sex, u.country, u.study_group, u.experience, u.level,
