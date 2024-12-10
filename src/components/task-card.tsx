@@ -1,4 +1,4 @@
-import { CalendarClock, Check } from "lucide-react"
+import { Check } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -13,19 +13,9 @@ import {
 import { Status, UserTask } from "@/types"
 import { useApiPost } from "@/hooks/api/useApiPost"
 import { TaskStatus } from "@/components/task-status"
+import { DateBadge } from "@/components/ui/date-badge"
 
 type TaskCardProps = React.ComponentProps<typeof Card> & { task: UserTask };
-
-function formatDate(isoDate: string) {
-  const date = new Date(isoDate);
-
-  const formatter = new Intl.DateTimeFormat(
-    'ru-RU',
-    { day: '2-digit', month: 'long' },
-  );
-
-  return formatter.format(date);
-}
 
 export function TaskCard({ className, task,  ...props }: TaskCardProps) {
   const { postData } = useApiPost<{ id: number }>();
@@ -42,14 +32,7 @@ export function TaskCard({ className, task,  ...props }: TaskCardProps) {
   return (
     <Card className={cn("w-[380px] h-[max-content]", className)} {...props}>
       <CardContent className="grid gap-4 mt-4">
-        <div className=" flex items-center space-x-4 rounded-md border p-4">
-          <CalendarClock />
-          <div className="flex-1 space-y-1">
-            <p className="text-sm font-medium leading-none">
-              {formatDate(task.picked_date as string)}
-            </p>
-          </div>
-        </div>
+        <DateBadge date={task.picked_date} />
       </CardContent>
       <CardHeader className="mt-[-40px] flex">
         <CardTitle className="mb-1">{task.title}</CardTitle>

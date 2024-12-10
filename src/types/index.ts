@@ -3,7 +3,7 @@ export interface User {
   name: string,
   sex: Sex,
   country: Country,
-  arrival_date: Date;
+  arrival_date: Date | null;
   study_group: StudyGroup;
   experience: number;
   level: number;
@@ -36,12 +36,11 @@ export interface Task {
   id: number,
   title: string;
   description: string;
-}
-
-// Temp type for json properties.
-export interface RawTask extends Task {
   required: boolean;
   position: number;
+  // Array of blocking tasks ids.
+  blocking_tasks: number[];
+  tags: Array<Sex | VisaType>;
 }
 
 export interface UserTask extends Task {
@@ -50,10 +49,24 @@ export interface UserTask extends Task {
   experience_points: number;
 }
 
+export type DayOfWeek =
+    'monday' |
+    'tuesday' |
+    'wednesday' |
+    'thursday' |
+    'friday' |
+    'saturday' |
+    'sunday';
+
+// 'HH:MM-HH:MM'
+export type TimeRange = `${string}:${string}-${string}:${string}`;
+
+export type Schedule = {
+  [K in DayOfWeek]: TimeRange[];
+}
+
 export interface DocumentTask extends Task {
-  // TODO (dbo) add Schedule type
-  schedule: string;
-  possible_dates: Date[];
+  schedule: Schedule | null;
 }
 
 export interface Coordinates {
