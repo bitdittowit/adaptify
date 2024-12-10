@@ -5,8 +5,8 @@ import { getCountryVisaType } from '@/utils/backend_potential/getCountryVisaType
 const DEFAULT_USER: User = {
   id: 1,
   name: 'John Doe',
-  arrival_date: new Date(),
-  sex: 'female',
+  arrival_date: null,
+  sex: 'male',
   country: 'kz',
   study_group: 'КИ21-22Б',
   experience: 0,

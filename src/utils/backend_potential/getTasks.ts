@@ -14,10 +14,13 @@ export const getTasks = async (
   visaType: VisaType,
 ): Promise<UserTask[]> => {
   try {
-    const fileName = `${sex}_${visaType}`;
-    const { tasks } = await import(`@/app/constants/tasks/${fileName}.json`);
+    const { tasks: rawTasks } = await import(`@/app/constants/tasks/user_tasks.json`);
 
-    return convertRawToUserTask(tasks);
+    const tasks = rawTasks.filter((rawTask) =>
+      rawTask.tags.includes(sex) &&
+      rawTask.tags.includes(visaType));
+
+    return convertRawToUserTask(tasks as RawTask[]);
   } catch (error) {
     console.error("Failed to load task data:", error);
     return [];

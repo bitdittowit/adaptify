@@ -3,7 +3,7 @@ export interface User {
   name: string,
   sex: Sex,
   country: Country,
-  arrival_date: Date;
+  arrival_date: Date | null;
   study_group: StudyGroup;
   experience: number;
   level: number;
@@ -36,6 +36,9 @@ export interface Task {
   id: number,
   title: string;
   description: string;
+  // Array of blocking tasks ids.
+  blocking_tasks: number[];
+  tags: Array<Sex | VisaType>;
 }
 
 // Temp type for json properties.
