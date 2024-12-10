@@ -37,10 +37,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useGetTasks } from "@/hooks/api/entities/tasks/useGetTasks"
-import { UserTask } from "@/types"
+import { Task } from "@/types"
 import { DateBadge } from "@/components/ui/date-badge";
 
-export const columns: ColumnDef<UserTask>[] = [
+export const columns: ColumnDef<Task>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -62,6 +62,10 @@ export const columns: ColumnDef<UserTask>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
+  },
+  {
+    accessorKey: "id",
+    cell: ({ row }) => <div className="text-center">{row.getValue("id")}</div>,
   },
   {
     accessorKey: "position",
@@ -94,9 +98,16 @@ export const columns: ColumnDef<UserTask>[] = [
   {
     accessorKey: "picked_date",
     header: "Date",
-    cell: ({ row }) => (
-      <DateBadge date={row.getValue("picked_date")} />
-    ),
+    cell: ({ row }) => {
+      const date: string | Date = row.getValue("picked_date");
+
+      if (!date) {
+        return <></>
+      }
+      
+      return (
+        <DateBadge date={date} />
+      )},
   },
   {
     accessorKey: "experience_points",
@@ -123,7 +134,7 @@ export const columns: ColumnDef<UserTask>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href={`/tasks/id/${row.getValue('position')}`}>
+              <Link href={`/tasks/id/${row.getValue('id')}`}>
                 View task details
               </Link>
             </DropdownMenuItem>

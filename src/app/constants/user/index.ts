@@ -2,7 +2,7 @@ import { User } from '@/types';
 import { getTasks } from '@/utils/backend_potential/getTasks';
 import { getCountryVisaType } from '@/utils/backend_potential/getCountryVisaType';
 
-const DEFAULT_USER: User = {
+export const DEFAULT_USER: User = {
   id: 1,
   name: 'John Doe',
   arrival_date: null,

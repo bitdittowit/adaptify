@@ -10,12 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Status, UserTask } from "@/types"
+import { Status, Task } from "@/types"
 import { useApiPost } from "@/hooks/api/useApiPost"
 import { TaskStatus } from "@/components/task-status"
 import { DateBadge } from "@/components/ui/date-badge"
 
-type TaskCardProps = React.ComponentProps<typeof Card> & { task: UserTask };
+type TaskCardProps = React.ComponentProps<typeof Card> & { task: Task };
 
 export function TaskCard({ className, task,  ...props }: TaskCardProps) {
   const { postData } = useApiPost<{ id: number }>();
@@ -32,7 +32,9 @@ export function TaskCard({ className, task,  ...props }: TaskCardProps) {
   return (
     <Card className={cn("w-[380px] h-[max-content]", className)} {...props}>
       <CardContent className="grid gap-4 mt-4">
-        <DateBadge date={task.picked_date} />
+        {task.picked_date && (
+          <DateBadge date={task.picked_date} />
+        )}
       </CardContent>
       <CardHeader className="mt-[-40px] flex">
         <CardTitle className="mb-1">{task.title}</CardTitle>

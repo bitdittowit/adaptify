@@ -1,7 +1,7 @@
-import { DocumentTask, Sex, Status, UserTask, VisaType } from '@/types';
+import { BaseTask, Sex, Status, Task, VisaType } from '@/types';
 import getNextAvailableDate from './getNextAvailableDate';
 
-const convertRawToUserTask = (tasks: DocumentTask[]): UserTask[] => {
+const convertRawToUserTask = (tasks: BaseTask[]): Task[] => {
   return tasks.map((task) => ({
     ...task,
     status: Status.OPEN,
@@ -15,7 +15,7 @@ const convertRawToUserTask = (tasks: DocumentTask[]): UserTask[] => {
 export const getTasks = async (
   sex: Sex,
   visaType: VisaType,
-): Promise<UserTask[]> => {
+): Promise<Task[]> => {
   try {
     const { tasks: documentTasks } =
         await import(`@/app/constants/tasks/user_tasks.json`);
@@ -24,7 +24,7 @@ export const getTasks = async (
       documentTask.tags.includes(sex) &&
       documentTask.tags.includes(visaType));
 
-    return convertRawToUserTask(tasks as DocumentTask[]);
+    return convertRawToUserTask(tasks as BaseTask[]);
   } catch (error) {
     console.error("Failed to load task data:", error);
     return [];

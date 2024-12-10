@@ -1,15 +1,62 @@
-import { getDefaultUser } from '@/app/constants/user';
 import { NextResponse } from 'next/server';
+import { User } from '@/types';
+import { db } from '@vercel/postgres';
+
+const client = db;
+
+async function getDefaultUser(): Promise<User | null> {
+  try {
+    const userQuery = await client.query(`
+      SELECT u.id, u.name, u.arrival_date, u.sex, u.country, u.study_group, u.experience, u.level,
+        json_agg(json_build_object(
+          'id', ut.id,
+          'status', ut.status,
+          'experience_points', ut.experience_points,
+          'title', dt.title,
+          'description', dt.description
+        )) AS tasks
+      FROM users u
+      LEFT JOIN user_tasks ut ON u.id = ut.user_id
+      LEFT JOIN tasks dt ON ut.document_task_id = dt.id
+      WHERE u.name = $1
+      GROUP BY u.id;
+    `, ['John Doe']);
+
+    if (userQuery.rows.length === 0) {
+      return null;
+    }
+
+    const user = userQuery.rows[0];
+    user.arrival_date = user.arrival_date ? new Date(user.arrival_date) : null;
+
+    return user as User;
+  } catch (error) {
+    console.error('error', error)
+    throw new Error('Error fetching user data');
+  }
+}
 
 export async function GET() {
-  const user = await getDefaultUser();
+  try {
+    const user = await getDefaultUser();
+    console.log('user', user)
 
-  const totalExperience = user.tasks.reduce(
-    (total, task) => total + task.experience_points, 0);
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+    }
 
-  return NextResponse.json({
-    level: user.level,
-    experience: user.experience,
-    totalExperience,
-  });
+    const totalExperience = user.tasks.reduce(
+      (total, task) => total + task.experience_points,
+      0
+    );
+    console.log('totalExperience', totalExperience)
+
+    return NextResponse.json({
+      level: user.level,
+      experience: user.experience,
+      totalExperience,
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error }, { status: 500 });
+  }
 }

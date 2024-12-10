@@ -7,7 +7,7 @@ export interface User {
   study_group: StudyGroup;
   experience: number;
   level: number;
-  tasks: UserTask[];
+  tasks: Task[];
 }
 
 export interface UserLevelSummary {
@@ -32,7 +32,7 @@ export const enum Status {
   FINISHED = 'finished',
 };
 
-export interface Task {
+export interface BaseTask {
   id: number,
   title: string;
   description: string;
@@ -41,9 +41,10 @@ export interface Task {
   // Array of blocking tasks ids.
   blocking_tasks: number[];
   tags: Array<Sex | VisaType>;
+  schedule: Schedule | null;
 }
 
-export interface UserTask extends Task {
+export interface Task extends BaseTask {
   status: Status;
   picked_date: Date | string;
   experience_points: number;
@@ -63,10 +64,6 @@ export type TimeRange = `${string}:${string}-${string}:${string}`;
 
 export type Schedule = {
   [K in DayOfWeek]: TimeRange[];
-}
-
-export interface DocumentTask extends Task {
-  schedule: Schedule | null;
 }
 
 export interface Coordinates {
