@@ -88,7 +88,7 @@ async function seedData() {
     if (documentTaskId) {
       await client.query(
         `INSERT INTO user_tasks (user_id, document_task_id, status, experience_points)
-        VALUES ((SELECT id FROM users WHERE name = $1), $2, 'open', 0);`
+        VALUES ((SELECT id FROM users WHERE name = $1), $2, 'open', 200);`
       , [
         DEFAULT_USER.name,
         documentTaskId

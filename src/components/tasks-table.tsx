@@ -94,9 +94,16 @@ export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "picked_date",
     header: "Date",
-    cell: ({ row }) => (
-      <DateBadge date={row.getValue("picked_date")} />
-    ),
+    cell: ({ row }) => {
+      const date: string | Date = row.getValue("picked_date");
+
+      if (!date) {
+        return <></>
+      }
+      
+      return (
+        <DateBadge date={date} />
+      )},
   },
   {
     accessorKey: "experience_points",
