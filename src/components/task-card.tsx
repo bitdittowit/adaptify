@@ -10,12 +10,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Status, UserTask } from "@/types"
+import { Status, Task } from "@/types"
 import { useApiPost } from "@/hooks/api/useApiPost"
 import { TaskStatus } from "@/components/task-status"
 import { DateBadge } from "@/components/ui/date-badge"
 
-type TaskCardProps = React.ComponentProps<typeof Card> & { task: UserTask };
+type TaskCardProps = React.ComponentProps<typeof Card> & { task: Task };
 
 export function TaskCard({ className, task,  ...props }: TaskCardProps) {
   const { postData } = useApiPost<{ id: number }>();

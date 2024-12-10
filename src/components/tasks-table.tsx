@@ -37,10 +37,10 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useGetTasks } from "@/hooks/api/entities/tasks/useGetTasks"
-import { UserTask } from "@/types"
+import { Task } from "@/types"
 import { DateBadge } from "@/components/ui/date-badge";
 
-export const columns: ColumnDef<UserTask>[] = [
+export const columns: ColumnDef<Task>[] = [
   {
     id: "select",
     header: ({ table }) => (

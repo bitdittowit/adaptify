@@ -1,7 +1,7 @@
-import { UserTask } from "@/types";
+import { Task } from "@/types";
 import { ApiResult } from "@/types/api";
 import useApiGet from "../../useApiGet";
 
-export function useGetTasks(): ApiResult<UserTask[]> {
-  return useApiGet<UserTask[]>('/api/tasks');
+export function useGetTasks(): ApiResult<Task[]> {
+  return useApiGet<Task[]>('/api/tasks');
 }
