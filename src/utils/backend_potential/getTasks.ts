@@ -1,12 +1,13 @@
 import { DocumentTask, Sex, Status, UserTask, VisaType } from '@/types';
+import getNextAvailableDate from './getNextAvailableDate';
 
 const convertRawToUserTask = (tasks: DocumentTask[]): UserTask[] => {
-  const preferDate = new Date();
-
   return tasks.map((task) => ({
     ...task,
     status: Status.OPEN,
-    picked_date: preferDate,
+    picked_date: task.schedule ?
+        getNextAvailableDate(task.schedule, new Date()) :
+        new Date(),
     experience_points: 200,
   }));
 };
