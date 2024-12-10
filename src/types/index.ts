@@ -36,15 +36,11 @@ export interface Task {
   id: number,
   title: string;
   description: string;
+  required: boolean;
+  position: number;
   // Array of blocking tasks ids.
   blocking_tasks: number[];
   tags: Array<Sex | VisaType>;
-}
-
-// Temp type for json properties.
-export interface RawTask extends Task {
-  required: boolean;
-  position: number;
 }
 
 export interface UserTask extends Task {
@@ -53,10 +49,24 @@ export interface UserTask extends Task {
   experience_points: number;
 }
 
+export type DayOfWeek =
+    'monday' |
+    'tuesday' |
+    'wednesday' |
+    'thursday' |
+    'friday' |
+    'saturday' |
+    'sunday';
+
+// 'HH:MM-HH:MM'
+export type TimeRange = `${string}:${string}-${string}:${string}`;
+
+export type Schedule = {
+  [K in DayOfWeek]: TimeRange[];
+}
+
 export interface DocumentTask extends Task {
-  // TODO (dbo) add Schedule type
-  schedule: string;
-  possible_dates: Date[];
+  schedule: Schedule | null;
 }
 
 export interface Coordinates {
