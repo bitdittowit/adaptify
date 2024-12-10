@@ -64,6 +64,10 @@ export const columns: ColumnDef<Task>[] = [
     enableHiding: false,
   },
   {
+    accessorKey: "id",
+    cell: ({ row }) => <div className="text-center">{row.getValue("id")}</div>,
+  },
+  {
     accessorKey: "position",
     header: ({ column }) => {
       return (
@@ -130,7 +134,7 @@ export const columns: ColumnDef<Task>[] = [
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href={`/tasks/id/${row.getValue('position')}`}>
+              <Link href={`/tasks/id/${row.getValue('id')}`}>
                 View task details
               </Link>
             </DropdownMenuItem>

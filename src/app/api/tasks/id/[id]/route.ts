@@ -1,22 +1,48 @@
 import { NextResponse } from 'next/server';
-import { getDefaultUser } from '@/app/constants/user';
+import { db } from '@vercel/postgres';
 
 export async function GET(
   _request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
-  const user = await getDefaultUser();
-  
-  const { id } = (await params);
+  const { id } = params;
 
-  const task = user.tasks.find((task) => task.id === parseInt(id));
+  console.log('id', id)
+  const taskId = parseInt(id, 10);
+  console.log('taskId', taskId)
 
-  if (!task) {
+  if (isNaN(taskId)) {
     return NextResponse.json(
-      { error: `No task with id ${id}` },
-      { status: 404 },
+      { error: `Invalid task ID: ${id}` },
+      { status: 400 }
     );
   }
 
-  return NextResponse.json(task);
+  const client = db;
+
+  try {
+    const taskQuery = await client.query(
+      `
+      SELECT ut.id, ut.status, ut.experience_points, t.title, t.description
+      FROM user_tasks ut
+      LEFT JOIN tasks t ON ut.document_task_id = t.id
+      WHERE ut.id = $1;
+      `,
+      [taskId]
+    );
+
+    if (taskQuery.rows.length === 0) {
+      return NextResponse.json(
+        { error: `No task with ID ${id}` },
+        { status: 404 }
+      );
+    }
+
+    const task = taskQuery.rows[0];
+
+    return NextResponse.json(task);
+  } catch (error) {
+    console.error('Error fetching task:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+  }
 }
