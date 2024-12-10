@@ -3,13 +3,11 @@ import { db } from '@vercel/postgres';
 
 export async function GET(
   _request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = params;
+  const { id } = (await params);
 
-  console.log('id', id)
   const taskId = parseInt(id, 10);
-  console.log('taskId', taskId)
 
   if (isNaN(taskId)) {
     return NextResponse.json(
