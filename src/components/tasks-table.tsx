@@ -104,7 +104,7 @@ export const columns: ColumnDef<Task>[] = [
       if (!date) {
         return <></>
       }
-      
+
       return (
         <DateBadge date={date} />
       )},
