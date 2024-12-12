@@ -60,6 +60,7 @@ export function ProofTask({ task }: ProofTaskProps) {
     if (result) {
       // todo change to toast.
       console.log(result);
+      task.proof!.status = 'proofed';
     }
   }
 
