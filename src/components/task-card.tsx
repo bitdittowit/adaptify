@@ -33,7 +33,7 @@ export function TaskCard({ className, task,  ...props }: TaskCardProps) {
   return (
     <Card className={cn("w-[380px] h-[max-content]", className)} {...props}>
       <CardContent className="grid gap-4 mt-4">
-        {console.log(task.schedule) || task.picked_date && (
+        {task.picked_date && (
           <DateBadge date={task.picked_date} />
         )}
       </CardContent>
