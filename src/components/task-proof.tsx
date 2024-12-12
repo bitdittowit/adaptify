@@ -76,7 +76,9 @@ export function ProofTask({ task }: ProofTaskProps) {
             )}
           />
         ))}
-        <Button type="submit">Проверить</Button>
+        <Button type="submit" disabled={task.proof!.status !== 'not_proofed'}>
+          Проверить
+        </Button>
       </form>
     </Form>
   )
