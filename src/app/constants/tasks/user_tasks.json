@@ -30,9 +30,9 @@
       "schedule": {
         "monday": ["09:00-12:00"],
         "tuesday": ["13:00-16:00"],
-        "wednesday": ["00:00-12:00"],
+        "wednesday": ["09:00-12:00"],
         "thursday": ["13:00-16:00"],
-        "friday": ["00:90-12:00"],
+        "friday": ["09:00-12:00"],
         "saturday": [],
         "sunday": []
       },
