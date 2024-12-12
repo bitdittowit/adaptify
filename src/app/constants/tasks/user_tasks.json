@@ -420,10 +420,10 @@
       "blocking_tasks": [],
       "tags": ["male", "female", "visa_free", "visa_required"],
       "schedule": {
-        "monday": ["09:00-12:30", "13:00-16:00"],
-        "tuesday": ["09:00-12:30", "13:00-16:00"],
-        "wednesday": ["09:00-12:30", "13:00-16:00"],
-        "thursday": ["09:00-12:30", "13:00-16:00"],
+        "monday": [],
+        "tuesday": [],
+        "wednesday": [],
+        "thursday": [],
         "friday": ["16:00-19:00"],
         "saturday": [],
         "sunday": []
