@@ -4,6 +4,8 @@ import React from 'react';
 import { useParams } from 'next/navigation';
 import { useGetTaskById } from '@/hooks/api/entities/tasks/useGetTaskById';
 import { TaskCard } from '@/components/task-card';
+import { Status } from '@/types';
+import { ProofTask } from '@/components/task-proof';
 
 const TaskPage = () => {
   const params = useParams();
@@ -17,6 +19,9 @@ const TaskPage = () => {
   return (
     <main className="p-4">
       <TaskCard task={task}/>
+      {task.status !== Status.FINISHED && task.proof && (
+        <ProofTask  task={task}/>
+      )}
     </main>
   );
 };
