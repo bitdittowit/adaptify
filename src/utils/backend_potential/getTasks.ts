@@ -9,6 +9,7 @@ const convertRawToUserTask = (tasks: BaseTask[]): Task[] => {
         getNextAvailableDate(task.schedule, new Date()) :
         new Date(),
     experience_points: 200,
+    proof_status: 'not_proofed',
   }));
 };
 
