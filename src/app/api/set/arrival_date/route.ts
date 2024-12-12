@@ -14,11 +14,22 @@ export async function POST(request: NextRequest) {
       [arrival_date, 'John Doe']
     );
 
+    const userResult = await db.query(
+      `SELECT id FROM users WHERE name = $1;`,
+      ['John Doe']
+    );
+
+    const userId = userResult.rows[0]?.id;
+
+    if (!userId) {
+      throw new Error('User not found');
+    }
+
     await db.query(
-      `UPDATE tasks
-      SET proof = jsonb_set(proof, '{status}', $1::jsonb)
-      WHERE id = $2;`,
-      [JSON.stringify('proofed'), taskId]
+      `UPDATE user_tasks
+      SET proof_status = $1
+      WHERE user_id = $2 AND document_task_id = $3;`,
+      ['proofed', userId, taskId]
     );
 
     await db.query('COMMIT');
@@ -27,14 +38,17 @@ export async function POST(request: NextRequest) {
       success: true,
       result: {
         arrival_date: arrival_date,
-        task: { id: taskId, proof_status: 'proofed' },
+        user_task: { taskId, proof_status: 'proofed' },
       },
     });
   } catch (error) {
     await db.query('ROLLBACK');
     console.error('Error updating arrival_date or proof status:', error);
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      {
+        error: 'Internal Server Error',
+        message: error instanceof Error ? error.message : ' Unknown error',
+      },
       { status: 500 }
     );
   }

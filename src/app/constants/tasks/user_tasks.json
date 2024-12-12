@@ -21,7 +21,6 @@
       "schedule": null,
       "proof": {
         "action": "/api/set/arrival_date",
-        "status": "not_proofed",
         "checks": [
           {
             "name": "arrival_date",

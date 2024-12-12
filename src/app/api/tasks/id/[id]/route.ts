@@ -22,7 +22,7 @@ export async function GET(
     const taskQuery = await client.query(
       `
       SELECT ut.id, ut.status, ut.experience_points,
-              t.title, t.description, t.schedule, t.proof
+              t.title, t.description, t.schedule, t.proof, ut.proof_status
       FROM user_tasks ut
       LEFT JOIN tasks t ON ut.document_task_id = t.id
       WHERE ut.id = $1;
