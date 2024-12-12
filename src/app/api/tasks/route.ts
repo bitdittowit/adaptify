@@ -13,7 +13,8 @@ async function getDefaultUser() {
           'experience_points', ut.experience_points,
           'title', t.title,
           'description', t.description,
-          'position', t.position
+          'position', t.position,
+          'schedule', t.schedule
         )) AS tasks
       FROM users u
       LEFT JOIN user_tasks ut ON u.id = ut.user_id
