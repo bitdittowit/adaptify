@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Task } from "@/types"
+import { useApiPost } from "@/hooks/api/useApiPost"
 
 interface ProofTaskProps {
   task: Task;
@@ -46,10 +47,20 @@ export function ProofTask({ task }: ProofTaskProps) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: defaultValues,
-  })
+  });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    alert(JSON.stringify(data, null, 2));
+  const { postData } = useApiPost<unknown>();
+
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    const result = await postData(
+      task.proof!.action,
+      {...data, taskId: task.id},
+    );
+
+    if (result) {
+      // todo change to toast.
+      console.log(result);
+    }
   }
 
   return (
