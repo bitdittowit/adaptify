@@ -71,6 +71,7 @@ export type Schedule = {
 export interface ProofTask {
   action: string;
   checks: CheckTask[];
+  status: ProofStatus;
 }
 
 export type ProofStatus = 'not_proofed' | 'checking' | 'proofed';
