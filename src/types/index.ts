@@ -42,6 +42,7 @@ export interface BaseTask {
   blocking_tasks: number[];
   tags: Array<Sex | VisaType>;
   schedule: Schedule | null;
+  proof: ProofTask | null;
 }
 
 export interface Task extends BaseTask {
@@ -65,6 +66,26 @@ export type TimeRange = `${string}:${string}-${string}:${string}`;
 export type Schedule = {
   [K in DayOfWeek]: TimeRange[];
 }
+
+export interface ProofTask {
+  action: string;
+  checks: CheckTask[];
+  status: ProofStatus;
+}
+
+export type ProofStatus = 'not_proofed' | 'checking' | 'proofed';
+
+export interface CheckTask {
+  name: string;
+  title: string;
+  placeholder: string;
+  type: CheckTaskType;
+}
+
+export type CheckTaskType =
+    'date' |
+    'string' |
+    'number';
 
 export interface Coordinates {
   x: number;

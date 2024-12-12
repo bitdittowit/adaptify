@@ -38,7 +38,8 @@ async function seedData() {
       position INT,
       blocking_tasks INTEGER[],
       tags TEXT[],
-      schedule JSONB
+      schedule JSONB,
+      proof JSONB
     );`
   );
   console.log('tasks created');
@@ -70,8 +71,8 @@ async function seedData() {
 
   for (const task of tasksData.tasks) {
     const result = await client.query(
-      `INSERT INTO tasks (title, description, required, position, blocking_tasks, tags, schedule)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      `INSERT INTO tasks (title, description, required, position, blocking_tasks, tags, schedule, proof)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING id;`
     , [
       task.title,
@@ -80,7 +81,8 @@ async function seedData() {
       task.position,
       task.blocking_tasks,
       task.tags,
-      task.schedule
+      task.schedule,
+      task.proof
     ]);
     console.log('task inserted', task);
 
