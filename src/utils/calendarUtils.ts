@@ -18,6 +18,6 @@ export const getRandomDateInMonth = (year = new Date().getFullYear(), month = ne
     return new Date(year, month, randomDay);
 };
 
-export const getTasksForDay = (tasks: Task[], day: Date) => {
+export const getTasksForDay = (tasks: Omit<Task, 'proof_status'>[], day: Date) => {
     return tasks.filter(({ picked_date }) => isSameDay(day, picked_date));
 }

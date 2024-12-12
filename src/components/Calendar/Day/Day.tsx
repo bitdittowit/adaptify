@@ -14,7 +14,7 @@ const indicatorMap: Record<string, JSX.Element> = {
 }
 
 type DayProps = BaseDayProps & {
-    tasks: Task[];
+    tasks: Omit<Task, 'proof_status'>[];
 }
 
 export const Day = ({ tasks, date, displayMonth, ...restDayProps }: DayProps) => {

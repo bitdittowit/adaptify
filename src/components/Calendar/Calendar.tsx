@@ -18,7 +18,7 @@ const mockTasks = (mockData.tasks as BaseTask[])
             status: Status.OPEN,
             picked_date: getRandomDateInMonth(),
             experience_points: getRandomInRange(1, 10),
-        } satisfies Task))
+        } satisfies Omit<Task, 'proof_status'>))
         .filter(({ picked_date }) => 
             !(isWeekend(picked_date) || Boolean(holidays.isHoliday(picked_date)))
         );
