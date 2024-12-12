@@ -38,7 +38,8 @@ async function seedData() {
       position INT,
       blocking_tasks INTEGER[],
       tags TEXT[],
-      schedule JSONB
+      schedule JSONB,
+      proof JSONB
     );`
   );
   console.log('tasks created');
@@ -50,7 +51,8 @@ async function seedData() {
       document_task_id INT REFERENCES tasks(id),
       status VARCHAR(10) CHECK (status IN ('open', 'pending', 'finished')),
       picked_date TIMESTAMP DEFAULT NOW(),
-      experience_points INT DEFAULT 0
+      experience_points INT DEFAULT 0,
+      proof_status VARCHAR(12) CHECK (proof_status IN ('not_proofed', 'checking', 'proofed')) DEFAULT 'not_proofed'
     );`
   );
   console.log('user_tasks created');
@@ -70,8 +72,8 @@ async function seedData() {
 
   for (const task of tasksData.tasks) {
     const result = await client.query(
-      `INSERT INTO tasks (title, description, required, position, blocking_tasks, tags, schedule)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      `INSERT INTO tasks (title, description, required, position, blocking_tasks, tags, schedule, proof)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
       RETURNING id;`
     , [
       task.title,
@@ -80,7 +82,8 @@ async function seedData() {
       task.position,
       task.blocking_tasks,
       task.tags,
-      task.schedule
+      task.schedule,
+      task.proof
     ]);
     console.log('task inserted', task);
 
@@ -89,8 +92,8 @@ async function seedData() {
 
     if (documentTaskId) {
       await client.query(
-        `INSERT INTO user_tasks (user_id, document_task_id, status, experience_points)
-        VALUES ((SELECT id FROM users WHERE name = $1), $2, 'open', 200);`
+        `INSERT INTO user_tasks (user_id, document_task_id, status, experience_points, proof_status)
+        VALUES ((SELECT id FROM users WHERE name = $1), $2, 'open', 200, 'not_proofed');`
       , [
         DEFAULT_USER.name,
         documentTaskId
@@ -108,7 +111,10 @@ export async function GET() {
     console.log('seed data ended');
     return NextResponse.json({ message: 'Database seeded successfully' });
   } catch (error) {
-    console.error('error', error);
-    return NextResponse.json({ error: error }, { status: 500 });
+    console.error('Error seeding data', error);
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 },
+    );
   }
 }
