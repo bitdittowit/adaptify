@@ -21,7 +21,7 @@ export async function GET(
   try {
     const taskQuery = await client.query(
       `
-      SELECT ut.id, ut.status, ut.experience_points, t.title, t.description
+      SELECT ut.id, ut.status, ut.experience_points, t.title, t.description, t.schedule
       FROM user_tasks ut
       LEFT JOIN tasks t ON ut.document_task_id = t.id
       WHERE ut.id = $1;

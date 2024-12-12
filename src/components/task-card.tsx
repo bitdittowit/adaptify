@@ -14,6 +14,7 @@ import { Status, Task } from "@/types"
 import { useApiPost } from "@/hooks/api/useApiPost"
 import { TaskStatus } from "@/components/task-status"
 import { DateBadge } from "@/components/ui/date-badge"
+import { ScheduleBadge } from "@/components/ui/schedule-badge"
 
 type TaskCardProps = React.ComponentProps<typeof Card> & { task: Task };
 
@@ -32,7 +33,7 @@ export function TaskCard({ className, task,  ...props }: TaskCardProps) {
   return (
     <Card className={cn("w-[380px] h-[max-content]", className)} {...props}>
       <CardContent className="grid gap-4 mt-4">
-        {task.picked_date && (
+        {console.log(task.schedule) || task.picked_date && (
           <DateBadge date={task.picked_date} />
         )}
       </CardContent>
@@ -40,6 +41,13 @@ export function TaskCard({ className, task,  ...props }: TaskCardProps) {
         <CardTitle className="mb-1">{task.title}</CardTitle>
         <CardDescription>{task.description}</CardDescription>
       </CardHeader>
+      <CardContent>
+        {
+          task.schedule && (
+            <ScheduleBadge schedule={task.schedule} />
+          )
+        }
+      </CardContent>
       <CardFooter className="gap-4">
         <TaskStatus status={task.status} />
         {task.status !== Status.FINISHED &&
