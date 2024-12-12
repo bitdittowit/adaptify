@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/sidebar"
 
 import '@/styles/index.css';
+import './globals.css'
 
 export const metadata: Metadata = {
   title: "Adaptify",
