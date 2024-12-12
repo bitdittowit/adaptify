@@ -60,7 +60,7 @@ export function ProofTask({ task }: ProofTaskProps) {
     if (result) {
       // todo change to toast.
       console.log(result);
-      task.proof!.status = 'proofed';
+      task.proof_status = 'proofed';
     }
   }
 
@@ -88,7 +88,7 @@ export function ProofTask({ task }: ProofTaskProps) {
             )}
           />
         ))}
-        <Button type="submit" disabled={task.proof!.status !== 'not_proofed'}>
+        <Button type="submit" disabled={task.proof_status !== 'not_proofed'}>
           Проверить
         </Button>
       </form>

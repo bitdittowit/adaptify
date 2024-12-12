@@ -49,6 +49,7 @@ export interface Task extends BaseTask {
   status: Status;
   picked_date: Date | string;
   experience_points: number;
+  proof_status: ProofStatus;
 }
 
 export type DayOfWeek =
@@ -70,7 +71,6 @@ export type Schedule = {
 export interface ProofTask {
   action: string;
   checks: CheckTask[];
-  status: ProofStatus;
 }
 
 export type ProofStatus = 'not_proofed' | 'checking' | 'proofed';
