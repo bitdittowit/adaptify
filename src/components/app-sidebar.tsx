@@ -35,7 +35,7 @@ const data = {
     },
     {
       title: "Task calendar",
-      url: "#",
+      url: "/calendar",
       icon: CalendarDays,
     },
   ],
