@@ -20,8 +20,7 @@
       "tags": ["male", "female", "visa_free", "visa_required"],
       "schedule": null,
       "proof": {
-        "action": "/api/",
-        "status": "not_proofed",
+        "action": "/api/set/arrival_date",
         "checks": [
           {
             "name": "arrival_date",
