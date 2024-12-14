@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
-import { User } from '@/types';
+
 import { db } from '@vercel/postgres';
+
+import type { User } from '@/types';
 
 const client = db;
 
 async function getDefaultUser(): Promise<User | null> {
-  try {
-    const userQuery = await client.query(`
+    try {
+        const userQuery = await client.query(
+            `
       SELECT u.id, u.name, u.arrival_date, u.sex, u.country, u.study_group, u.experience, u.level,
         json_agg(json_build_object(
           'id', ut.id,
@@ -20,43 +23,42 @@ async function getDefaultUser(): Promise<User | null> {
       LEFT JOIN tasks dt ON ut.document_task_id = dt.id
       WHERE u.name = $1
       GROUP BY u.id;
-    `, ['John Doe']);
+    `,
+            ['John Doe'],
+        );
 
-    if (userQuery.rows.length === 0) {
-      return null;
+        if (userQuery.rows.length === 0) {
+            return null;
+        }
+
+        const user = userQuery.rows[0];
+        user.arrival_date = user.arrival_date ? new Date(user.arrival_date) : null;
+
+        return user as User;
+    } catch (error) {
+        console.error('error', error);
+        throw new Error('Error fetching user data');
     }
-
-    const user = userQuery.rows[0];
-    user.arrival_date = user.arrival_date ? new Date(user.arrival_date) : null;
-
-    return user as User;
-  } catch (error) {
-    console.error('error', error)
-    throw new Error('Error fetching user data');
-  }
 }
 
 export async function GET() {
-  try {
-    const user = await getDefaultUser();
-    console.log('user', user)
+    try {
+        const user = await getDefaultUser();
+        console.log('user', user);
 
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+        if (!user) {
+            return NextResponse.json({ error: 'User not found' }, { status: 404 });
+        }
+
+        const totalExperience = user.tasks.reduce((total, task) => total + task.experience_points, 0);
+        console.log('totalExperience', totalExperience);
+
+        return NextResponse.json({
+            level: user.level,
+            experience: user.experience,
+            totalExperience,
+        });
+    } catch (error) {
+        return NextResponse.json({ error: error }, { status: 500 });
     }
-
-    const totalExperience = user.tasks.reduce(
-      (total, task) => total + task.experience_points,
-      0
-    );
-    console.log('totalExperience', totalExperience)
-
-    return NextResponse.json({
-      level: user.level,
-      experience: user.experience,
-      totalExperience,
-    });
-  } catch (error) {
-    return NextResponse.json({ error: error }, { status: 500 });
-  }
 }

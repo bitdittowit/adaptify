@@ -1,0 +1,34 @@
+{
+    "root": true,
+    "settings": {
+        "css.lint.unknownAtRules": "ignore",
+        "css.lint.validProperties": ["composes"],
+        "editor.formatOnSave": true,
+        "typescript.tsdk": "node_modules/typescript/lib",
+        "[css]": {
+            "editor.defaultFormatter": "biomejs.biome"
+        },
+        "[javascript]": {
+            "editor.defaultFormatter": "Jota0222.multi-formatter",
+            "multiFormatter.formatterList": ["esbenp.prettier-vscode", "biomejs.biome"]
+        },
+        "[javascriptreact]": {
+            "editor.defaultFormatter": "Jota0222.multi-formatter",
+            "multiFormatter.formatterList": ["esbenp.prettier-vscode", "biomejs.biome"]
+        },
+        "[json]": {
+            "editor.defaultFormatter": "biomejs.biome"
+        },
+        "[jsonc]": {
+            "editor.defaultFormatter": "biomejs.biome"
+        },
+        "[typescript]": {
+            "editor.defaultFormatter": "Jota0222.multi-formatter",
+            "multiFormatter.formatterList": ["esbenp.prettier-vscode", "biomejs.biome"]
+        },
+        "[typescriptreact]": {
+            "editor.defaultFormatter": "Jota0222.multi-formatter",
+            "multiFormatter.formatterList": ["esbenp.prettier-vscode", "biomejs.biome"]
+        }
+    }
+}
