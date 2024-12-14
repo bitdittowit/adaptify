@@ -1,0 +1,19 @@
+{
+    "arrowParens": "avoid",
+    "quoteProps": "as-needed",
+    "semi": true,
+    "singleQuote": true,
+    "plugins": ["@trivago/prettier-plugin-sort-imports"],
+    "importOrder": [
+        "^server-only$",
+        "^node:",
+        "^react$",
+        "^next(?!\\w)",
+        "<THIRD_PARTY_MODULES>",
+        "^@/",
+        "^../",
+        "^./"
+    ],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
+}

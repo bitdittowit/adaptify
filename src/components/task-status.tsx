@@ -1,12 +1,13 @@
-import { Status } from "@/types"
-import { CheckCheck, CircleDashed, LockKeyholeOpen } from "lucide-react"
+import { CheckCheck, CircleDashed, LockKeyholeOpen } from 'lucide-react';
 
-export function TaskStatus({ status }: { status: Status }) {
-  return (
-    <>
-      {status === Status.OPEN && <LockKeyholeOpen/>}
-      {status === Status.PENDING && <CircleDashed/>}
-      {status === Status.FINISHED && <CheckCheck/>}
-    </>
-  )
+import { STATUS } from '@/types';
+
+export function TaskStatus({ status }: { status: STATUS }) {
+    return (
+        <>
+            {status === STATUS.OPEN && <LockKeyholeOpen />}
+            {status === STATUS.PENDING && <CircleDashed />}
+            {status === STATUS.FINISHED && <CheckCheck />}
+        </>
+    );
 }

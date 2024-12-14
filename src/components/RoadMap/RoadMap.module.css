@@ -1,69 +1,69 @@
 .container {
-  place-self: center;
-  position: relative;
-  max-width: 1024px;
-  width: 60vw;
+    place-self: center;
+    position: relative;
+    max-width: 1024px;
+    width: 60vw;
 
-  --level-size: 80px;
-  --active-color: pink;
-  --inactive-color: lightgray;
-  --connector-width: 60;
+    --level-size: 80px;
+    --active-color: pink;
+    --inactive-color: lightgray;
+    --connector-width: 60;
 }
 
 .svg {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 .connector {
-  fill: none;
-  stroke: var(--inactive-color);
-  stroke-width: var(--connector-width);
-  stroke-linecap: round;
+    fill: none;
+    stroke: var(--inactive-color);
+    stroke-width: var(--connector-width);
+    stroke-linecap: round;
 
-  transition: stroke-dashoffset 2s ease;
+    transition: stroke-dashoffset 2s ease;
 }
 
 .connector.active {
-  fill: none;
-  stroke: var(--active-color);
-  stroke-width: var(--connector-width);
+    fill: none;
+    stroke: var(--active-color);
+    stroke-width: var(--connector-width);
 
-  animation: draw 2s forwards;
+    animation: draw 2s forwards;
 }
 
 .connector.active.back {
-  fill: none;
-  stroke: white;
-  stroke-width: calc(var(--connector-width) + 20);
+    fill: none;
+    stroke: white;
+    stroke-width: calc(var(--connector-width) + 20);
 
-  animation: draw 2s forwards;
+    animation: draw 2s forwards;
 }
 
 .level {
-  font-size: 24px;
+    font-size: 24px;
 
-  position: absolute;
-  width: var(--level-size);
-  height: var(--level-size);
-  border: 8px solid white;
-  border-radius: 50%;
-  background-color: var(--inactive-color);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  cursor: pointer;
-  transform: translate(-50%, 0);
+    position: absolute;
+    width: var(--level-size);
+    height: var(--level-size);
+    border: 8px solid white;
+    border-radius: 50%;
+    background-color: var(--inactive-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    transform: translate(-50%, 0);
 }
 
 .level.active {
-  background-color: var(--active-color);
+    background-color: var(--active-color);
 }
 
 @keyframes draw {
-  to {
-    stroke-dashoffset: 0;
-  }
+    to {
+        stroke-dashoffset: 0;
+    }
 }

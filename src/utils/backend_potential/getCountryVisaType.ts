@@ -1,13 +1,11 @@
-import { Country, VisaType } from "@/types";
+import type { Country, VisaType } from '@/types';
 
-const visaFreeCountries: ReadonlySet<Country> = new Set([
-  'kz',
-]);
+const visaFreeCountries: ReadonlySet<Country> = new Set(['kz']);
 
 export const getCountryVisaType = (country: Country): VisaType => {
-  if (visaFreeCountries.has(country)) {
-    return 'visa_free';
-  }
+    if (visaFreeCountries.has(country)) {
+        return 'visa_free';
+    }
 
-  return 'visa_required';
+    return 'visa_required';
 };

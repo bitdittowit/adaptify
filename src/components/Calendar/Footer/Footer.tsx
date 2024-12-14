@@ -1,11 +1,13 @@
-import type { DayOfWeek, Task } from "@/types";
-import { getDay } from "date-fns";
-import { type FooterProps as BaseFooterProps } from "react-day-picker";
+import { getDay } from 'date-fns';
+import type { FooterProps as BaseFooterProps } from 'react-day-picker';
+
+import type { DayOfWeek, Task } from '@/types';
+
 import styles from './Footer.module.css';
 
 type FooterProps = BaseFooterProps & {
     tasks: Pick<Task, 'title' | 'id' | 'schedule'>[];
-}
+};
 
 const getDayOfWeek = (date: Date): DayOfWeek => {
     const days: DayOfWeek[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
@@ -17,9 +19,11 @@ export const Footer = ({ tasks, displayMonth }: FooterProps) => {
         <tfoot className={styles.footer}>
             {tasks?.map(({ title, id, schedule }) => (
                 <tr key={id}>
-                    <td key={id}>{title}: <b>{schedule?.[getDayOfWeek(displayMonth || new Date())]}</b></td>
+                    <td key={id}>
+                        {title}: <b>{schedule?.[getDayOfWeek(displayMonth || new Date())]}</b>
+                    </td>
                 </tr>
             ))}
         </tfoot>
-    )
-}
+    );
+};

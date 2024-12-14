@@ -1,11 +1,13 @@
 import { NextResponse } from 'next/server';
+
 import { db } from '@vercel/postgres';
 
 async function getDefaultUser() {
-  const client = db;
+    const client = db;
 
-  try {
-    const userQuery = await client.query(`
+    try {
+        const userQuery = await client.query(
+            `
       SELECT u.id, u.name, u.arrival_date, u.sex, u.country, u.study_group, u.experience, u.level,
         json_agg(json_build_object(
           'id', ut.id,
@@ -21,41 +23,40 @@ async function getDefaultUser() {
       LEFT JOIN tasks t ON ut.document_task_id = t.id
       WHERE u.name = $1
       GROUP BY u.id;
-    `, ['John Doe']);
+    `,
+            ['John Doe'],
+        );
 
-    if (userQuery.rows.length === 0) {
-      return null;
+        if (userQuery.rows.length === 0) {
+            return null;
+        }
+
+        const user = userQuery.rows[0];
+        console.log('user', user);
+        user.arrival_date = user.arrival_date ? new Date(user.arrival_date) : null;
+
+        return user;
+    } catch (error) {
+        console.error('Error fetching user data:', error);
+        throw new Error('Error fetching user data');
     }
-
-    const user = userQuery.rows[0];
-    console.log('user', user)
-    user.arrival_date = user.arrival_date ? new Date(user.arrival_date) : null;
-
-    return user;
-  } catch (error) {
-    console.error('Error fetching user data:', error);
-    throw new Error('Error fetching user data');
-  }
 }
 
 export async function GET() {
-  try {
-    const user = await getDefaultUser();
+    try {
+        const user = await getDefaultUser();
 
-    if (!user) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
+        if (!user) {
+            return NextResponse.json({ error: 'User not found' }, { status: 404 });
+        }
+
+        if (!user.tasks) {
+            return NextResponse.json({ error: 'Tasks not found' }, { status: 404 });
+        }
+
+        return NextResponse.json(user.tasks);
+    } catch (error) {
+        console.error('Error in API route:', error);
+        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     }
-
-    if (!user.tasks) {
-      return NextResponse.json({ error: 'Tasks not found' }, { status: 404 });
-    }
-
-    return NextResponse.json(user.tasks);
-  } catch (error) {
-    console.error('Error in API route:', error);
-    return NextResponse.json(
-      { error: 'Internal Server Error' },
-      { status: 500 },
-    );
-  }
 }

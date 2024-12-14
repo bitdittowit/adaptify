@@ -1,8 +1,10 @@
-import type { Task } from "@/types";
-import { isSameDay } from "date-fns";
+import { isSameDay } from 'date-fns';
+
+import type { Task } from '@/types';
 
 export const getRandomInRange = (min: number, max: number) => {
     if (min > max) {
+        //biome-ignore lint/style/noParameterAssign: why not
         [min, max] = [max, min];
     }
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -10,7 +12,8 @@ export const getRandomInRange = (min: number, max: number) => {
 
 export const getRandomDateInMonth = (year = new Date().getFullYear(), month = new Date().getMonth()) => {
     if (month < 0 || month > 11) {
-        month = new Date().getMonth()
+        //biome-ignore lint/style/noParameterAssign: temp util func
+        month = new Date().getMonth();
     }
 
     const endDate = new Date(year, month + 1, 0);
@@ -20,4 +23,4 @@ export const getRandomDateInMonth = (year = new Date().getFullYear(), month = ne
 
 export const getTasksForDay = (tasks: Omit<Task, 'proof_status'>[], day: Date) => {
     return tasks.filter(({ picked_date }) => isSameDay(day, picked_date));
-}
+};
