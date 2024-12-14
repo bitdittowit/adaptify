@@ -57,7 +57,7 @@
                 "noDuplicateElseIf": "error",
                 "noSubstr": "error",
                 "noUnknownPseudoElement": "error",
-                "useConsistentCurlyBraces": "error"
+                "useConsistentCurlyBraces": "warn"
             },
             "style": {
                 "noUnusedTemplateLiteral": "warn",

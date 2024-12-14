@@ -6,8 +6,8 @@
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
-        "lint": "tsc --incremental false && prettier './**/*.{js,ts,mjs,mts}' --check && biome check",
-        "lint:fix": "prettier './**/*.{js,ts,mjs,mts}' --write && biome check --write",
+        "lint": "tsc --incremental false && prettier './**/*.{js,ts,mjs,mts,jsx,tsx}' --check && biome check",
+        "lint:fix": "prettier './**/*.{js,ts,mjs,mts,jsx,tsx}' --write && biome check --write",
         "prepare": "husky"
     },
     "lint-staged": {

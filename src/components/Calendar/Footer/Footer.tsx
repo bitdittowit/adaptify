@@ -1,6 +1,8 @@
-import type { DayOfWeek, Task } from '@/types';
 import { getDay } from 'date-fns';
 import type { FooterProps as BaseFooterProps } from 'react-day-picker';
+
+import type { DayOfWeek, Task } from '@/types';
+
 import styles from './Footer.module.css';
 
 type FooterProps = BaseFooterProps & {

@@ -1,6 +1,7 @@
 'use client';
 
 import type * as React from 'react';
+
 import { CalendarDays, ListChecks, Route } from 'lucide-react';
 
 import { NavMain } from '@/components/nav-main';

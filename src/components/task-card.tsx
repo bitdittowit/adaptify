@@ -9,7 +9,7 @@ import { DateBadge } from '@/components/ui/date-badge';
 import { ScheduleBadge } from '@/components/ui/schedule-badge';
 import { useApiPost } from '@/hooks/api/useApiPost';
 import { cn } from '@/lib/utils';
-import { Status, type Task } from '@/types';
+import { STATUS, type Task } from '@/types';
 
 type TaskCardProps = ComponentProps<typeof Card> & { task: Task };
 
@@ -21,7 +21,7 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
         const result = await postData('/api/tasks/finish', data);
         if (result) {
             console.log('User experience updated:', result);
-            task.status = Status.FINISHED;
+            task.status = STATUS.FINISHED;
         }
     };
 
@@ -37,7 +37,7 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
             <CardContent>{task.schedule && <ScheduleBadge schedule={task.schedule} />}</CardContent>
             <CardFooter className="gap-4">
                 <TaskStatus status={task.status} />
-                {task.status !== Status.FINISHED && (
+                {task.status !== STATUS.FINISHED && (
                     <Button className="w-full" onClick={markAsDone}>
                         <Check /> Mark as done
                     </Button>

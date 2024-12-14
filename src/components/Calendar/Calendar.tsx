@@ -1,13 +1,17 @@
 'use client';
-import mockData from '@/app/constants/tasks/user_tasks.json';
-import { Calendar as BaseCalendar } from '@/components/ui/calendar';
-import { Status, type BaseTask, type Task } from '@/types';
-import { getRandomDateInMonth, getRandomInRange, getTasksForDay } from '@/utils/calendarUtils';
+
+import { useState } from 'react';
+
 import { isPast, isSameMonth, isToday, isWeekend } from 'date-fns';
 import { ru } from 'date-fns/locale/ru';
 import Holidays from 'date-holidays';
-import { useState } from 'react';
 import type { DayProps as BaseDayProps, FooterProps as BaseFooterProps } from 'react-day-picker';
+
+import mockData from '@/app/constants/tasks/user_tasks.json';
+import { Calendar as BaseCalendar } from '@/components/ui/calendar';
+import { type BaseTask, STATUS, type Task } from '@/types';
+import { getRandomDateInMonth, getRandomInRange, getTasksForDay } from '@/utils/calendarUtils';
+
 import { Day } from './Day/Day';
 import { Footer } from './Footer/Footer';
 
@@ -17,7 +21,7 @@ const mockTasks = (mockData.tasks as BaseTask[])
         task =>
             ({
                 ...task,
-                status: Status.OPEN,
+                status: STATUS.OPEN,
                 picked_date: getRandomDateInMonth(),
                 experience_points: getRandomInRange(1, 10),
             }) satisfies Omit<Task, 'proof_status'>,

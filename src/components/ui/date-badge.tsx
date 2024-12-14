@@ -7,7 +7,10 @@ interface DateBadgeProps {
 function formatDate(isoDate: string) {
     const date = new Date(isoDate);
 
-    const formatter = new Intl.DateTimeFormat('ru-RU', { day: '2-digit', month: 'long' });
+    const formatter = new Intl.DateTimeFormat('ru-RU', {
+        day: '2-digit',
+        month: 'long',
+    });
 
     return formatter.format(date);
 }

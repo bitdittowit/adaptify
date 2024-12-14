@@ -1,6 +1,7 @@
+import type { ReactElement } from 'react';
+
 import type { Coordinates } from '@/types';
 import getPathLength from '@/utils/getPathLength';
-import type { ReactElement } from 'react';
 
 function createCurvedPathD(points: Coordinates[]): string {
     if (points.length < 2) {

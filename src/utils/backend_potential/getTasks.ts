@@ -1,11 +1,11 @@
-import { type BaseTask, type Sex, Status, type Task, type VisaType } from '@/types';
+import { type BaseTask, STATUS, type Sex, type Task, type VisaType } from '@/types';
 
 import getNextAvailableDate from './getNextAvailableDate';
 
 const convertRawToUserTask = (tasks: BaseTask[]): Task[] => {
     return tasks.map(task => ({
         ...task,
-        status: Status.OPEN,
+        status: STATUS.OPEN,
         picked_date: task.schedule ? getNextAvailableDate(task.schedule, new Date()) : new Date(),
         experience_points: 200,
         proof_status: 'not_proofed',

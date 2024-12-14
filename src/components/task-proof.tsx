@@ -7,8 +7,8 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import type { Task } from '@/types';
 import { useApiPost } from '@/hooks/api/useApiPost';
+import type { Task } from '@/types';
 
 interface ProofTaskProps {
     task: Task;
@@ -51,7 +51,10 @@ export function ProofTask({ task }: ProofTaskProps) {
     const { postData } = useApiPost<unknown>();
 
     async function onSubmit(data: z.infer<typeof FormSchema>) {
-        const result = await postData(task.proof?.action || '', { ...data, taskId: task.id });
+        const result = await postData(task.proof?.action || '', {
+            ...data,
+            taskId: task.id,
+        });
 
         if (result) {
             // todo change to toast.

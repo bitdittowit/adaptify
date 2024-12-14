@@ -5,7 +5,7 @@ import { useParams } from 'next/navigation';
 import { TaskCard } from '@/components/task-card';
 import { ProofTask } from '@/components/task-proof';
 import { useGetTaskById } from '@/hooks/api/entities/tasks/useGetTaskById';
-import { Status } from '@/types';
+import { STATUS } from '@/types';
 
 const TaskPage = () => {
     const params = useParams();
@@ -23,7 +23,7 @@ const TaskPage = () => {
     return (
         <main className="p-4">
             <TaskCard task={task} />
-            {task.status !== Status.FINISHED && task.proof && <ProofTask task={task} />}
+            {task.status !== STATUS.FINISHED && task.proof && <ProofTask task={task} />}
         </main>
     );
 };

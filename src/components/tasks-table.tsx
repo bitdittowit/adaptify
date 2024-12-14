@@ -1,6 +1,9 @@
 'use client';
 
 import * as React from 'react';
+
+import Link from 'next/link';
+
 import {
     type ColumnDef,
     type ColumnFiltersState,
@@ -14,10 +17,10 @@ import {
     useReactTable,
 } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react';
-import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
+import { DateBadge } from '@/components/ui/date-badge';
 import {
     DropdownMenu,
     DropdownMenuCheckboxItem,
@@ -31,7 +34,6 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useGetTasks } from '@/hooks/api/entities/tasks/useGetTasks';
 import type { Task } from '@/types';
-import { DateBadge } from '@/components/ui/date-badge';
 
 export const columns: ColumnDef<Task>[] = [
     {

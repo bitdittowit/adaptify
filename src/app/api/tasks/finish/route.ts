@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
-import { Status } from '@/types';
+import { STATUS } from '@/types';
 
 export async function POST(request: NextRequest) {
     const { id } = await request.json();
@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
 
         const task = taskQuery.rows[0];
 
-        if (task.status === Status.FINISHED) {
+        if (task.status === STATUS.FINISHED) {
             throw new Error(`Task with id ${id} is already finished`);
         }
 
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
             `UPDATE user_tasks
       SET status = $1
       WHERE id = $2;`,
-            [Status.FINISHED, id],
+            [STATUS.FINISHED, id],
         );
 
         const newExperience = Number(task.experience) + Number(task.experience_points);
