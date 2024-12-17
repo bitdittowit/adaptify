@@ -32,7 +32,7 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
             </CardContent>
             <CardHeader className="mt-[-40px] flex">
                 <CardTitle className="mb-1">{task.title}</CardTitle>
-                <CardDescription>{task.description}</CardDescription>
+                <CardDescription style={{ whiteSpace: 'pre-line' }}>{task.description}</CardDescription>
             </CardHeader>
             <CardContent>{task.schedule && <ScheduleBadge schedule={task.schedule} />}</CardContent>
             <CardFooter className="gap-4">
