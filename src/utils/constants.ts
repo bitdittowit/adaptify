@@ -1,62 +1,36 @@
 import type { Level } from '@/types';
 
-const leftPositions = [
-    '50%',
-    '80%',
-    '20%',
-    '50%',
-    '80%',
-    '20%',
-    '50%',
-    '20%',
-    '50%',
-    '80%',
-    '80%',
-    '20%',
-    '50%',
-    '80%',
-    '50%',
-    '20%',
-    '20%',
-    '80%',
-    '20%',
-    '50%',
-];
+export const STEP = 60;
+const leftOffsetBorder = 10;
+const rightOffsetBorder = 90;
 
-const calculateStep = (): number => {
-    const screenWidth = window.innerWidth;
-    let step = 100;
-
-    if (screenWidth > 720) {
-        const maxScreenWidth = 1024;
-        const minScreenWidth = 720;
-        const maxStep = 200;
-
-        if (screenWidth <= maxScreenWidth) {
-            const ratio = (screenWidth - minScreenWidth) / (maxScreenWidth - minScreenWidth);
-            step = 100 + ratio * (maxStep - 100);
-        } else {
-            step = maxStep;
-        }
-    }
-
-    return step;
-};
-
-export const STEP = calculateStep();
-
-const createLevels = (count: number): Level[] => {
+const createLevels = (count: number, step = 10): Level[] => {
     const levels: Level[] = [];
+    let leftOffset = 50;
+    let increasing = true;
 
     for (let i = 0; i < count; i++) {
         const id = i + 1;
         const bottom = 20 + i * STEP;
-        const left = leftPositions[i % leftPositions.length];
 
-        levels.push({ id, position: { bottom, left } });
+        levels.push({ id, position: { bottom, left: `${leftOffset}%` } });
+
+        if (leftOffset >= rightOffsetBorder) {
+            increasing = false;
+        } else if (leftOffset <= leftOffsetBorder) {
+            increasing = true;
+        }
+
+        if (increasing) {
+            leftOffset += step;
+        } else {
+            leftOffset -= step;
+        }
     }
 
     return levels;
 };
 
-export const LEVELS = createLevels(20);
+const leftOffsetStep = window.innerWidth > 720 ? 8 : 20;
+
+export const LEVELS = createLevels(20, leftOffsetStep);

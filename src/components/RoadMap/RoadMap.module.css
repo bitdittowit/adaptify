@@ -3,6 +3,11 @@
     position: relative;
     max-width: 1024px;
     width: 60vw;
+    perspective: 100000px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     --level-size: 80px;
     --active-color: pink;
@@ -16,54 +21,78 @@
     width: 100%;
 }
 
-.connector {
-    fill: none;
-    stroke: var(--inactive-color);
-    stroke-width: var(--connector-width);
-    stroke-linecap: round;
-
-    transition: stroke-dashoffset 2s ease;
-}
-
-.connector.active {
-    fill: none;
-    stroke: var(--active-color);
-    stroke-width: var(--connector-width);
-
-    animation: draw 2s forwards;
-}
-
-.connector.active.back {
-    fill: none;
-    stroke: white;
-    stroke-width: calc(var(--connector-width) + 20);
-
-    animation: draw 2s forwards;
-}
-
 .level {
-    font-size: 24px;
-
     position: absolute;
     width: var(--level-size);
     height: var(--level-size);
-    border: 8px solid white;
-    border-radius: 50%;
-    background-color: var(--inactive-color);
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     cursor: pointer;
-    transform: translate(-50%, 0);
+    transform: translate(-50%, 0) rotateX(-30deg) rotateY(-30deg);
+    transform-style: preserve-3d;
 }
 
-.level.active {
-    background-color: var(--active-color);
+.levelNumber {
+    --size: 24px;
+
+    font-size: 14px;
+    font-weight: 800;
+    line-height: var(--size);
+    color: black;
+    background-color: #ffffff33;
+
+    width: var(--size);
+    height: var(--size);
+
+    box-sizing: content-box;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: middle;
+    rotate: -30deg;
 }
 
-@keyframes draw {
-    to {
-        stroke-dashoffset: 0;
-    }
+.cubeFace {
+    position: absolute;
+    width: var(--level-size);
+    height: var(--level-size);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #999;
+    box-sizing: border-box;
+}
+
+.cubeFaceFront {
+    transform: translateZ(calc(var(--level-size) / 2));
+}
+.cubeFaceBack {
+    transform: rotateY(180deg) translateZ(calc(var(--level-size) / 2));
+}
+.cubeFaceRight {
+    transform: rotateY(90deg) translateZ(calc(var(--level-size) / 2));
+}
+.cubeFaceLeft {
+    transform: rotateY(-90deg) translateZ(calc(var(--level-size) / 2));
+}
+.cubeFaceTop {
+    transform: rotateX(90deg) translateZ(calc(var(--level-size) / 2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cubeFaceBottom {
+    transform: rotateX(-90deg) translateZ(calc(var(--level-size) / 2));
+}
+
+.level.active .cubeFaceFront,
+.level.active .cubeFaceBack,
+.level.active .cubeFaceRight,
+.level.active .cubeFaceLeft,
+.level.active .cubeFaceBottom,
+.level.active .cubeFaceTop {
+    background-color: #7fffd488;
+    border-color: #eee;
+    transition: background-color linear 200ms, border-color linear 200ms;
+    transition-delay: 200ms;
 }

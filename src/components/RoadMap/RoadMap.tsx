@@ -4,7 +4,6 @@ import { useEffect, useRef } from 'react';
 import type { FC } from 'react';
 
 import { useGetUserLevelSummary } from '@/hooks/api/entities/users/useGetUserLevelSummary';
-import usePaths from '@/hooks/usePaths';
 import { LEVELS } from '@/utils/constants';
 
 import Level from './Level';
@@ -17,7 +16,6 @@ const RoadMap: FC = () => {
     const containerRef = useRef<HTMLDivElement | null>(null);
 
     const currentLevel = userLevelSummary?.level ?? 0;
-    const paths = usePaths(LEVELS, currentLevel, containerRef, styles.connector, styles.active, styles.back);
 
     useEffect(() => {
         window.scrollTo(0, document.body.scrollHeight);
@@ -31,7 +29,6 @@ const RoadMap: FC = () => {
                 minHeight: LEVELS[LEVELS.length - 1].position.bottom + LAYOUT_OFFSET_PX,
             }}
         >
-            <svg className={styles.svg}>{paths}</svg>
             {LEVELS.map(({ id, position }) => (
                 <Level key={id} id={id} position={position} isActive={id <= currentLevel} />
             ))}
