@@ -7,6 +7,7 @@ import { AddressBadge } from '@/components/ui/address-badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { DateBadge } from '@/components/ui/date-badge';
+import { DocumentsBadge } from '@/components/ui/documents-badge';
 import { ScheduleBadge } from '@/components/ui/schedule-badge';
 import { useApiPost } from '@/hooks/api/useApiPost';
 import { cn } from '@/lib/utils';
@@ -29,6 +30,7 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
     const renderTaskBadges = (task: Task) => {
         return (
             <>
+                {task.documents && <DocumentsBadge documents={task.documents} />}
                 {task.schedule && <ScheduleBadge schedule={task.schedule} />}
                 {task.address && <AddressBadge address={task.address} />}
             </>
