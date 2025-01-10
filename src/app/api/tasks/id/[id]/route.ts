@@ -11,13 +11,12 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
         return NextResponse.json({ error: `Invalid task ID: ${id}` }, { status: 400 });
     }
 
-    const client = db;
-
     try {
-        const taskQuery = await client.query(
+        const taskQuery = await db.query(
             `
       SELECT ut.id, ut.status, ut.experience_points,
-              t.title, t.description, t.schedule, t.proof, ut.proof_status
+             t.title, t.description, t.schedule, t.proof, ut.proof_status,
+             t.documents, t.links, t.medical_procedures, t.address, t.contacts, t.cost
       FROM user_tasks ut
       LEFT JOIN tasks t ON ut.document_task_id = t.id
       WHERE ut.id = $1;
