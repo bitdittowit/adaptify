@@ -16,6 +16,23 @@ export interface UserLevelSummary {
     totalExperience: number;
 }
 
+export interface Link {
+    url: string;
+    description: string;
+}
+
+export interface Contact {
+    phones?: Array<{ title?: string; value: string }>;
+    emails?: Array<{ title?: string; value: string }>;
+}
+
+export interface Address {
+    title: string;
+    value: string;
+}
+
+export type Cost = string;
+
 // TODO (dbo) add Country enum
 export type Country = string;
 
@@ -43,6 +60,12 @@ export interface BaseTask {
     tags: Array<Sex | VisaType>;
     schedule: Schedule | null;
     proof: ProofTask | null;
+    documents: string[] | null;
+    links: string[] | null;
+    medical_procedures?: string[];
+    address: Address[] | null;
+    contacts: Contact | null;
+    cost?: string;
 }
 
 export interface Task extends BaseTask {
