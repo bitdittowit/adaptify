@@ -17,18 +17,10 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table';
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import { DateBadge } from '@/components/ui/date-badge';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useGetTasks } from '@/hooks/api/entities/tasks/useGetTasks';
@@ -44,19 +36,14 @@ export const columns: ColumnDef<Task>[] = [
         accessorKey: 'position',
         header: ({ column }) => {
             return (
-                <div className="flex justify-center">
+                <div className="flex justify-center max-w-[48px]">
                     <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
                         <ArrowUpDown />
                     </Button>
                 </div>
             );
         },
-        cell: ({ row }) => <div className="text-center">{row.getValue('position')}</div>,
-    },
-    {
-        accessorKey: 'status',
-        header: 'Status',
-        cell: ({ row }) => <div className="capitalize">{row.getValue('status')}</div>,
+        cell: () => <></>,
     },
     {
         accessorKey: 'title',
@@ -86,27 +73,13 @@ export const columns: ColumnDef<Task>[] = [
         },
     },
     {
-        id: 'actions',
-        enableHiding: false,
-        cell: ({ row }) => {
-            return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>
-                            <Link href={`/tasks/id/${row.getValue('id')}`}>View task details</Link>
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
-            );
-        },
+        accessorKey: 'details',
+        header: () => <></>,
+        cell: ({ row }) => (
+            <Button variant="outline">
+                <Link href={`/tasks/id/${row.getValue('id')}`}>Details</Link>
+            </Button>
+        ),
     },
 ];
 
@@ -130,7 +103,7 @@ export function TasksTable() {
         state: {
             sorting,
             columnFilters,
-            columnVisibility,
+            columnVisibility: { ...columnVisibility, id: false },
         },
     });
 
@@ -148,14 +121,14 @@ export function TasksTable() {
                     className="max-w-sm"
                 />
             </div>
-            <div className="rounded-md border">
+            <div className="rounded-md border overflow-x-auto" style={{ maxWidth: 'calc(100vw - 40px)' }}>
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map(headerGroup => (
                             <TableRow key={headerGroup.id}>
                                 {headerGroup.headers.map(header => {
                                     return (
-                                        <TableHead key={header.id}>
+                                        <TableHead key={header.id} className="first:sticky first:left-0 first:w-10">
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(header.column.columnDef.header, header.getContext())}
@@ -170,7 +143,7 @@ export function TasksTable() {
                             table.getRowModel().rows.map(row => (
                                 <TableRow key={row.id}>
                                     {row.getVisibleCells().map(cell => (
-                                        <TableCell key={cell.id}>
+                                        <TableCell key={cell.id} className="last:sticky last:right-0 last:w-10">
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                         </TableCell>
                                     ))}
