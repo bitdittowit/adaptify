@@ -1,0 +1,15 @@
+{
+    "sidebar": {
+        "routeMap": "Прогресс",
+        "taskList": "Список задач",
+        "taskCalendar": "Календарь задач"
+    },
+    "input": {
+        "filter": "Найти..."
+    },
+    "language-switcher": {
+        "choose": "Выберите язык",
+        "ru": "Русский",
+        "en": "Английский"
+    }
+}
