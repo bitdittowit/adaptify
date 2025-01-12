@@ -2,6 +2,7 @@
 
 import * as React from 'react';
 
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
 import {
@@ -16,14 +17,12 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table';
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react';
+import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
 import { DateBadge } from '@/components/ui/date-badge';
 import {
     DropdownMenu,
-    DropdownMenuCheckboxItem,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuLabel,
@@ -37,35 +36,19 @@ import type { Task } from '@/types';
 
 export const columns: ColumnDef<Task>[] = [
     {
-        id: 'select',
-        header: ({ table }) => (
-            <Checkbox
-                checked={table.getIsAllPageRowsSelected() || (table.getIsSomePageRowsSelected() && 'indeterminate')}
-                onCheckedChange={value => table.toggleAllPageRowsSelected(!!value)}
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={value => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
-    },
-    {
         accessorKey: 'id',
+        header: () => <div className="text-center">id</div>,
         cell: ({ row }) => <div className="text-center">{row.getValue('id')}</div>,
     },
     {
         accessorKey: 'position',
         header: ({ column }) => {
             return (
-                <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                    <ArrowUpDown />
-                </Button>
+                <div className="flex justify-center">
+                    <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                        <ArrowUpDown />
+                    </Button>
+                </div>
             );
         },
         cell: ({ row }) => <div className="text-center">{row.getValue('position')}</div>,
@@ -131,8 +114,8 @@ export function TasksTable() {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
-    const [rowSelection, setRowSelection] = React.useState({});
     const { data, loading } = useGetTasks();
+    const t = useTranslations('input');
 
     const table = useReactTable({
         data,
@@ -144,12 +127,10 @@ export function TasksTable() {
         getSortedRowModel: getSortedRowModel(),
         getFilteredRowModel: getFilteredRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
-        onRowSelectionChange: setRowSelection,
         state: {
             sorting,
             columnFilters,
             columnVisibility,
-            rowSelection,
         },
     });
 
@@ -159,37 +140,13 @@ export function TasksTable() {
 
     return (
         <div className="w-full">
-            <div className="flex items-center py-4">
+            <div className="flex items-center py-4 justify-end">
                 <Input
-                    placeholder="Filter tasks..."
+                    placeholder={t('filter')}
                     value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
                     onChange={event => table.getColumn('title')?.setFilterValue(event.target.value)}
                     className="max-w-sm"
                 />
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="outline" className="ml-auto">
-                            Columns <ChevronDown />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        {table
-                            .getAllColumns()
-                            .filter(column => column.getCanHide())
-                            .map(column => {
-                                return (
-                                    <DropdownMenuCheckboxItem
-                                        key={column.id}
-                                        className="capitalize"
-                                        checked={column.getIsVisible()}
-                                        onCheckedChange={value => column.toggleVisibility(!!value)}
-                                    >
-                                        {column.id}
-                                    </DropdownMenuCheckboxItem>
-                                );
-                            })}
-                    </DropdownMenuContent>
-                </DropdownMenu>
             </div>
             <div className="rounded-md border">
                 <Table>
@@ -211,7 +168,7 @@ export function TasksTable() {
                     <TableBody>
                         {table.getRowModel().rows?.length ? (
                             table.getRowModel().rows.map(row => (
-                                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                                <TableRow key={row.id}>
                                     {row.getVisibleCells().map(cell => (
                                         <TableCell key={cell.id}>
                                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
@@ -230,10 +187,6 @@ export function TasksTable() {
                 </Table>
             </div>
             <div className="flex items-center justify-end space-x-2 py-4">
-                <div className="flex-1 text-sm text-muted-foreground">
-                    {table.getFilteredSelectedRowModel().rows.length} of {table.getFilteredRowModel().rows.length}
-                    row(s) selected.
-                </div>
                 <div className="space-x-2">
                     <Button
                         variant="outline"
