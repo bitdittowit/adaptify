@@ -21,7 +21,7 @@ export interface Link {
     description: string;
 }
 
-export interface Contact {
+export interface Contacts {
     phones?: Array<{ title?: string; value: string }>;
     emails?: Array<{ title?: string; value: string }>;
 }
@@ -64,7 +64,7 @@ export interface BaseTask {
     links: string[] | null;
     medical_procedures?: string[];
     address: Address[] | null;
-    contacts: Contact | null;
+    contacts: Contacts | null;
     cost?: string;
 }
 

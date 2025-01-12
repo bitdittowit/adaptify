@@ -6,6 +6,7 @@ import { TaskStatus } from '@/components/task-status';
 import { AddressBadge } from '@/components/ui/address-badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { ContactsBadge } from '@/components/ui/contacts-badge';
 import { DateBadge } from '@/components/ui/date-badge';
 import { DocumentsBadge } from '@/components/ui/documents-badge';
 import { ScheduleBadge } from '@/components/ui/schedule-badge';
@@ -33,6 +34,7 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
                 {task.documents && <DocumentsBadge documents={task.documents} />}
                 {task.schedule && <ScheduleBadge schedule={task.schedule} />}
                 {task.address && <AddressBadge address={task.address} />}
+                {task.contacts && <ContactsBadge contacts={task.contacts} />}
             </>
         );
     };
