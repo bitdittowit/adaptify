@@ -2,8 +2,12 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
-import tasksData from '@/app/constants/tasks/user_tasks.json';
+import rawTasksData from '@/app/constants/tasks/user_tasks.json';
 import { DEFAULT_USER } from '@/app/constants/user';
+import type { BaseTask } from '@/types';
+import preprocessTasks from '@/utils/backend_potential/preprocessTasks';
+
+const tasksData = preprocessTasks(rawTasksData.tasks as BaseTask[]);
 
 async function seedData() {
     console.log('start to seed data');
@@ -78,7 +82,7 @@ async function seedData() {
     );
     console.log('user inserted');
 
-    for (const task of tasksData.tasks) {
+    for (const task of tasksData) {
         console.log('inserting task', task);
         const result = await db.query(
             `INSERT INTO tasks (title, description, required, position, blocks, blocked_by, tags, schedule, proof, documents, links, medical_procedures, address, contacts, cost)
