@@ -36,7 +36,8 @@ async function seedData() {
             description TEXT NOT NULL,
             required BOOLEAN DEFAULT FALSE,
             position INT,
-            blocking_tasks INTEGER[],
+            blocks INTEGER[],
+            blocked_by INTEGER[],
             tags TEXT[],
             schedule JSONB,
             proof JSONB,
@@ -80,7 +81,7 @@ async function seedData() {
     for (const task of tasksData.tasks) {
         console.log('inserting task', task);
         const result = await db.query(
-            `INSERT INTO tasks (title, description, required, position, blocking_tasks, tags, schedule, proof, documents, links, medical_procedures, address, contacts, cost)
+            `INSERT INTO tasks (title, description, required, position, blocks, blocked_by, tags, schedule, proof, documents, links, medical_procedures, address, contacts, cost)
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
             RETURNING id;`,
             [
@@ -88,7 +89,8 @@ async function seedData() {
                 task.description,
                 task.required,
                 task.position,
-                task.blocking_tasks,
+                task.blocks,
+                task.blocked_by,
                 task.tags,
                 task.schedule,
                 task.proof,
