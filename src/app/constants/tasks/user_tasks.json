@@ -431,8 +431,8 @@
             "required": true,
             "position": 12,
             "title": "Пройти процедуру дактилоскопии и фотографирования",
-            "blocks": [9],
-            "blocked_by": [],
+            "blocks": [],
+            "blocked_by": [9],
             "tags": ["male", "female", "visa_required"],
             "schedule": {
                 "monday": ["08:00-17:00"],
