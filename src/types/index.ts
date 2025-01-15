@@ -74,6 +74,7 @@ export interface Task extends BaseTask {
     picked_date: Date | string;
     experience_points: number;
     proof_status: ProofStatus;
+    available: boolean;
 }
 
 export type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';

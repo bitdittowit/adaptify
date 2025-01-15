@@ -47,6 +47,9 @@ function updateTaskDependencies(tasks: BaseTask[]): BaseTask[] {
             return;
         }
 
+        // Ensure task does not block itself.
+        task.blocks = task.blocks.filter(blockId => blockId !== taskId);
+
         for (const blocksId of task.blocks) {
             updateBlocks(blocksId, visited);
 
@@ -77,6 +80,7 @@ function updateTaskDependencies(tasks: BaseTask[]): BaseTask[] {
         updateBlocks(task.id);
     }
 
+    // console.log('tasks', tasks.map(t => ({id: t.id, blocks: t.blocks, blocked_by: t.blocked_by})));
     return tasks;
 }
 

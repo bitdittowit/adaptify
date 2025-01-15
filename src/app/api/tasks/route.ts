@@ -8,22 +8,24 @@ async function getDefaultUser() {
     try {
         const userQuery = await client.query(
             `
-      SELECT u.id, u.name, u.arrival_date, u.sex, u.country, u.study_group, u.experience, u.level,
-        json_agg(json_build_object(
-          'id', ut.id,
-          'status', ut.status,
-          'experience_points', ut.experience_points,
-          'title', t.title,
-          'description', t.description,
-          'position', t.position,
-          'schedule', t.schedule
-        )) AS tasks
-      FROM users u
-      LEFT JOIN user_tasks ut ON u.id = ut.user_id
-      LEFT JOIN tasks t ON ut.document_task_id = t.id
-      WHERE u.name = $1
-      GROUP BY u.id;
-    `,
+          SELECT u.id, u.name, u.arrival_date, u.sex, u.country, u.study_group, u.experience, u.level,
+            json_agg(json_build_object(
+              'id', ut.id,
+              'status', ut.status,
+              'experience_points', ut.experience_points,
+              'title', t.title,
+              'description', t.description,
+              'position', t.position,
+              'schedule', t.schedule
+            )) AS tasks
+          FROM users u
+          LEFT JOIN user_tasks ut ON u.id = ut.user_id
+          LEFT JOIN tasks t ON ut.document_task_id = t.id
+          WHERE u.name = $1 
+            AND ut.available = TRUE
+            AND ut.status != 'finished'
+          GROUP BY u.id;
+        `,
             ['John Doe'],
         );
 
