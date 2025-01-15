@@ -56,7 +56,8 @@ export interface BaseTask {
     required: boolean;
     position: number;
     // Array of blocking tasks ids.
-    blocking_tasks: number[];
+    blocks: number[];
+    blocked_by: number[];
     tags: Array<Sex | VisaType>;
     schedule: Schedule | null;
     proof: ProofTask | null;

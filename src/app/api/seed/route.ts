@@ -2,8 +2,12 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
-import tasksData from '@/app/constants/tasks/user_tasks.json';
+import rawTasksData from '@/app/constants/tasks/user_tasks.json';
 import { DEFAULT_USER } from '@/app/constants/user';
+import type { BaseTask } from '@/types';
+import preprocessTasks from '@/utils/backend_potential/preprocessTasks';
+
+const tasksData = preprocessTasks(rawTasksData.tasks as BaseTask[]);
 
 async function seedData() {
     console.log('start to seed data');
@@ -36,7 +40,8 @@ async function seedData() {
             description TEXT NOT NULL,
             required BOOLEAN DEFAULT FALSE,
             position INT,
-            blocking_tasks INTEGER[],
+            blocks INTEGER[],
+            blocked_by INTEGER[],
             tags TEXT[],
             schedule JSONB,
             proof JSONB,
@@ -77,18 +82,19 @@ async function seedData() {
     );
     console.log('user inserted');
 
-    for (const task of tasksData.tasks) {
+    for (const task of tasksData) {
         console.log('inserting task', task);
         const result = await db.query(
-            `INSERT INTO tasks (title, description, required, position, blocking_tasks, tags, schedule, proof, documents, links, medical_procedures, address, contacts, cost)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+            `INSERT INTO tasks (title, description, required, position, blocks, blocked_by, tags, schedule, proof, documents, links, medical_procedures, address, contacts, cost)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
             RETURNING id;`,
             [
                 task.title,
                 task.description,
                 task.required,
                 task.position,
-                task.blocking_tasks,
+                task.blocks,
+                task.blocked_by,
                 task.tags,
                 task.schedule,
                 task.proof,
