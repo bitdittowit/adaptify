@@ -11,5 +11,8 @@
         "choose": "Choose language",
         "ru": "Russian",
         "en": "English"
+    },
+    "task": {
+        "details": "Details"
     }
 }
