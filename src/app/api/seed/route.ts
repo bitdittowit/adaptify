@@ -7,7 +7,7 @@ import { DEFAULT_USER } from '@/app/constants/user';
 import type { BaseTask } from '@/types';
 import preprocessTasks from '@/utils/backend_potential/preprocessTasks';
 
-const tasksData = preprocessTasks(rawTasksData.tasks as BaseTask[]);
+const tasksData = preprocessTasks(rawTasksData.tasks as unknown as BaseTask[]);
 
 async function seedData() {
     console.log('start to seed data');
@@ -28,14 +28,15 @@ async function seedData() {
             arrival_date TIMESTAMP DEFAULT NULL,
             study_group VARCHAR(255),
             experience INT DEFAULT 0,
-            level INT DEFAULT 1
+            level INT DEFAULT 1,
+            completed_tasks INTEGER[]
         );`,
     );
     console.log('users created');
 
     await db.query(
         `CREATE TABLE IF NOT EXISTS tasks (
-            id SERIAL PRIMARY KEY,
+            id INTEGER PRIMARY KEY,
             title VARCHAR(255) NOT NULL,
             description TEXT NOT NULL,
             required BOOLEAN DEFAULT FALSE,
@@ -58,6 +59,7 @@ async function seedData() {
     await db.query(
         `CREATE TABLE IF NOT EXISTS user_tasks (
             id SERIAL PRIMARY KEY,
+            available BOOLEAN DEFAULT FALSE,
             user_id INT REFERENCES users(id) ON DELETE CASCADE,
             document_task_id INT REFERENCES tasks(id),
             status VARCHAR(10) CHECK (status IN ('open', 'pending', 'finished')),
@@ -69,8 +71,8 @@ async function seedData() {
     console.log('user_tasks created');
 
     await db.query(
-        `INSERT INTO users (name, sex, country, study_group, experience, level)
-        VALUES ($1, $2, $3, $4, $5, $6);`,
+        `INSERT INTO users (name, sex, country, study_group, experience, level, completed_tasks)
+        VALUES ($1, $2, $3, $4, $5, $6, $7);`,
         [
             DEFAULT_USER.name,
             DEFAULT_USER.sex,
@@ -78,6 +80,7 @@ async function seedData() {
             DEFAULT_USER.study_group,
             DEFAULT_USER.experience,
             DEFAULT_USER.level,
+            [],
         ],
     );
     console.log('user inserted');
@@ -85,10 +88,11 @@ async function seedData() {
     for (const task of tasksData) {
         console.log('inserting task', task);
         const result = await db.query(
-            `INSERT INTO tasks (title, description, required, position, blocks, blocked_by, tags, schedule, proof, documents, links, medical_procedures, address, contacts, cost)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+            `INSERT INTO tasks (id, title, description, required, position, blocks, blocked_by, tags, schedule, proof, documents, links, medical_procedures, address, contacts, cost)
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
             RETURNING id;`,
             [
+                task.id,
                 task.title,
                 task.description,
                 task.required,
@@ -113,9 +117,9 @@ async function seedData() {
 
         if (documentTaskId) {
             await db.query(
-                `INSERT INTO user_tasks (user_id, document_task_id, status, experience_points, proof_status)
-                VALUES ((SELECT id FROM users WHERE name = $1), $2, 'open', 200, 'not_proofed');`,
-                [DEFAULT_USER.name, documentTaskId],
+                `INSERT INTO user_tasks (user_id, document_task_id, status, experience_points, proof_status, available)
+                VALUES ((SELECT id FROM users WHERE name = $1), $2, 'open', 200, 'not_proofed', $3);`,
+                [DEFAULT_USER.name, documentTaskId, task.blocked_by.length === 0],
             );
             console.log('user_task inserted');
         }
