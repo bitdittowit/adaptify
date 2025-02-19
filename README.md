@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
+## Для разработчиков
 
 First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Открой [http://localhost:3000](http://localhost:3000) в браузере, чтобы увидеть результат.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Можно проверить работоспособность, внеся правку в `app/page.tsx`.
+Чтобы увидеть изменения – просто обнови страницу.
 
-## Learn More
+### Флоу разработки
 
-To learn more about Next.js, take a look at the following resources:
+Отводишь свою локальную ветку.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+В ней вносишь необходимые изменения.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+git commit -m <message>
+```
 
-## Deploy on Vercel
+```bash
+git push
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Открываешь ПР в main (через консоль или через интерфейс гитхаба).
+Добавляешь `bitdittowit` (обязательный ревьюер для всех пр-ов в `main`) в ревьюеры.
+По мере ревью вносишь правки, после получения лайка смело вливаешь в main.
+Ждешь пока пройдет `ci` на `deploy`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+В случае ошибки при деплое, открываешь следующий пр на починку деплоя.
+
+Ограничений по неймингу веток и сообщений коммитов нет – кайфуйте!
+Только кайфуйте на английском плиз.
