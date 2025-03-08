@@ -7,13 +7,13 @@ import { ru } from 'date-fns/locale/ru';
 import Holidays from 'date-holidays';
 import type { DayProps as BaseDayProps, FooterProps as BaseFooterProps } from 'react-day-picker';
 
-import mockData from '@/app/constants/tasks/user_tasks.json';
 import { Calendar as BaseCalendar } from '@/components/ui/calendar';
+import mockData from '@/constants/tasks/user_tasks.json';
 import { type BaseTask, STATUS, type Task } from '@/types';
-import { getRandomDateInMonth, getRandomInRange, getTasksForDay } from '@/utils/calendarUtils';
+import { getRandomDateInMonth, getRandomInRange, getTasksForDay } from '@/utils/calendar-utils';
 
-import { Day } from './Day/Day';
-import { Footer } from './Footer/Footer';
+import { Day } from './day/day';
+import { Footer } from './footer/footer';
 
 const holidays = new Holidays('RU');
 const mockTasks = (mockData.tasks as BaseTask[])

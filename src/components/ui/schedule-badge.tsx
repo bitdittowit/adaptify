@@ -1,4 +1,4 @@
-import { daysOfWeek } from '@/app/constants/daysOfWeek';
+import { daysOfWeek } from '@/constants/days-of-week';
 import type { Schedule } from '@/types';
 
 interface ScheduleBadgeProps {

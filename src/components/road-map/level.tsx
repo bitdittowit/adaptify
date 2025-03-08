@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 import type { Position } from '@/types';
 
-import styles from './RoadMap.module.css';
+import styles from './road-map.module.css';
 
 interface LevelProps {
     id: number;

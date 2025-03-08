@@ -1,4 +1,4 @@
-import useApiGet from '@/hooks/api/useApiGet';
+import useApiGet from '@/hooks/api/use-api-get';
 import type { Task } from '@/types';
 import type { ApiResult } from '@/types/api';
 

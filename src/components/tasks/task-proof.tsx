@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useApiPost } from '@/hooks/api/useApiPost';
+import { useApiPost } from '@/hooks/api/use-api-post';
 import type { Task } from '@/types';
 
 interface ProofTaskProps {

@@ -1,6 +1,6 @@
 import { addDays, format, isAfter, parse } from 'date-fns';
 
-import { daysOfWeek } from '@/app/constants/daysOfWeek';
+import { daysOfWeek } from '@/constants/days-of-week';
 import type { Schedule } from '@/types';
 
 export default function getNextAvailableDate(schedule: Schedule, currentDate: Date): Date {

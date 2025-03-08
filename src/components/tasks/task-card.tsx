@@ -10,7 +10,7 @@ import { ContactsBadge } from '@/components/ui/contacts-badge';
 import { DateBadge } from '@/components/ui/date-badge';
 import { DocumentsBadge } from '@/components/ui/documents-badge';
 import { ScheduleBadge } from '@/components/ui/schedule-badge';
-import { useApiPost } from '@/hooks/api/useApiPost';
+import { useApiPost } from '@/hooks/api/use-api-post';
 import { cn } from '@/lib/utils';
 import { STATUS, type Task } from '@/types';
 

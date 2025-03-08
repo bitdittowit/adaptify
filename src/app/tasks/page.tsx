@@ -1,11 +1,13 @@
-// import { TasksTable } from '@/components/tasks-table';
+// import { TasksTable } from '@/components/tasks/tasks-table';
 
 'use client';
 
-import { TaskPreviewCard } from '@/components/task-preview-card';
-import { useGetTasks } from '@/hooks/api/entities/tasks/useGetTasks';
+import { TaskPreviewCard } from '@/components/tasks/task-preview-card';
+import { useGetTasks } from '@/hooks/api/entities/tasks/use-get-tasks';
 
-// import { TasksTable } from '@/components/tasks-table';
+// import { TasksTable } from '@/components/tasks/tasks-table';
+
+// import { TasksTable } from '@/components/tasks/tasks-table';
 
 export default function Page() {
     const { data, loading } = useGetTasks();

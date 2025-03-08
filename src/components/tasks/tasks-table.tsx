@@ -23,7 +23,7 @@ import { Button } from '@/components/ui/button';
 import { DateBadge } from '@/components/ui/date-badge';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { useGetTasks } from '@/hooks/api/entities/tasks/useGetTasks';
+import { useGetTasks } from '@/hooks/api/entities/tasks/use-get-tasks';
 import type { Task } from '@/types';
 
 export const columns: ColumnDef<Task>[] = [

@@ -3,11 +3,11 @@
 import { useEffect, useRef } from 'react';
 import type { FC } from 'react';
 
-import { useGetUserLevelSummary } from '@/hooks/api/entities/users/useGetUserLevelSummary';
+import { useGetUserLevelSummary } from '@/hooks/api/entities/users/use-get-user-level-summary';
 import { LEVELS } from '@/utils/constants';
 
-import Level from './Level';
-import styles from './RoadMap.module.css';
+import Level from './level';
+import styles from './road-map.module.css';
 
 const LAYOUT_OFFSET_PX = 120;
 

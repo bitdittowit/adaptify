@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals';
 
 import type { BaseTask } from '@/types';
-import updateTaskDependencies from '@/utils/backend_potential/updateTaskDependencies';
+import updateTaskDependencies from '@/utils/backend-potential/update-task-dependencies';
 
 function createTask(
     id: number,
