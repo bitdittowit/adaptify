@@ -9,6 +9,10 @@ import { useGetTasks } from '@/hooks/api/entities/tasks/use-get-tasks';
 
 // import { TasksTable } from '@/components/tasks/tasks-table';
 
+// import { TasksTable } from '@/components/tasks/tasks-table';
+
+// import { TasksTable } from '@/components/tasks/tasks-table';
+
 export default function Page() {
     const { data, loading } = useGetTasks();
 
