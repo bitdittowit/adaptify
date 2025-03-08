@@ -2,7 +2,16 @@
     "sidebar": {
         "routeMap": "Прогресс",
         "taskList": "Список задач",
-        "taskCalendar": "Календарь задач"
+        "taskCalendar": "Календарь задач",
+        "projects": "Проекты",
+        "more": "Ещё",
+        "viewProject": "Просмотр проекта",
+        "shareProject": "Поделиться проектом",
+        "deleteProject": "Удалить проект",
+        "toggle": "Переключить",
+        "notifications": "Уведомления",
+        "profile": "Профиль",
+        "logout": "Выйти"
     },
     "input": {
         "filter": "Найти..."
@@ -19,6 +28,41 @@
         "system": "Системная"
     },
     "task": {
-        "details": "Подробнее"
+        "details": "Подробнее",
+        "markAsDone": "Отметить как выполненное",
+        "loading": "Загрузка...",
+        "error": "Ошибка загрузки задачи: {message}",
+        "verify": "Проверить",
+        "experience": "Опыт",
+        "title": "Название",
+        "date": "Дата",
+        "noResults": "Нет результатов.",
+        "userExperienceUpdated": "Опыт пользователя обновлен: {result}"
+    },
+    "calendar": {
+        "tasks": "Задачи",
+        "styles": {
+            "weekend": "text-destructive",
+            "past": "text-muted-foreground",
+            "container": "rounded-md border",
+            "indicatorColor": "#6a994e"
+        },
+        "indicators": {
+            "defaultDotColor": "red",
+            "defaultRectangleColor": "black"
+        }
+    },
+    "common": {
+        "loading": "Загрузка..."
+    },
+    "proof": {
+        "submit": "Проверить"
+    },
+    "errors": {
+        "validation": "ты что творишь!?"
+    },
+    "pagination": {
+        "previous": "Предыдущая",
+        "next": "Следующая"
     }
 }

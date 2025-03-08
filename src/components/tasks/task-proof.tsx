@@ -1,5 +1,7 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -15,6 +17,8 @@ interface ProofTaskProps {
 }
 
 export function ProofTask({ task }: ProofTaskProps) {
+    const t = useTranslations();
+
     const createFormSchema = (task: Task) => {
         const obj = task.proof?.checks.reduce(
             (acc, check) => ({
@@ -25,7 +29,7 @@ export function ProofTask({ task }: ProofTaskProps) {
         );
 
         if (!obj) {
-            throw new Error('ты что творишь!?');
+            throw new Error(t('errors.validation'));
         }
 
         return z.object(obj);
@@ -87,7 +91,7 @@ export function ProofTask({ task }: ProofTaskProps) {
                     />
                 ))}
                 <Button type="submit" disabled={task.proof_status !== 'not_proofed'}>
-                    Проверить
+                    {t('proof.submit')}
                 </Button>
             </form>
         </Form>

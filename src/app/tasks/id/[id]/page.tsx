@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useParams } from 'next/navigation';
 
 import { TaskCard } from '@/components/tasks/task-card';
@@ -8,16 +9,17 @@ import { useGetTaskById } from '@/hooks/api/entities/tasks/use-get-task-by-id';
 import { STATUS } from '@/types';
 
 const TaskPage = () => {
+    const t = useTranslations();
     const params = useParams();
     const id = Array.isArray(params.id) ? params.id?.[0] : params.id || '';
 
     const { data: task, error, loading } = useGetTaskById(id);
 
     if (error) {
-        return <div>Error loading task: {error.message}</div>;
+        return <div>{t('task.error', { message: error.message })}</div>;
     }
     if (loading || !task) {
-        return <div>Loading...</div>;
+        return <div>{t('task.loading')}</div>;
     }
 
     return (

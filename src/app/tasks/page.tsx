@@ -1,13 +1,16 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 import { TaskPreviewCard } from '@/components/tasks/task-preview-card';
 import { useGetTasks } from '@/hooks/api/entities/tasks/use-get-tasks';
 
 export default function Page() {
+    const t = useTranslations();
     const { data, loading } = useGetTasks();
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>{t('common.loading')}</div>;
     }
 
     return (

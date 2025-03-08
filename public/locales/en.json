@@ -2,7 +2,16 @@
     "sidebar": {
         "routeMap": "Route map",
         "taskList": "Task list",
-        "taskCalendar": "Task calendar"
+        "taskCalendar": "Task calendar",
+        "projects": "Projects",
+        "more": "More",
+        "viewProject": "View Project",
+        "shareProject": "Share Project",
+        "deleteProject": "Delete Project",
+        "toggle": "Toggle",
+        "notifications": "Notifications",
+        "profile": "Profile",
+        "logout": "Logout"
     },
     "input": {
         "filter": "Filter tasks..."
@@ -19,6 +28,41 @@
         "system": "System"
     },
     "task": {
-        "details": "Details"
+        "details": "Details",
+        "markAsDone": "Mark as done",
+        "loading": "Loading...",
+        "error": "Error loading task: {message}",
+        "verify": "Verify",
+        "experience": "Experience",
+        "title": "Title",
+        "date": "Date",
+        "noResults": "No results.",
+        "userExperienceUpdated": "User experience updated: {result}"
+    },
+    "calendar": {
+        "tasks": "Tasks",
+        "styles": {
+            "weekend": "text-destructive",
+            "past": "text-muted-foreground",
+            "container": "rounded-md border",
+            "indicatorColor": "#6a994e"
+        },
+        "indicators": {
+            "defaultDotColor": "red",
+            "defaultRectangleColor": "black"
+        }
+    },
+    "common": {
+        "loading": "Loading..."
+    },
+    "proof": {
+        "submit": "Submit proof"
+    },
+    "errors": {
+        "validation": "What are you doing!?"
+    },
+    "pagination": {
+        "previous": "Previous",
+        "next": "Next"
     }
 }
