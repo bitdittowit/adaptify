@@ -28,7 +28,7 @@ const mockTasks = (mockData.tasks as BaseTask[])
     )
     .filter(({ picked_date }) => !(isWeekend(picked_date) || Boolean(holidays.isHoliday(picked_date))));
 
-const Calendar = () => {
+const CalendarComponent = () => {
     const [date, setDate] = useState<Date | undefined>(new Date());
 
     const predicates = {
@@ -66,4 +66,4 @@ const Calendar = () => {
     );
 };
 
-export default Calendar;
+export default CalendarComponent;
