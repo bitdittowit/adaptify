@@ -11,7 +11,7 @@ export const Dot = ({ color = 'red', size = 4, ...props }) => {
     );
 };
 
-export const RoundedRectangle = ({ width = 8, height = 4, color, rx = 2, ...props }) => {
+export const RoundedRectangle = ({ width = 8, height = 4, color = 'black', rx = 2, ...props }) => {
     const t = useTranslations('calendar');
     const defaultColor = t('indicators.defaultRectangleColor');
 
