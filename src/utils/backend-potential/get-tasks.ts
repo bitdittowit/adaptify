@@ -1,6 +1,6 @@
 import { type BaseTask, STATUS, type Sex, type Task, type VisaType } from '@/types';
 
-import getNextAvailableDate from './getNextAvailableDate';
+import getNextAvailableDate from './get-next-available-date';
 
 const convertRawToUserTask = (tasks: BaseTask[]): Task[] => {
     return tasks.map(task => ({
@@ -15,7 +15,7 @@ const convertRawToUserTask = (tasks: BaseTask[]): Task[] => {
 
 export const getTasks = async (sex: Sex, visaType: VisaType): Promise<Task[]> => {
     try {
-        const { tasks: documentTasks } = await import('@/app/constants/tasks/user_tasks.json');
+        const { tasks: documentTasks } = await import('@/constants/tasks/user_tasks.json');
 
         const tasks = documentTasks.filter(
             documentTask => documentTask.tags.includes(sex) && documentTask.tags.includes(visaType),
