@@ -5,7 +5,7 @@ import { Day as BaseDay, type DayProps as BaseDayProps } from 'react-day-picker'
 
 import type { Task } from '@/types';
 
-import { Dot, RoundedRectangle } from '../indicators/indicators';
+import { Dot, RoundedRectangle } from '../indicators/Indicators';
 
 import styles from './Day.module.css';
 
