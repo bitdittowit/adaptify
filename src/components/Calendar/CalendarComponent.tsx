@@ -12,8 +12,8 @@ import mockData from '@/constants/tasks/user_tasks.json';
 import { type BaseTask, STATUS, type Task } from '@/types';
 import { getRandomDateInMonth, getRandomInRange, getTasksForDay } from '@/utils/calendar-utils';
 
-import { Day } from './day/Day';
-import { Footer } from './footer/Footer';
+import { Day } from './Day/Day';
+import { Footer } from './Footer/Footer';
 
 const holidays = new Holidays('RU');
 const mockTasks = (mockData.tasks as BaseTask[])
