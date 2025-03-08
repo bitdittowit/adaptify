@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-export const Dot = ({ color, size = 4, ...props }) => {
+export const Dot = ({ color = 'red', size = 4, ...props }) => {
     const t = useTranslations('calendar');
     const defaultColor = t('indicators.defaultDotColor');
 
