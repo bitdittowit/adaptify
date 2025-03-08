@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import { Check } from 'lucide-react';
 
-import { TaskStatus } from '@/components/task-status';
+import { TaskStatus } from '@/components/tasks/task-status';
 import { AddressBadge } from '@/components/ui/address-badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
