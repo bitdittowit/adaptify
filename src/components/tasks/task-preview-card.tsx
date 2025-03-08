@@ -22,7 +22,7 @@ export function TaskPreviewCard({ className, task, ...props }: TaskPreviewCardPr
                 <CardTitle className="mb-1">{task.title}</CardTitle>
             </CardHeader>
             <CardFooter className="gap-4 self-end flex justify-end">
-                <div className="inline-block px-4 py-2 bg-gray-300 text-white rounded cursor-default pointer-events-none">
+                <div className="inline-block px-4 py-2 bg-primary text-primary-foreground rounded cursor-default pointer-events-none">
                     {task.experience_points}
                 </div>
                 <Link

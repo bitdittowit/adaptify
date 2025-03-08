@@ -30,7 +30,7 @@ export function LanguageSwitcher() {
         <DropdownMenu>
             <DropdownMenuTrigger className="px-3 py-3 [&>svg]:size-8" asChild>
                 <Button variant="outline">
-                    <Languages className="text-gray-700" />
+                    <Languages className="text-foreground" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent side="left" className="w-56 mt-6">

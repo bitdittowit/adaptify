@@ -12,8 +12,8 @@ import mockData from '@/constants/tasks/user_tasks.json';
 import { type BaseTask, STATUS, type Task } from '@/types';
 import { getRandomDateInMonth, getRandomInRange, getTasksForDay } from '@/utils/calendar-utils';
 
-import { Day } from './day/day';
-import { Footer } from './footer/footer';
+import { Day } from './day/Day';
+import { Footer } from './footer/Footer';
 
 const holidays = new Holidays('RU');
 const mockTasks = (mockData.tasks as BaseTask[])
@@ -59,8 +59,8 @@ const Calendar = () => {
             disabled={(day: Date) => predicates.past(day) || !isSameMonth(day, date || new Date())}
             modifiers={predicates}
             modifiersClassNames={{
-                weekend: 'text-red-500',
-                past: 'text-gray-400',
+                weekend: 'text-destructive',
+                past: 'text-muted-foreground',
             }}
         />
     );

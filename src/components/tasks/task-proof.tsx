@@ -67,7 +67,7 @@ export function ProofTask({ task }: ProofTaskProps) {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full h-[max-content] space-y-6 bg-white shadow-md rounded-lg p-6"
+                className="w-full h-[max-content] space-y-6 bg-card shadow-md rounded-lg p-6"
             >
                 {task.proof?.checks.map((check, i) => (
                     <FormField

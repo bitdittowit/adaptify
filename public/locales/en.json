@@ -12,6 +12,12 @@
         "ru": "Russian",
         "en": "English"
     },
+    "theme-switcher": {
+        "choose": "Choose theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+    },
     "task": {
         "details": "Details"
     }
