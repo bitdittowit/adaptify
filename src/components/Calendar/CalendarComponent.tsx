@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 
+import { useLocale, useTranslations } from 'next-intl';
+
 import { isPast, isSameMonth, isToday, isWeekend } from 'date-fns';
 import { ru } from 'date-fns/locale/ru';
 import Holidays from 'date-holidays';
@@ -30,6 +32,8 @@ const mockTasks = (mockData.tasks as BaseTask[])
 
 export const CalendarComponent = () => {
     const [date, setDate] = useState<Date | undefined>(new Date());
+    const locale = useLocale();
+    const t = useTranslations('calendar');
 
     const predicates = {
         past: (day: Date) => !isToday(day) && isPast(day) && isSameMonth(day, date || new Date()),
@@ -52,15 +56,15 @@ export const CalendarComponent = () => {
             today={new Date()}
             onSelect={setDate}
             onMonthChange={setDate}
-            className="rounded-md border"
+            className={t('styles.container')}
             showOutsideDays={true}
             weekStartsOn={1}
-            locale={ru}
+            locale={locale === 'ru' ? ru : undefined}
             disabled={(day: Date) => predicates.past(day) || !isSameMonth(day, date || new Date())}
             modifiers={predicates}
             modifiersClassNames={{
-                weekend: 'text-destructive',
-                past: 'text-muted-foreground',
+                weekend: t('styles.weekend'),
+                past: t('styles.past'),
             }}
         />
     );

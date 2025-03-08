@@ -1,5 +1,7 @@
 import type { ComponentProps } from 'react';
 
+import { useTranslations } from 'next-intl';
+
 import { Check } from 'lucide-react';
 
 import { TaskStatus } from '@/components/tasks/task-status';
@@ -17,13 +19,14 @@ import { STATUS, type Task } from '@/types';
 type TaskCardProps = ComponentProps<typeof Card> & { task: Task };
 
 export function TaskCard({ className, task, ...props }: TaskCardProps) {
+    const t = useTranslations();
     const { postData } = useApiPost<{ id: number }>();
 
     const markAsDone = async () => {
         const data = { id: task.id };
         const result = await postData('/api/tasks/finish', data);
         if (result) {
-            console.log('User experience updated:', result);
+            console.log(t('task.userExperienceUpdated', { result: JSON.stringify(result) }));
             task.status = STATUS.FINISHED;
         }
     };
@@ -53,7 +56,7 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
                 <TaskStatus status={task.status} />
                 {task.status !== STATUS.FINISHED && (
                     <Button className="w-full" onClick={markAsDone}>
-                        <Check /> Mark as done
+                        <Check /> {t('task.markAsDone')}
                     </Button>
                 )}
             </CardFooter>

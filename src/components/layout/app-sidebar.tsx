@@ -9,6 +9,7 @@ import { useGetAppSideBarData } from '@/hooks/use-get-app-sidebar-data';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     const data = useGetAppSideBarData();
+    const navItems = data.navMain.map(item => ({ ...item, name: item.title }));
 
     return (
         <Sidebar variant="inset" {...props}>
@@ -16,7 +17,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 <NavUser user={data.user} />
             </SidebarHeader>
             <SidebarContent>
-                <NavMain items={data.navMain} />
+                <NavMain groups={[{ name: 'Navigation', items: navItems }]} />
             </SidebarContent>
             <SidebarFooter />
         </Sidebar>

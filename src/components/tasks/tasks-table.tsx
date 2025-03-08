@@ -26,69 +26,70 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { useGetTasks } from '@/hooks/api/entities/tasks/use-get-tasks';
 import type { Task } from '@/types';
 
-export const columns: ColumnDef<Task>[] = [
-    {
-        accessorKey: 'id',
-        header: () => <div className="text-center">id</div>,
-        cell: ({ row }) => <div className="text-center">{row.getValue('id')}</div>,
-    },
-    {
-        accessorKey: 'position',
-        header: ({ column }) => {
-            return (
-                <div className="flex justify-center max-w-[48px]">
-                    <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
-                        <ArrowUpDown />
-                    </Button>
-                </div>
-            );
-        },
-        cell: () => <></>,
-    },
-    {
-        accessorKey: 'title',
-        header: 'Title',
-        cell: ({ row }) => <div>{row.getValue('title')}</div>,
-    },
-    {
-        accessorKey: 'picked_date',
-        header: 'Date',
-        cell: ({ row }) => {
-            const date: string | Date = row.getValue('picked_date');
-
-            if (!date) {
-                return <></>;
-            }
-
-            return <DateBadge date={date} />;
-        },
-    },
-    {
-        accessorKey: 'experience_points',
-        header: () => <div className="text-right">Experience</div>,
-        cell: ({ row }) => {
-            const amount = Number.parseFloat(row.getValue('experience_points'));
-
-            return <div className="text-right font-medium">{amount}</div>;
-        },
-    },
-    {
-        accessorKey: 'details',
-        header: () => <></>,
-        cell: ({ row }) => (
-            <Button variant="outline">
-                <Link href={`/tasks/id/${row.getValue('id')}`}>Details</Link>
-            </Button>
-        ),
-    },
-];
-
 export function TasksTable() {
+    const t = useTranslations();
+
+    const columns: ColumnDef<Task>[] = [
+        {
+            accessorKey: 'id',
+            header: () => <div className="text-center">id</div>,
+            cell: ({ row }) => <div className="text-center">{row.getValue('id')}</div>,
+        },
+        {
+            accessorKey: 'position',
+            header: ({ column }) => {
+                return (
+                    <div className="flex justify-center max-w-[48px]">
+                        <Button variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                            <ArrowUpDown />
+                        </Button>
+                    </div>
+                );
+            },
+            cell: () => <></>,
+        },
+        {
+            accessorKey: 'title',
+            header: t('task.title'),
+            cell: ({ row }) => <div>{row.getValue('title')}</div>,
+        },
+        {
+            accessorKey: 'picked_date',
+            header: t('task.date'),
+            cell: ({ row }) => {
+                const date: string | Date = row.getValue('picked_date');
+
+                if (!date) {
+                    return <></>;
+                }
+
+                return <DateBadge date={date} />;
+            },
+        },
+        {
+            accessorKey: 'experience_points',
+            header: () => <div className="text-right">{t('task.experience')}</div>,
+            cell: ({ row }) => {
+                const amount = Number.parseFloat(row.getValue('experience_points'));
+
+                return <div className="text-right font-medium">{amount}</div>;
+            },
+        },
+        {
+            accessorKey: 'details',
+            header: () => <></>,
+            cell: ({ row }) => (
+                <Button variant="outline">
+                    <Link href={`/tasks/id/${row.getValue('id')}`}>{t('task.details')}</Link>
+                </Button>
+            ),
+        },
+    ];
+
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
     const { data, loading } = useGetTasks();
-    const t = useTranslations('input');
 
     const table = useReactTable({
         data,
@@ -108,14 +109,14 @@ export function TasksTable() {
     });
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>{t('common.loading')}</div>;
     }
 
     return (
         <div className="w-full">
             <div className="flex items-center py-4 justify-end">
                 <Input
-                    placeholder={t('filter')}
+                    placeholder={t('input.filter')}
                     value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
                     onChange={event => table.getColumn('title')?.setFilterValue(event.target.value)}
                     className="max-w-sm"
@@ -152,7 +153,7 @@ export function TasksTable() {
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No results.
+                                    {t('task.noResults')}
                                 </TableCell>
                             </TableRow>
                         )}
@@ -167,7 +168,7 @@ export function TasksTable() {
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
                     >
-                        Previous
+                        {t('pagination.previous')}
                     </Button>
                     <Button
                         variant="outline"
@@ -175,7 +176,7 @@ export function TasksTable() {
                         onClick={() => table.nextPage()}
                         disabled={!table.getCanNextPage()}
                     >
-                        Next
+                        {t('pagination.next')}
                     </Button>
                 </div>
             </div>
