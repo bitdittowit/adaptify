@@ -2,9 +2,9 @@
 
 import { useParams } from 'next/navigation';
 
-import { TaskCard } from '@/components/task-card';
-import { ProofTask } from '@/components/task-proof';
-import { useGetTaskById } from '@/hooks/api/entities/tasks/useGetTaskById';
+import { TaskCard } from '@/components/tasks/task-card';
+import { ProofTask } from '@/components/tasks/task-proof';
+import { useGetTaskById } from '@/hooks/api/entities/tasks/use-get-task-by-id';
 import { STATUS } from '@/types';
 
 const TaskPage = () => {

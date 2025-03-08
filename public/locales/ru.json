@@ -1,0 +1,24 @@
+{
+    "sidebar": {
+        "routeMap": "Прогресс",
+        "taskList": "Список задач",
+        "taskCalendar": "Календарь задач"
+    },
+    "input": {
+        "filter": "Найти..."
+    },
+    "language-switcher": {
+        "choose": "Выберите язык",
+        "ru": "Русский",
+        "en": "Английский"
+    },
+    "theme-switcher": {
+        "choose": "Выберите тему",
+        "light": "Светлая",
+        "dark": "Темная",
+        "system": "Системная"
+    },
+    "task": {
+        "details": "Подробнее"
+    }
+}

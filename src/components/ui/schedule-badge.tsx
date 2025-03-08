@@ -1,4 +1,6 @@
-import { daysOfWeek } from '@/app/constants/daysOfWeek';
+import { Calendar } from 'lucide-react';
+
+import { daysOfWeek } from '@/constants/days-of-week';
 import type { Schedule } from '@/types';
 
 interface ScheduleBadgeProps {
@@ -8,7 +10,10 @@ interface ScheduleBadgeProps {
 export function ScheduleBadge({ schedule }: ScheduleBadgeProps) {
     return (
         <div className="border p-4 rounded-md grid gap-4">
-            <h2 className="text-gray-700 font-semibold leading-none tracking-tight">Расписание</h2>
+            <div className="flex items-center space-x-2">
+                <Calendar className="h-5 w-5" />
+                <h2 className="text-foreground font-semibold leading-none tracking-tight">Расписание</h2>
+            </div>
             <div className="grid grid-cols-2 gap-4">
                 {daysOfWeek.map(day => (
                     <div key={day} className="flex-1">
@@ -23,7 +28,7 @@ export function ScheduleBadge({ schedule }: ScheduleBadgeProps) {
                                 ))}
                             </ul>
                         ) : (
-                            <p className="text-sm text-gray-500">Неприемный день</p>
+                            <p className="text-sm text-muted-foreground">Неприемный день</p>
                         )}
                     </div>
                 ))}

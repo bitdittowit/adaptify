@@ -1,0 +1,24 @@
+{
+    "sidebar": {
+        "routeMap": "Route map",
+        "taskList": "Task list",
+        "taskCalendar": "Task calendar"
+    },
+    "input": {
+        "filter": "Filter tasks..."
+    },
+    "language-switcher": {
+        "choose": "Choose language",
+        "ru": "Russian",
+        "en": "English"
+    },
+    "theme-switcher": {
+        "choose": "Choose theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System"
+    },
+    "task": {
+        "details": "Details"
+    }
+}

@@ -1,11 +1,7 @@
-// import { TasksTable } from '@/components/tasks-table';
-
 'use client';
 
-import { TaskPreviewCard } from '@/components/task-preview-card';
-import { useGetTasks } from '@/hooks/api/entities/tasks/useGetTasks';
-
-// import { TasksTable } from '@/components/tasks-table';
+import { TaskPreviewCard } from '@/components/tasks/task-preview-card';
+import { useGetTasks } from '@/hooks/api/entities/tasks/use-get-tasks';
 
 export default function Page() {
     const { data, loading } = useGetTasks();
@@ -21,7 +17,7 @@ export default function Page() {
         >
             {data.map((task, index) => (
                 <div key={task.id} className="grid gap-2 grid-cols-1 xl:grid-cols-[40px_1fr]">
-                    <span className="mt-1 bg-gray-300 rounded w-10 h-10 grid place-items-center text-gray-100">
+                    <span className="mt-1 bg-primary rounded w-10 h-10 grid place-items-center text-primary-foreground">
                         {index + 1}
                     </span>
                     <TaskPreviewCard task={task} />

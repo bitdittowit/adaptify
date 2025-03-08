@@ -4,10 +4,12 @@ import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getMessages } from 'next-intl/server';
 
-import { AppSidebar } from '@/components/app-sidebar';
-import { LanguageSwitcher } from '@/components/language-switcher';
+import { LanguageSwitcher } from '@/components/common/language-switcher';
+import { ThemeSwitcher } from '@/components/common/theme-switcher';
+import { AppSidebar } from '@/components/layout/app-sidebar';
 import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { ThemeProvider } from '@/hooks/use-theme';
 import '@/styles/index.css';
 
 import './globals.css';
@@ -29,27 +31,30 @@ export default async function RootLayout({
         <html lang={locale}>
             <body>
                 <NextIntlClientProvider messages={messages}>
-                    <SidebarProvider>
-                        <AppSidebar />
-                        <SidebarInset>
-                            <header className="flex h-16 shrink-0 items-center gap-2">
-                                <div className="flex gap-2 px-4 w-full justify-between">
-                                    <div className="left flex items-center">
-                                        <SidebarTrigger className="-ml-1" />
-                                        <Separator orientation="vertical" className="mr-2 h-4" />
+                    <ThemeProvider>
+                        <SidebarProvider>
+                            <AppSidebar />
+                            <SidebarInset>
+                                <header className="flex h-16 shrink-0 items-center gap-2">
+                                    <div className="flex gap-2 px-4 w-full justify-between">
+                                        <div className="left flex items-center">
+                                            <SidebarTrigger className="-ml-1" />
+                                            <Separator orientation="vertical" className="mr-2 h-4" />
+                                        </div>
+                                        <div className="right flex items-center gap-2">
+                                            <ThemeSwitcher />
+                                            <LanguageSwitcher />
+                                        </div>
                                     </div>
-                                    <div className="right flex items-center">
-                                        <LanguageSwitcher />
+                                </header>
+                                <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+                                    <div className="flex min-h-[100vh] flex-1 items-center justify-center relative rounded-xl bg-muted/50 md:min-h-min">
+                                        {children}
                                     </div>
                                 </div>
-                            </header>
-                            <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
-                                <div className="flex min-h-[100vh] flex-1 items-center justify-center relative rounded-xl bg-muted/50 md:min-h-min">
-                                    {children}
-                                </div>
-                            </div>
-                        </SidebarInset>
-                    </SidebarProvider>
+                            </SidebarInset>
+                        </SidebarProvider>
+                    </ThemeProvider>
                 </NextIntlClientProvider>
             </body>
         </html>

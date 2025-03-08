@@ -2,10 +2,10 @@ import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
-import rawTasksData from '@/app/constants/tasks/user_tasks.json';
-import { DEFAULT_USER } from '@/app/constants/user';
+import rawTasksData from '@/constants/tasks/user_tasks.json';
+import { DEFAULT_USER } from '@/constants/user';
 import type { BaseTask } from '@/types';
-import preprocessTasks from '@/utils/backend_potential/preprocessTasks';
+import preprocessTasks from '@/utils/backend-potential/preprocess-tasks';
 
 const tasksData = preprocessTasks(rawTasksData.tasks as unknown as BaseTask[]);
 

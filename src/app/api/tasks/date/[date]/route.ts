@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getDefaultUser } from '@/app/constants/user';
+import { getDefaultUser } from '@/constants/user';
 
 export async function GET(_request: Request, { params }: { params: Promise<{ date: string }> }) {
     const user = await getDefaultUser();
