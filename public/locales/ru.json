@@ -44,7 +44,8 @@
         "title": "Название",
         "date": "Дата",
         "noResults": "Нет результатов.",
-        "userExperienceUpdated": "Опыт пользователя обновлен: {result}"
+        "userExperienceUpdated": "Опыт пользователя обновлен: {result}",
+        "blockedTasks": "Задачи, которые разблокируются после выполнения"
     },
     "calendar": {
         "tasks": "Задачи",
