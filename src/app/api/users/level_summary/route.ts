@@ -1,3 +1,4 @@
+import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
@@ -6,7 +7,7 @@ import type { User } from '@/types';
 
 const client = db;
 
-async function getDefaultUser(): Promise<User | null> {
+async function getUserSummary(email: string): Promise<User | null> {
     try {
         const userQuery = await client.query(
             `
@@ -21,10 +22,10 @@ async function getDefaultUser(): Promise<User | null> {
       FROM users u
       LEFT JOIN user_tasks ut ON u.id = ut.user_id
       LEFT JOIN tasks dt ON ut.document_task_id = dt.id
-      WHERE u.name = $1
+      WHERE u.email = $1
       GROUP BY u.id;
     `,
-            ['John Doe'],
+            [email],
         );
 
         if (userQuery.rows.length === 0) {
@@ -43,15 +44,18 @@ async function getDefaultUser(): Promise<User | null> {
 
 export async function GET() {
     try {
-        const user = await getDefaultUser();
-        console.log('user', user);
+        const session = await getServerSession();
+        if (!session?.user?.email) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const user = await getUserSummary(session.user.email);
 
         if (!user) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });
         }
 
         const totalExperience = user.tasks.reduce((total, task) => total + task.experience_points, 0);
-        console.log('totalExperience', totalExperience);
 
         return NextResponse.json({
             level: user.level,

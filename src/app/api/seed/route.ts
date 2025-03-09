@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 import { db } from '@vercel/postgres';
 
 import rawTasksData from '@/constants/tasks/user_tasks.json';
-import { DEFAULT_USER } from '@/constants/user';
 import type { BaseTask } from '@/types';
 import preprocessTasks from '@/utils/backend-potential/preprocess-tasks';
 
@@ -23,13 +22,15 @@ async function seedData() {
         `CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
             name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            image VARCHAR(255),
             sex VARCHAR(6) CHECK(sex IN ('male', 'female')),
             country VARCHAR(255),
             arrival_date TIMESTAMP DEFAULT NULL,
             study_group VARCHAR(255),
             experience INT DEFAULT 0,
             level INT DEFAULT 1,
-            completed_tasks INTEGER[]
+            completed_tasks INTEGER[] DEFAULT '{}'
         );`,
     );
     console.log('users created');
@@ -70,27 +71,11 @@ async function seedData() {
     );
     console.log('user_tasks created');
 
-    await db.query(
-        `INSERT INTO users (name, sex, country, study_group, experience, level, completed_tasks)
-        VALUES ($1, $2, $3, $4, $5, $6, $7);`,
-        [
-            DEFAULT_USER.name,
-            DEFAULT_USER.sex,
-            DEFAULT_USER.country,
-            DEFAULT_USER.study_group,
-            DEFAULT_USER.experience,
-            DEFAULT_USER.level,
-            [],
-        ],
-    );
-    console.log('user inserted');
-
+    // Insert only tasks without connecting them to any user
     for (const task of tasksData) {
-        console.log('inserting task', task);
-        const result = await db.query(
+        await db.query(
             `INSERT INTO tasks (id, title, description, required, position, blocks, blocked_by, tags, schedule, proof, documents, links, medical_procedures, address, contacts, cost)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
-            RETURNING id;`,
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)`,
             [
                 task.id,
                 task.title,
@@ -110,19 +95,7 @@ async function seedData() {
                 task.cost || null,
             ],
         );
-        console.log('task inserted');
-
-        const documentTaskId = result.rows[0]?.id;
-        console.log('documentTaskId', documentTaskId);
-
-        if (documentTaskId) {
-            await db.query(
-                `INSERT INTO user_tasks (user_id, document_task_id, status, experience_points, proof_status, available)
-                VALUES ((SELECT id FROM users WHERE name = $1), $2, 'open', 200, 'not_proofed', $3);`,
-                [DEFAULT_USER.name, documentTaskId, task.blocked_by.length === 0],
-            );
-            console.log('user_task inserted');
-        }
+        console.log(`Task ${task.id} inserted`);
     }
 
     console.log('seeding data complete');
@@ -131,7 +104,6 @@ async function seedData() {
 export async function GET() {
     try {
         await seedData();
-        console.log('seed data ended');
         return NextResponse.json({ message: 'Database seeded successfully' });
     } catch (error) {
         console.error('Error seeding data', error);
