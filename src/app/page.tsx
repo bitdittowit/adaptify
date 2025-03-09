@@ -1,5 +1,5 @@
-import { redirect } from 'next/navigation';
+import { RoadMap } from '@/components/road-map';
 
 export default function Home() {
-    redirect('/tasks');
+    return <RoadMap />;
 }
