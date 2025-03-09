@@ -19,12 +19,14 @@ import {
 } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
 
+import { TaskStatus } from '@/components/tasks/task-status';
 import { Button } from '@/components/ui/button';
 import { DateBadge } from '@/components/ui/date-badge';
 import { Input } from '@/components/ui/input';
+import { LocalizedText } from '@/components/ui/localized-text';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useGetTasks } from '@/hooks/api/entities/tasks/use-get-tasks';
-import type { Task } from '@/types';
+import type { LocalizedText as LocalizedTextType, Task } from '@/types';
 
 export function TasksTable() {
     const t = useTranslations();
@@ -32,8 +34,7 @@ export function TasksTable() {
     const columns: ColumnDef<Task>[] = [
         {
             accessorKey: 'id',
-            header: () => <div className="text-center">id</div>,
-            cell: ({ row }) => <div className="text-center">{row.getValue('id')}</div>,
+            header: () => t('task.id'),
         },
         {
             accessorKey: 'position',
@@ -50,28 +51,35 @@ export function TasksTable() {
         },
         {
             accessorKey: 'title',
-            header: t('task.title'),
-            cell: ({ row }) => <div>{row.getValue('title')}</div>,
+            header: () => t('task.title'),
+            cell: ({ row }) => {
+                const title = row.getValue('title') as LocalizedTextType;
+                return <LocalizedText text={title} defaultValue={t('task.noTitle')} />;
+            },
+        },
+        {
+            accessorKey: 'description',
+            header: () => t('task.description'),
+            cell: ({ row }) => {
+                const description = row.getValue('description') as LocalizedTextType;
+                return <LocalizedText text={description} defaultValue={t('task.noDescription')} />;
+            },
+        },
+        {
+            accessorKey: 'status',
+            header: () => t('task.status'),
+            cell: ({ row }) => <TaskStatus status={row.getValue('status')} />,
         },
         {
             accessorKey: 'picked_date',
-            header: t('task.date'),
-            cell: ({ row }) => {
-                const date: string | Date = row.getValue('picked_date');
-
-                if (!date) {
-                    return <></>;
-                }
-
-                return <DateBadge date={date} />;
-            },
+            header: () => t('task.date'),
+            cell: ({ row }) => <DateBadge date={row.getValue('picked_date')} />,
         },
         {
             accessorKey: 'experience_points',
             header: () => <div className="text-right">{t('task.experience')}</div>,
             cell: ({ row }) => {
                 const amount = Number.parseFloat(row.getValue('experience_points'));
-
                 return <div className="text-right font-medium">{amount}</div>;
             },
         },

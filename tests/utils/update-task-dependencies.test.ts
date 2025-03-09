@@ -12,8 +12,14 @@ function createTask(
 ): BaseTask {
     return {
         id,
-        title,
-        description: '',
+        title: {
+            ru: title,
+            en: title,
+        },
+        description: {
+            ru: '',
+            en: '',
+        },
         required: true,
         position,
         blocks,

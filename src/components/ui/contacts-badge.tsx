@@ -1,5 +1,8 @@
-import { Phone } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
+import { Mail, Phone } from 'lucide-react';
+
+import { LocalizedText } from '@/components/ui/localized-text';
 import type { Contacts } from '@/types';
 
 interface ContactsBadgeProps {
@@ -7,28 +10,52 @@ interface ContactsBadgeProps {
 }
 
 export function ContactsBadge({ contacts }: ContactsBadgeProps) {
+    const t = useTranslations();
+
+    const phones = contacts?.phones || [];
+    const emails = contacts?.emails || [];
+
+    if (phones.length === 0 && emails.length === 0) {
+        return null;
+    }
+
     return (
-        <div className="border p-4 rounded-md grid gap-4">
-            <div className="flex items-center space-x-2">
-                <Phone className="h-5 w-5" />
-                <h2 className="text-foreground font-semibold leading-none tracking-tight">Контакты для связи</h2>
+        <div className="flex flex-col gap-2">
+            <h2 className="text-lg font-semibold">{t('task.contacts')}</h2>
+            <div className="flex flex-col gap-2">
+                {phones.map(phone => {
+                    const key = `${phone.title?.ru || ''}-${phone.value}`;
+                    return (
+                        <div key={key} className="flex items-start gap-2">
+                            <Phone className="h-5 w-5 mt-0.5" />
+                            <div className="flex flex-col">
+                                <LocalizedText
+                                    text={phone.title}
+                                    defaultValue={t('task.noPhoneTitle')}
+                                    className="font-medium"
+                                />
+                                <span className="text-muted-foreground">{phone.value}</span>
+                            </div>
+                        </div>
+                    );
+                })}
+                {emails.map(email => {
+                    const key = `${email.title?.ru || ''}-${email.value}`;
+                    return (
+                        <div key={key} className="flex items-start gap-2">
+                            <Mail className="h-5 w-5 mt-0.5" />
+                            <div className="flex flex-col">
+                                <LocalizedText
+                                    text={email.title}
+                                    defaultValue={t('task.noEmailTitle')}
+                                    className="font-medium"
+                                />
+                                <span className="text-muted-foreground">{email.value}</span>
+                            </div>
+                        </div>
+                    );
+                })}
             </div>
-            {contacts.phones?.map((phone, index) => (
-                <div key={`${phone.value}-${index}`}>
-                    <div className="block text-muted-foreground text-sm mb-1">{phone.title}</div>
-                    <div className="bg-muted border border-border rounded-md p-2 text-sm text-foreground font-semi-bold">
-                        {phone.value}
-                    </div>
-                </div>
-            ))}
-            {contacts.emails?.map((email, index) => (
-                <div key={`${email.value}-${index}`}>
-                    <div className="block text-muted-foreground text-sm mb-1">{email.title}</div>
-                    <div className="bg-muted border border-border rounded-md p-2 text-sm text-foreground font-semi-bold">
-                        {email.value}
-                    </div>
-                </div>
-            ))}
         </div>
     );
 }

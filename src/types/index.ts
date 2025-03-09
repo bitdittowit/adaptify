@@ -18,20 +18,20 @@ export interface UserLevelSummary {
 
 export interface Link {
     url: string;
-    description: string;
+    description: LocalizedText;
 }
 
 export interface Contacts {
-    phones?: Array<{ title?: string; value: string }>;
-    emails?: Array<{ title?: string; value: string }>;
+    phones?: Array<{ title?: LocalizedText; value: string }>;
+    emails?: Array<{ title?: LocalizedText; value: string }>;
 }
 
 export interface Address {
-    title: string;
-    value: string;
+    title: LocalizedText | null;
+    value: LocalizedText;
 }
 
-export type Cost = string;
+export type Cost = LocalizedText;
 
 // TODO (dbo) add Country enum
 export type Country = string;
@@ -49,10 +49,15 @@ export enum STATUS {
     FINISHED = 'finished',
 }
 
+export interface LocalizedText {
+    ru: string;
+    en?: string;
+}
+
 export interface BaseTask {
     id: number;
-    title: string;
-    description: string;
+    title: LocalizedText;
+    description: LocalizedText;
     required: boolean;
     position: number;
     // Array of blocking tasks ids.
@@ -61,12 +66,13 @@ export interface BaseTask {
     tags: Array<Sex | VisaType>;
     schedule: Schedule | null;
     proof: ProofTask | null;
-    documents: string[] | null;
-    links: string[] | null;
-    medical_procedures?: string[];
+    documents: LocalizedText[] | null;
+    links: Link[] | null;
+    medical_procedures?: LocalizedText[];
     address: Address[] | null;
     contacts: Contacts | null;
-    cost?: string;
+    cost?: Cost;
+    clubs?: LocalizedText[];
 }
 
 export interface Task extends BaseTask {
@@ -96,7 +102,7 @@ export type ProofStatus = 'not_proofed' | 'checking' | 'proofed';
 
 export interface CheckTask {
     name: string;
-    title: string;
+    title: LocalizedText;
     placeholder: string;
     type: CheckTaskType;
 }

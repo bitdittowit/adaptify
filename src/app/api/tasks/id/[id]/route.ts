@@ -15,8 +15,13 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
         const taskQuery = await db.query(
             `
       SELECT ut.id, ut.status, ut.experience_points,
-             t.title, t.description, t.schedule, t.proof, ut.proof_status,
-             t.documents, t.links, t.medical_procedures, t.address, t.contacts, t.cost
+             t.title::jsonb, t.description::jsonb, t.schedule, t.proof, ut.proof_status,
+             t.documents::jsonb->'items' as documents,
+             t.links::jsonb->'items' as links,
+             t.medical_procedures::jsonb->'items' as medical_procedures,
+             t.address::jsonb->'items' as address,
+             t.contacts::jsonb as contacts,
+             t.cost::jsonb as cost
       FROM user_tasks ut
       LEFT JOIN tasks t ON ut.document_task_id = t.id
       WHERE ut.id = $1;

@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ContactsBadge } from '@/components/ui/contacts-badge';
 import { DateBadge } from '@/components/ui/date-badge';
 import { DocumentsBadge } from '@/components/ui/documents-badge';
+import { LocalizedText } from '@/components/ui/localized-text';
 import { ScheduleBadge } from '@/components/ui/schedule-badge';
 import { useApiPost } from '@/hooks/api/use-api-post';
 import { cn } from '@/lib/utils';
@@ -36,7 +37,7 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
             <>
                 {task.documents && <DocumentsBadge documents={task.documents} />}
                 {task.schedule && <ScheduleBadge schedule={task.schedule} />}
-                {task.address && <AddressBadge address={task.address} />}
+                {task.address && <AddressBadge addresses={task.address} />}
                 {task.contacts && <ContactsBadge contacts={task.contacts} />}
             </>
         );
@@ -48,8 +49,12 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
                 {task.picked_date && <DateBadge date={task.picked_date} />}
             </CardContent>
             <CardHeader className="mt-[-40px] flex">
-                <CardTitle className="mb-1">{task.title}</CardTitle>
-                <CardDescription style={{ whiteSpace: 'pre-line' }}>{task.description}</CardDescription>
+                <CardTitle className="mb-1">
+                    <LocalizedText text={task.title} />
+                </CardTitle>
+                <CardDescription style={{ whiteSpace: 'pre-line' }}>
+                    <LocalizedText text={task.description} />
+                </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-4">{renderTaskBadges(task)}</CardContent>
             <CardFooter className="gap-4">

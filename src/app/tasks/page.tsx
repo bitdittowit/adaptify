@@ -13,6 +13,10 @@ export default function Page() {
         return <div>{t('common.loading')}</div>;
     }
 
+    if (!data || data.length === 0) {
+        return <div className="text-center p-4">{t('task.noTasks')}</div>;
+    }
+
     return (
         <main
             className=" block w-full p-4 grid place-content-center gap-4"

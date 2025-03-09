@@ -10,6 +10,7 @@ import { TaskCard } from '@/components/tasks/task-card';
 import { ProofTask } from '@/components/tasks/task-proof';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { LocalizedText } from '@/components/ui/localized-text';
 import { useGetRelatedTasks } from '@/hooks/api/entities/tasks/use-get-related-tasks';
 import { useGetTaskById } from '@/hooks/api/entities/tasks/use-get-task-by-id';
 import { STATUS } from '@/types';
@@ -36,7 +37,7 @@ const TaskPage = () => {
                     <Button variant="outline" asChild>
                         <Link href={`/tasks/id/${relatedTasks.previous.id}`}>
                             <ArrowLeft className="mr-2 h-4 w-4" />
-                            {relatedTasks.previous.title}
+                            <LocalizedText text={relatedTasks.previous.title} />
                         </Link>
                     </Button>
                 ) : (
@@ -45,7 +46,7 @@ const TaskPage = () => {
                 {relatedTasks?.next ? (
                     <Button variant="outline" asChild>
                         <Link href={`/tasks/id/${relatedTasks.next.id}`}>
-                            {relatedTasks.next.title}
+                            <LocalizedText text={relatedTasks.next.title} />
                             <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                     </Button>
@@ -68,7 +69,7 @@ const TaskPage = () => {
                                 <div key={blockedTask.id} className="flex items-center gap-2">
                                     <LockKeyhole className="h-4 w-4" />
                                     <Link href={`/tasks/id/${blockedTask.id}`} className="text-sm hover:underline">
-                                        {blockedTask.title}
+                                        <LocalizedText text={blockedTask.title} />
                                     </Link>
                                 </div>
                             ))}

@@ -39,7 +39,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
             )
             SELECT 
                 ut.id,
-                t.title,
+                t.title::jsonb as title,
                 t.position,
                 CASE 
                     WHEN t.position < (SELECT position FROM current_task) THEN 'previous'
@@ -63,7 +63,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
         // Get tasks that are blocked by current task
         const blockedTasksQuery = await db.query(
             `
-            SELECT ut.id, t.title
+            SELECT ut.id, t.title::jsonb as title
             FROM tasks t
             JOIN user_tasks ut ON t.id = ut.document_task_id
             WHERE $1 = ANY(t.blocked_by);

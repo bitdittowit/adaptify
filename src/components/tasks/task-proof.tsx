@@ -9,6 +9,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { LocalizedText } from '@/components/ui/localized-text';
 import { useApiPost } from '@/hooks/api/use-api-post';
 import type { Task } from '@/types';
 
@@ -21,11 +22,11 @@ export function ProofTask({ task }: ProofTaskProps) {
 
     const createFormSchema = (task: Task) => {
         const obj = task.proof?.checks.reduce(
-            (acc, check) => ({
-                ...acc,
-                [check.name]: z.string(),
-            }),
-            {},
+            (acc, check) => {
+                acc[check.name] = z.string();
+                return acc;
+            },
+            {} as Record<string, z.ZodString>,
         );
 
         if (!obj) {
@@ -36,11 +37,11 @@ export function ProofTask({ task }: ProofTaskProps) {
     };
     const createDefaultValues = (task: Task) => {
         return task.proof?.checks.reduce(
-            (acc, check) => ({
-                ...acc,
-                [check.name]: '',
-            }),
-            {},
+            (acc, check) => {
+                acc[check.name] = '';
+                return acc;
+            },
+            {} as Record<string, string>,
         );
     };
 
@@ -81,7 +82,9 @@ export function ProofTask({ task }: ProofTaskProps) {
                         name={check.name}
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>{check.title}</FormLabel>
+                                <FormLabel>
+                                    <LocalizedText text={check.title} />
+                                </FormLabel>
                                 <FormControl>
                                     <Input placeholder={check.placeholder} type={check.type} {...field} />
                                 </FormControl>
