@@ -71,5 +71,11 @@
     "pagination": {
         "previous": "Previous",
         "next": "Next"
+    },
+    "auth": {
+        "login": {
+            "title": "Sign In",
+            "googleButton": "Sign in with Google"
+        }
     }
 }

@@ -15,6 +15,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
+import { useSession } from '@/hooks/use-session';
 
 export function NavUser({
     user,
@@ -23,6 +24,7 @@ export function NavUser({
 }) {
     const { isMobile } = useSidebar();
     const t = useTranslations('sidebar');
+    const { signOut } = useSession();
     const initials = user.name
         .split(' ')
         .map(n => n[0])
@@ -77,7 +79,7 @@ export function NavUser({
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>
+                        <DropdownMenuItem onClick={signOut}>
                             <LogOut className="mr-2 h-4 w-4" />
                             <span>{t('logout')}</span>
                         </DropdownMenuItem>
