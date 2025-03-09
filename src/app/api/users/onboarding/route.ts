@@ -15,25 +15,26 @@ export async function POST(request: NextRequest) {
     }
 
     try {
-        const { country, study_group } = await request.json();
-        console.log('Received data:', { country, study_group });
+        const { country, study_group, sex } = await request.json();
+        console.log('Received data:', { country, study_group, sex });
 
         const hasCountry = Boolean(country);
         const hasStudyGroup = Boolean(study_group);
+        const hasSex = Boolean(sex);
         // biome-ignore lint/complexity/useSimplifiedLogicExpression: <explanation>
-        const isMissingData = !hasCountry || !hasStudyGroup;
+        const isMissingData = !hasCountry || !hasStudyGroup || !hasSex;
 
         if (isMissingData) {
             console.log('Missing required data');
-            return NextResponse.json({ error: 'Country and study group are required' }, { status: 400 });
+            return NextResponse.json({ error: 'Country, study group and sex are required' }, { status: 400 });
         }
 
         const result = await db.query(
             `UPDATE users 
-       SET country = $1, study_group = $2
-       WHERE email = $3
-       RETURNING id, name, email, country, study_group`,
-            [country, study_group, userEmail],
+       SET country = $1, study_group = $2, sex = $3
+       WHERE email = $4
+       RETURNING id, name, email, country, study_group, sex`,
+            [country, study_group, sex, userEmail],
         );
 
         console.log('Update result:', result.rows[0]);

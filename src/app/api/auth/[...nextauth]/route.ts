@@ -49,10 +49,10 @@ const handler = NextAuth({
                 if (result.rows.length === 0) {
                     // Create new user
                     const newUser = await db.query(
-                        `INSERT INTO users (name, email, image, sex, completed_tasks)
-                        VALUES ($1, $2, $3, $4, $5)
+                        `INSERT INTO users (name, email, image, completed_tasks)
+                        VALUES ($1, $2, $3, $4)
                         RETURNING id`,
-                        [user.name ?? 'New User', user.email, user.image ?? null, 'male', []],
+                        [user.name ?? 'New User', user.email, user.image ?? null, []],
                     );
 
                     const userId = newUser.rows[0].id;
