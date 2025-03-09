@@ -1,8 +1,8 @@
 {
     "sidebar": {
-        "routeMap": "Route map",
-        "taskList": "Task list",
-        "taskCalendar": "Task calendar",
+        "routeMap": "Progress",
+        "taskList": "Task List",
+        "taskCalendar": "Task Calendar",
         "projects": "Projects",
         "more": "More",
         "viewProject": "View Project",
@@ -15,13 +15,13 @@
     },
     "level": {
         "nextLevel": "Level {level}",
-        "congratulations": "Congratulations! You've reached Level {level}",
+        "congratulations": "Congratulations! You've reached level {level}",
         "experienceNeeded": "You need {experience} more experience points to reach this level",
-        "unlocked": "You've unlocked this level! Keep going!",
-        "viewTasks": "View Available Tasks"
+        "unlocked": "You've unlocked this level! Keep up the good work!",
+        "viewTasks": "View available tasks"
     },
     "input": {
-        "filter": "Filter tasks..."
+        "filter": "Search..."
     },
     "language-switcher": {
         "choose": "Choose language",
@@ -36,7 +36,7 @@
     },
     "task": {
         "details": "Details",
-        "markAsDone": "Mark as done",
+        "markAsDone": "Mark as completed",
         "loading": "Loading...",
         "error": "Error loading task: {message}",
         "verify": "Verify",
@@ -64,7 +64,7 @@
         "loading": "Loading..."
     },
     "proof": {
-        "submit": "Submit proof"
+        "submit": "Verify"
     },
     "errors": {
         "validation": "What are you doing!?"
@@ -80,14 +80,22 @@
         }
     },
     "onboarding": {
-        "title": "Complete Profile Setup",
+        "title": "Complete Your Profile",
         "country": {
             "label": "Country",
-            "placeholder": "Select country"
+            "placeholder": "Select your country"
         },
         "studyGroup": {
             "label": "Study Group",
-            "placeholder": "Select group"
+            "placeholder": "Select your study group"
+        },
+        "sex": {
+            "label": "Sex",
+            "placeholder": "Select your sex",
+            "options": {
+                "male": "Male",
+                "female": "Female"
+            }
         },
         "submit": {
             "default": "Continue",

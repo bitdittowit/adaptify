@@ -87,7 +87,15 @@
         },
         "studyGroup": {
             "label": "Учебная группа",
-            "placeholder": "Выберите группу"
+            "placeholder": "Выберите учебную группу"
+        },
+        "sex": {
+            "label": "Пол",
+            "placeholder": "Выберите пол",
+            "options": {
+                "male": "Мужской",
+                "female": "Женский"
+            }
         },
         "submit": {
             "default": "Продолжить",

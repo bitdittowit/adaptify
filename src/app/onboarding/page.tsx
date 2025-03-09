@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 const STUDY_GROUPS = ['КИ21-22Б', 'КИ22-23Б', 'КИ23-24Б', 'КИ24-25Б'];
 
 const COUNTRY_CODES = ['kz', 'uz', 'kg', 'tj'] as const;
+const SEX_OPTIONS = ['male', 'female'] as const;
 
 export default function OnboardingPage() {
     const router = useRouter();
@@ -20,13 +21,15 @@ export default function OnboardingPage() {
     const [error, setError] = useState<string | null>(null);
     const [country, setCountry] = useState('');
     const [studyGroup, setStudyGroup] = useState('');
+    const [sex, setSex] = useState('');
     const t = useTranslations('onboarding');
     const tCountries = useTranslations('countries');
 
     useEffect(() => {
         const userCountry = session?.user?.country;
         const userStudyGroup = session?.user?.study_group;
-        const hasRequiredData = Boolean(userCountry && userStudyGroup);
+        const userSex = session?.user?.sex;
+        const hasRequiredData = Boolean(userCountry && userStudyGroup && userSex);
 
         if (hasRequiredData) {
             router.replace('/');
@@ -39,7 +42,8 @@ export default function OnboardingPage() {
 
         const hasCountry = Boolean(country);
         const hasStudyGroup = Boolean(studyGroup);
-        const hasAllFields = hasCountry && hasStudyGroup;
+        const hasSex = Boolean(sex);
+        const hasAllFields = hasCountry && hasStudyGroup && hasSex;
 
         if (!hasAllFields) {
             return;
@@ -47,11 +51,11 @@ export default function OnboardingPage() {
 
         setLoading(true);
         try {
-            console.log('Sending data:', { country, study_group: studyGroup });
+            console.log('Sending data:', { country, study_group: studyGroup, sex });
             const response = await fetch('/api/users/onboarding', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ country, study_group: studyGroup }),
+                body: JSON.stringify({ country, study_group: studyGroup, sex }),
             });
 
             const data = await response.json();
@@ -61,13 +65,11 @@ export default function OnboardingPage() {
                 throw new Error(data.error || 'Failed to update profile');
             }
 
-            // Wait for session update to complete
             await update({
                 ...session,
-                user: { ...session?.user, country, study_group: studyGroup },
+                user: { ...session?.user, country, study_group: studyGroup, sex },
             });
 
-            // Force a hard reload to ensure middleware picks up the new session
             window.location.href = '/';
         } catch (error) {
             console.error('Error updating profile:', error);
@@ -79,8 +81,9 @@ export default function OnboardingPage() {
 
     const hasCountry = Boolean(country);
     const hasStudyGroup = Boolean(studyGroup);
+    const hasSex = Boolean(sex);
     // biome-ignore lint/complexity/useSimplifiedLogicExpression: <explanation>
-    const isSubmitDisabled = !hasCountry || !hasStudyGroup || loading;
+    const isSubmitDisabled = !hasCountry || !hasStudyGroup || !hasSex || loading;
 
     return (
         <div className="flex min-h-screen items-center justify-center">
@@ -88,6 +91,25 @@ export default function OnboardingPage() {
                 <h1 className="mb-6 text-center text-2xl font-bold">{t('title')}</h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     {error && <div className="rounded-md bg-destructive/15 p-3 text-sm text-destructive">{error}</div>}
+
+                    <div className="space-y-2">
+                        <label htmlFor="sex" className="text-sm font-medium">
+                            {t('sex.label')}
+                        </label>
+                        <Select value={sex} onValueChange={setSex} name="sex">
+                            <SelectTrigger id="sex">
+                                <SelectValue placeholder={t('sex.placeholder')} />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {SEX_OPTIONS.map(option => (
+                                    <SelectItem key={option} value={option}>
+                                        {t(`sex.options.${option}`)}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+
                     <div className="space-y-2">
                         <label htmlFor="country" className="text-sm font-medium">
                             {t('country.label')}
