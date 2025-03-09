@@ -20,7 +20,7 @@ import { useSession } from '@/hooks/use-session';
 export function NavUser({
     user,
 }: {
-    user: { name: string; email: string; image?: string };
+    user: { name: string; email: string; image: string | null | undefined };
 }) {
     const { isMobile } = useSidebar();
     const t = useTranslations('sidebar');
