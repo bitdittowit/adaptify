@@ -77,5 +77,26 @@
             "title": "Sign In",
             "googleButton": "Sign in with Google"
         }
+    },
+    "onboarding": {
+        "title": "Complete Profile Setup",
+        "country": {
+            "label": "Country",
+            "placeholder": "Select country"
+        },
+        "studyGroup": {
+            "label": "Study Group",
+            "placeholder": "Select group"
+        },
+        "submit": {
+            "default": "Continue",
+            "loading": "Saving..."
+        }
+    },
+    "countries": {
+        "kz": "Kazakhstan",
+        "uz": "Uzbekistan",
+        "kg": "Kyrgyzstan",
+        "tj": "Tajikistan"
     }
 }

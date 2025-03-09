@@ -11,6 +11,31 @@ const handler = NextAuth({
         }),
     ],
     callbacks: {
+        async jwt({ token, user, trigger, session }) {
+            if (trigger === 'update' && session) {
+                // Handle updates from client
+                return { ...token, ...session.user };
+            }
+
+            if (user?.email) {
+                try {
+                    const result = await db.query(
+                        'SELECT id, sex, country, study_group, experience, level FROM users WHERE email = $1',
+                        [user.email],
+                    );
+
+                    if (result.rows[0]) {
+                        token = {
+                            ...token,
+                            ...result.rows[0],
+                        };
+                    }
+                } catch (error) {
+                    console.error('Error in jwt callback:', error);
+                }
+            }
+            return token;
+        },
         async signIn({ user }) {
             if (!user.email) {
                 return false;
@@ -21,28 +46,16 @@ const handler = NextAuth({
 
                 const result = await db.query('SELECT * FROM users WHERE email = $1', [user.email]);
 
-                let userId: number;
-
                 if (result.rows.length === 0) {
                     // Create new user
                     const newUser = await db.query(
-                        `INSERT INTO users (name, email, image, sex, country, study_group, experience, level, completed_tasks)
-                        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                        `INSERT INTO users (name, email, image, sex, completed_tasks)
+                        VALUES ($1, $2, $3, $4, $5)
                         RETURNING id`,
-                        [
-                            user.name ?? 'New User',
-                            user.email,
-                            user.image ?? null,
-                            'male', // default values
-                            'ru',
-                            'КИ21-22Б',
-                            0,
-                            1,
-                            [],
-                        ],
+                        [user.name ?? 'New User', user.email, user.image ?? null, 'male', []],
                     );
 
-                    userId = newUser.rows[0].id;
+                    const userId = newUser.rows[0].id;
 
                     // Create user tasks for the new user
                     const tasks = await db.query('SELECT * FROM tasks');
@@ -71,25 +84,20 @@ const handler = NextAuth({
                 return false;
             }
         },
-        async session({ session }) {
-            if (session.user?.email) {
-                try {
-                    const result = await db.query(
-                        'SELECT id, sex, country, study_group, experience, level FROM users WHERE email = $1',
-                        [session.user.email],
-                    );
-
-                    if (result.rows[0]) {
-                        session.user = {
-                            ...session.user,
-                            ...result.rows[0],
-                        };
-                    }
-                } catch (error) {
-                    console.error('Error in session callback:', error);
-                }
-            }
-            return session;
+        session({ session, token }) {
+            const updatedSession = {
+                ...session,
+                user: {
+                    ...session.user,
+                    id: token.id,
+                    country: token.country,
+                    study_group: token.study_group,
+                    sex: token.sex,
+                    experience: token.experience,
+                    level: token.level,
+                },
+            };
+            return updatedSession;
         },
     },
     pages: {
