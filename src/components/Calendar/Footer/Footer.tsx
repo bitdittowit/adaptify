@@ -1,26 +1,23 @@
-import { getDay } from 'date-fns';
-import type { FooterProps as BaseFooterProps } from 'react-day-picker';
+import { LocalizedText } from '@/components/ui/localized-text';
+import type { Task } from '@/types';
 
-import type { DayOfWeek, Task } from '@/types';
+const DAYS = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'] as const;
 
-import styles from './footer.module.css';
-
-type FooterProps = BaseFooterProps & {
-    tasks: Pick<Task, 'title' | 'id' | 'schedule'>[];
-};
-
-const getDayOfWeek = (date: Date): DayOfWeek => {
-    const days: DayOfWeek[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    return days[getDay(date)];
-};
+interface FooterProps {
+    tasks?: Task[];
+    displayMonth?: Date;
+}
 
 export const Footer = ({ tasks, displayMonth }: FooterProps) => {
+    const getDay = (date: Date) => DAYS[date.getDay()];
+
     return (
-        <tfoot className={styles.footer}>
+        <tfoot className="footer">
             {tasks?.map(({ title, id, schedule }) => (
                 <tr key={id}>
-                    <td key={id}>
-                        {title}: <b>{schedule?.[getDayOfWeek(displayMonth || new Date())]}</b>
+                    <td>
+                        <LocalizedText text={title} />:{' '}
+                        <b>{schedule?.[getDay(displayMonth || new Date())]?.join(', ')}</b>
                     </td>
                 </tr>
             ))}

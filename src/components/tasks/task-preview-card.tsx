@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { DateBadge } from '@/components/ui/date-badge';
+import { LocalizedText } from '@/components/ui/localized-text';
 import { cn } from '@/lib/utils';
 import type { Task } from '@/types';
 
@@ -19,7 +20,9 @@ export function TaskPreviewCard({ className, task, ...props }: TaskPreviewCardPr
                 <CardContent className="grid gap-4 mt-4">{<DateBadge date={task.picked_date} />}</CardContent>
             )}
             <CardHeader className="flex">
-                <CardTitle className="mb-1">{task.title}</CardTitle>
+                <CardTitle className="mb-1">
+                    <LocalizedText text={task.title} />
+                </CardTitle>
             </CardHeader>
             <CardFooter className="gap-4 self-end flex justify-end">
                 <div

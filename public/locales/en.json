@@ -44,8 +44,29 @@
         "title": "Title",
         "date": "Date",
         "noResults": "No results.",
+        "noTasks": "You don't have any available tasks yet",
         "userExperienceUpdated": "User experience updated: {result}",
-        "blockedTasks": "Tasks that will be unlocked after completion"
+        "blockedTasks": "Tasks that will be unlocked after completion",
+        "schedule": "Schedule",
+        "noSchedule": "No appointments",
+        "noTitle": "No title",
+        "noDescription": "No description",
+        "noAddressTitle": "No title",
+        "noAddressValue": "No address",
+        "noPhoneTitle": "No title",
+        "noEmailTitle": "No title",
+        "addresses": "Addresses",
+        "contacts": "Contacts",
+        "documents": "Documents"
+    },
+    "days": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
     },
     "calendar": {
         "tasks": "Tasks",

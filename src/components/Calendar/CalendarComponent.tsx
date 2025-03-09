@@ -7,7 +7,6 @@ import { useLocale, useTranslations } from 'next-intl';
 import { isPast, isSameMonth, isToday, isWeekend } from 'date-fns';
 import { ru } from 'date-fns/locale/ru';
 import Holidays from 'date-holidays';
-import type { DayProps as BaseDayProps, FooterProps as BaseFooterProps } from 'react-day-picker';
 
 import { Calendar as BaseCalendar } from '@/components/ui/calendar';
 import mockData from '@/constants/tasks/user_tasks.json';
@@ -19,15 +18,14 @@ import { Footer } from './Footer/Footer';
 
 const holidays = new Holidays('RU');
 const mockTasks = (mockData.tasks as BaseTask[])
-    .map(
-        task =>
-            ({
-                ...task,
-                status: STATUS.OPEN,
-                picked_date: getRandomDateInMonth(),
-                experience_points: getRandomInRange(1, 10),
-            }) as Omit<Task, 'proof_status'>,
-    )
+    .map(task => ({
+        ...task,
+        status: STATUS.OPEN,
+        picked_date: getRandomDateInMonth(),
+        experience_points: getRandomInRange(1, 10),
+        proof_status: 'not_proofed',
+        available: true,
+    }))
     .filter(({ picked_date }) => !(isWeekend(picked_date) || Boolean(holidays.isHoliday(picked_date))));
 
 export const CalendarComponent = () => {
@@ -46,9 +44,13 @@ export const CalendarComponent = () => {
     return (
         <BaseCalendar
             components={{
-                Day: (props: BaseDayProps) => <Day {...props} tasks={getTasksForDay(mockTasks, props.date)} />,
-                Footer: (props: BaseFooterProps) => (
-                    <Footer {...props} tasks={getTasksForDay(mockTasks, date || new Date())} />
+                Day: props => <Day {...props} tasks={getTasksForDay(mockTasks as Task[], props.date)} />,
+                Footer: props => (
+                    <Footer
+                        {...props}
+                        tasks={getTasksForDay(mockTasks as Task[], date || new Date())}
+                        displayMonth={date}
+                    />
                 ),
             }}
             mode="single"

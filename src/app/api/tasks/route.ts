@@ -14,10 +14,19 @@ async function getUserTasks(email: string) {
               'id', ut.id,
               'status', ut.status,
               'experience_points', ut.experience_points,
-              'title', t.title,
-              'description', t.description,
+              'title', t.title::jsonb,
+              'description', t.description::jsonb,
               'position', t.position,
-              'schedule', t.schedule
+              'schedule', t.schedule,
+              'proof', t.proof,
+              'documents', t.documents,
+              'links', t.links,
+              'medical_procedures', t.medical_procedures,
+              'address', t.address,
+              'contacts', t.contacts,
+              'cost', t.cost,
+              'proof_status', ut.proof_status,
+              'available', ut.available
             )) AS tasks
           FROM users u
           LEFT JOIN user_tasks ut ON u.id = ut.user_id

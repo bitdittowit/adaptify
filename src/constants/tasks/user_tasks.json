@@ -4,24 +4,36 @@
             "id": 1,
             "required": true,
             "position": 1,
-            "title": "Регистрация во Вконтакте",
+            "title": {
+                "ru": "Регистрация во Вконтакте",
+                "en": "VKontakte Registration"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
             "schedule": null,
             "proof": null,
-            "description": "Первый уровень - это регистрация во ВКонтакте, это необходимо, чтобы тебя добавили в чат учебной группы. Также это позволит быстро находить информацию о событиях и активности университета, вступить в группу иностранных студентов для общения и обмена опытом, получать важные уведомления и консультации от координаторов. После регистрации вернитесь сюда, чтобы продолжить. Если вы зарегистрировались – вставьте ссылку на ваш аккаунт.",
+            "description": {
+                "ru": "Первый уровень - это регистрация во ВКонтакте, это необходимо, чтобы тебя добавили в чат учебной группы. Также это позволит быстро находить информацию о событиях и активности университета, вступить в группу иностранных студентов для общения и обмена опытом, получать важные уведомления и консультации от координаторов. После регистрации вернитесь сюда, чтобы продолжить. Если вы зарегистрировались – вставьте ссылку на ваш аккаунт.",
+                "en": "The first level is registration in VKontakte, this is necessary so that you can be added to your study group chat. It will also allow you to quickly find information about university events and activities, join a group of international students for communication and experience exchange, receive important notifications and consultations from coordinators. After registration, return here to continue. If you have registered, paste the link to your account."
+            },
             "documents": null,
             "address": null,
             "contacts": null,
             "links": [
                 {
                     "url": "https://vk.cc/mobileios",
-                    "description": "Скачать для iOS"
+                    "description": {
+                        "ru": "Скачать для iOS",
+                        "en": "Download for iOS"
+                    }
                 },
                 {
                     "url": "https://vk.cc/mobileandroid",
-                    "description": "Скачать для Android"
+                    "description": {
+                        "ru": "Скачать для Android",
+                        "en": "Download for Android"
+                    }
                 }
             ]
         },
@@ -29,7 +41,10 @@
             "id": 2,
             "required": true,
             "position": 2,
-            "title": "Дата прилета",
+            "title": {
+                "ru": "Дата прилета",
+                "en": "Arrival Date"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
@@ -39,13 +54,19 @@
                 "checks": [
                     {
                         "name": "arrival_date",
-                        "title": "Дата прилета",
+                        "title": {
+                            "ru": "Дата прилета",
+                            "en": "Arrival Date"
+                        },
                         "placeholder": "2025-01-01",
                         "type": "date"
                     }
                 ]
             },
-            "description": "Укажите дату прилета в Красноярск.",
+            "description": {
+                "ru": "Укажите дату прилета в Красноярск.",
+                "en": "Please specify your arrival date to Krasnoyarsk."
+            },
             "documents": null,
             "address": null,
             "contacts": null,
@@ -55,7 +76,10 @@
             "id": 3,
             "required": true,
             "position": 3,
-            "title": "Первоначальная постановка на миграционный учет",
+            "title": {
+                "ru": "Первоначальная постановка на миграционный учет",
+                "en": "Initial Migration Registration"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free"],
@@ -69,23 +93,62 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Необходимо сделать в течение 3-х рабочих дней после приезда в Красноярск.",
+            "description": {
+                "ru": "Необходимо сделать в течение 3-х рабочих дней после приезда в Красноярск.",
+                "en": "Must be completed within 3 working days after arrival in Krasnoyarsk."
+            },
             "documents": [
-                "оригинал документа, удостоверяющего личность (национальный паспорт, заграничный паспорт, ID - выберите один документ, данные которого будете заносить во всех случаях)",
-                "копия документа удостоверяющего личность (все страницы с отметками, чистые копировать не нужно) в 2 экзэмплярах",
-                "оригинал миграционной карты с отметкой о дате пересечения границы РФ",
-                "копия миграционной карты с отметкой о дате пересечения границы РФ с 2-х сторон в 2-х экземплярах",
-                "нотариально заверенная копия перевода национального паспорта или заграничного паспорта",
-                "билет (для подтверждения даты прибытия в г. Красноярск)/предыдущая регистрация",
-                "справка из общежития/договор аренды квартиры",
-                "фотографии (4 шт. размером 3х4 см)",
-                "договор на обучение, в случае обучения на платной основе",
-                "медицинский страховой полис, действующий на территории РФ до конца текущего учебного года (можно заказать через личные сообщения группы, список актуальных предложений ищите по ссылке)"
+                {
+                    "ru": "оригинал документа, удостоверяющего личность (национальный паспорт, заграничный паспорт, ID - выберите один документ, данные которого будете заносить во всех случаях)",
+                    "en": "original identity document (national passport, international passport, ID - choose one document that you will use in all cases)"
+                },
+                {
+                    "ru": "копия документа удостоверяющего личность (все страницы с отметками, чистые копировать не нужно) в 2 экзэмплярах",
+                    "en": "copy of identity document (all pages with marks, no need to copy blank pages) in 2 copies"
+                },
+                {
+                    "ru": "оригинал миграционной карты с отметкой о дате пересечения границы РФ",
+                    "en": "original migration card with a mark of the date of crossing the Russian border"
+                },
+                {
+                    "ru": "копия миграционной карты с отметкой о дате пересечения границы РФ с 2-х сторон в 2-х экземплярах",
+                    "en": "copy of migration card with a mark of the date of crossing the Russian border from both sides in 2 copies"
+                },
+                {
+                    "ru": "нотариально заверенная копия перевода национального паспорта или заграничного паспорта",
+                    "en": "notarized copy of the translation of national passport or international passport"
+                },
+                {
+                    "ru": "билет (для подтверждения даты прибытия в г. Красноярск)/предыдущая регистрация",
+                    "en": "ticket (to confirm the date of arrival in Krasnoyarsk)/previous registration"
+                },
+                {
+                    "ru": "справка из общежития/договор аренды квартиры",
+                    "en": "dormitory certificate/apartment rental agreement"
+                },
+                {
+                    "ru": "фотографии (4 шт. размером 3х4 см)",
+                    "en": "photos (4 pcs, size 3x4 cm)"
+                },
+                {
+                    "ru": "договор на обучение, в случае обучения на платной основе",
+                    "en": "education contract, in case of paid education"
+                },
+                {
+                    "ru": "медицинский страховой полис, действующий на территории РФ до конца текущего учебного года (можно заказать через личные сообщения группы, список актуальных предложений ищите по ссылке)",
+                    "en": "medical insurance policy valid in Russia until the end of the current academic year (can be ordered through group private messages, look for the list of current offers at the link)"
+                }
             ],
             "address": [
                 {
-                    "title": "Протокольный отдел",
-                    "value": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03"
+                    "title": {
+                        "ru": "Протокольный отдел",
+                        "en": "Protocol Department"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03",
+                        "en": "79 Svobodny Ave., building 5 (library), room B1-03"
+                    }
                 }
             ],
             "contacts": null,
@@ -95,7 +158,10 @@
             "id": 22,
             "required": true,
             "position": 3,
-            "title": "Первоначальная постановка на миграционный учет",
+            "title": {
+                "ru": "Первоначальная постановка на миграционный учет",
+                "en": "Initial Migration Registration"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_required"],
@@ -109,18 +175,42 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Необходимо сделать в течение 3-х рабочих дней после приезда в Красноярск.",
+            "description": {
+                "ru": "Необходимо сделать в течение 3-х рабочих дней после приезда в Красноярск.",
+                "en": "Must be completed within 3 working days after arrival in Krasnoyarsk."
+            },
             "documents": [
-                "оригинал документа, удостоверяющего личность (национальный паспорт, заграничный паспорт, ID - выберите один документ, данные которого будете заносить во всех случаях)",
-                "копия документа удостоверяющего личность (все страницы с отметками, чистые копировать не нужно) в 2 экзэмплярах",
-                "копия миграционной карты с отметкой о дате пересечения границы РФ с 2-х сторон в 2-х экземплярах",
-                "справка из общежития/договор аренды квартиры",
-                "договор на обучение, в случае обучения на платной основе"
+                {
+                    "ru": "оригинал документа, удостоверяющего личность (национальный паспорт, заграничный паспорт, ID - выберите один документ, данные которого будете заносить во всех случаях)",
+                    "en": "original identity document (national passport, international passport, ID - choose one document that you will use in all cases)"
+                },
+                {
+                    "ru": "копия документа удостоверяющего личность (все страницы с отметками, чистые копировать не нужно) в 2 экзэмплярах",
+                    "en": "copy of identity document (all pages with marks, no need to copy blank pages) in 2 copies"
+                },
+                {
+                    "ru": "копия миграционной карты с отметкой о дате пересечения границы РФ с 2-х сторон в 2-х экземплярах",
+                    "en": "copy of migration card with a mark of the date of crossing the Russian border from both sides in 2 copies"
+                },
+                {
+                    "ru": "справка из общежития/договор аренды квартиры",
+                    "en": "dormitory certificate/apartment rental agreement"
+                },
+                {
+                    "ru": "договор на обучение, в случае обучения на платной основе",
+                    "en": "education contract, in case of paid education"
+                }
             ],
             "address": [
                 {
-                    "title": "Протокольный отдел",
-                    "value": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03"
+                    "title": {
+                        "ru": "Протокольный отдел",
+                        "en": "Protocol Department"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03",
+                        "en": "79 Svobodny Ave., building 5 (library), room B1-03"
+                    }
                 }
             ],
             "contacts": null,
@@ -130,7 +220,10 @@
             "id": 4,
             "required": true,
             "position": 4,
-            "title": "Заселение в общежитие",
+            "title": {
+                "ru": "Заселение в общежитие",
+                "en": "Dormitory Check-in"
+            },
             "blocks": [5],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
@@ -144,25 +237,44 @@
                 "sunday": ["08:30-13:00", "14:00-17:00"]
             },
             "proof": null,
-            "description": "Получите справку из общежития и бумажный пропуск в общежитие, когда вы получите ИНН и СНИЛС необходимо занести эти документы в кабинет заведующей общежития, в котором вы живете",
+            "description": {
+                "ru": "Получите справку из общежития и бумажный пропуск в общежитие, когда вы получите ИНН и СНИЛС необходимо занести эти документы в кабинет заведующей общежития, в котором вы живете",
+                "en": "Get a dormitory certificate and a paper pass to the dormitory. When you receive your TIN and SNILS, you need to bring these documents to the office of the dormitory manager where you live"
+            },
             "documents": [
-                "6 фотографий (3х4)",
-                "копия паспорта (без прописки в г. Красноярске)",
-                "справка о прохождении флюорографии"
+                {
+                    "ru": "6 фотографий (3х4)",
+                    "en": "6 photos (3x4)"
+                },
+                {
+                    "ru": "копия паспорта (без прописки в г. Красноярске)",
+                    "en": "copy of passport (without registration in Krasnoyarsk)"
+                },
+                {
+                    "ru": "справка о прохождении флюорографии",
+                    "en": "fluorography certificate"
+                }
             ],
             "address": [
                 {
-                    "title": "Кабинет заведующей общежития",
-                    "value": "Кабинет заведующей общежития, в котором вы живете",
-                    "hours": "08:30-17:00",
-                    "break": "13:00-14:00"
+                    "title": {
+                        "ru": "Кабинет заведующей общежития",
+                        "en": "Dormitory Manager's Office"
+                    },
+                    "value": {
+                        "ru": "Кабинет заведующей общежития, в котором вы живете",
+                        "en": "Office of the dormitory manager where you live"
+                    }
                 }
             ],
             "contacts": null,
             "links": [
                 {
                     "url": "http://example.com/образец_заполнения_договора",
-                    "description": "Образец заполнения договора"
+                    "description": {
+                        "ru": "Образец заполнения договора",
+                        "en": "Contract filling sample"
+                    }
                 }
             ]
         },
@@ -170,29 +282,43 @@
             "id": 5,
             "required": true,
             "position": 5,
-            "title": "Пропуск в общежитие",
+            "title": {
+                "ru": "Получить электронный пропуск",
+                "en": "Get Electronic Pass"
+            },
             "blocks": [],
             "blocked_by": [4],
             "tags": ["male", "female", "visa_free", "visa_required"],
             "schedule": {
-                "monday": ["08:30-13:00", "14:00-17:00"],
-                "tuesday": ["08:30-13:00", "14:00-17:00"],
-                "wednesday": ["08:30-13:00", "14:00-17:00"],
-                "thursday": ["08:30-13:00", "14:00-17:00"],
-                "friday": ["08:30-13:00", "14:00-17:00"],
-                "saturday": ["08:30-13:00", "14:00-17:00"],
-                "sunday": ["08:30-13:00", "14:00-17:00"]
+                "monday": ["08:30-17:00"],
+                "tuesday": ["08:30-17:00"],
+                "wednesday": ["08:30-17:00"],
+                "thursday": ["08:30-17:00"],
+                "friday": ["08:30-17:00"],
+                "saturday": [],
+                "sunday": []
             },
             "proof": null,
-            "description": "Обменяйте бумажный пропуск на электронный пропуск в «Бюро пропусков» в течение 60 дней.",
+            "description": {
+                "ru": "Электронный пропуск необходим для прохода в учебные корпуса и общежития. Для его получения необходимо заполнить заявление и предоставить фотографию.",
+                "en": "An electronic pass is required for access to academic buildings and dormitories. To get it, you need to fill out an application and provide a photo."
+            },
+            "documents": [
+                {
+                    "ru": "фотография 3х4",
+                    "en": "photo 3x4"
+                }
+            ],
             "address": [
                 {
-                    "title": "Бюро пропусков на Свободном",
-                    "value": "пр. Свободный, 79, возле ауд. 11-01"
-                },
-                {
-                    "title": "Бюро пропусков на Борисова",
-                    "value": "ул. Борисова, 24"
+                    "title": {
+                        "ru": "Бюро пропусков",
+                        "en": "Pass Office"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный, 79/10",
+                        "en": "79/10 Svobodny Ave."
+                    }
                 }
             ],
             "contacts": null,
@@ -200,21 +326,55 @@
         },
         {
             "id": 6,
-            "required": false,
+            "required": true,
             "position": 6,
-            "title": "Оформить дебетовую карту",
+            "title": {
+                "ru": "Получить банковскую карту",
+                "en": "Get Bank Card"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
-            "schedule": null,
+            "schedule": {
+                "monday": ["09:00-18:00"],
+                "tuesday": ["09:00-18:00"],
+                "wednesday": ["09:00-18:00"],
+                "thursday": ["09:00-18:00"],
+                "friday": ["09:00-17:00"],
+                "saturday": [],
+                "sunday": []
+            },
             "proof": null,
-            "description": "Можно оформить дебетовую карту онлайн или оффлайн.",
+            "description": {
+                "ru": "Банковская карта необходима для получения стипендии и других выплат. Карту можно получить в любом отделении банка.",
+                "en": "A bank card is required to receive scholarships and other payments. You can get a card at any bank branch."
+            },
             "documents": [
-                "паспорт иностранного гражданина",
-                "действующая миграционная карта",
-                "виза и миграционная карта или патент; разрешение на работу или на временное пребывание; вид на жительство или другой документ, подтверждающий право на пребывание в РФ"
+                {
+                    "ru": "паспорт",
+                    "en": "passport"
+                },
+                {
+                    "ru": "миграционная карта",
+                    "en": "migration card"
+                },
+                {
+                    "ru": "регистрация",
+                    "en": "registration"
+                }
             ],
-            "address": null,
+            "address": [
+                {
+                    "title": {
+                        "ru": "Отделение Сбербанка",
+                        "en": "Sberbank Branch"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный, 81",
+                        "en": "81 Svobodny Ave."
+                    }
+                }
+            ],
             "contacts": null,
             "links": null
         },
@@ -222,36 +382,79 @@
             "id": 7,
             "required": true,
             "position": 7,
-            "title": "Отнести оригинал аттестата",
+            "title": {
+                "ru": "Предоставить документы об образовании",
+                "en": "Submit Education Documents"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
             "schedule": {
-                "monday": ["08:30-13:00", "14:00-17:00"],
-                "tuesday": ["08:30-13:00", "14:00-17:00"],
-                "wednesday": ["08:30-13:00", "14:00-17:00"],
-                "thursday": ["08:30-13:00", "14:00-17:00"],
-                "friday": ["08:30-13:00", "14:00-17:00"],
-                "saturday": ["08:30-13:00", "14:00-17:00"],
-                "sunday": ["08:30-13:00", "14:00-17:00"]
+                "monday": ["09:00-17:00"],
+                "tuesday": ["09:00-17:00"],
+                "wednesday": ["09:00-17:00"],
+                "thursday": ["09:00-17:00"],
+                "friday": ["09:00-17:00"],
+                "saturday": [],
+                "sunday": []
             },
             "proof": null,
-            "description": "Принести оригинал документа о предыдущем образовании в Отдел по работе с иностранными абитуриентами.",
-            "documents": ["оригинал документа о предыдущем образовании"],
-            "address": [
+            "description": {
+                "ru": "Необходимо предоставить оригиналы документов об образовании и их нотариально заверенные переводы.",
+                "en": "You need to provide original education documents and their notarized translations."
+            },
+            "documents": [
                 {
-                    "title": "Отдел по работе с иностранными абитуриентами",
-                    "value": "пр. Свободный, 82А, корпус № 24 (А), ауд. 4-47"
+                    "ru": "оригинал аттестата/диплома",
+                    "en": "original certificate/diploma"
+                },
+                {
+                    "ru": "нотариально заверенный перевод аттестата/диплома",
+                    "en": "notarized translation of certificate/diploma"
+                },
+                {
+                    "ru": "приложение к аттестату/диплому с оценками",
+                    "en": "certificate/diploma supplement with grades"
+                },
+                {
+                    "ru": "нотариально заверенный перевод приложения",
+                    "en": "notarized translation of the supplement"
                 }
             ],
-            "contacts": null,
+            "address": [
+                {
+                    "title": {
+                        "ru": "Отдел по работе с иностранными студентами",
+                        "en": "International Students Office"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный, 79, ауд. 52-05",
+                        "en": "79 Svobodny Ave., room 52-05"
+                    }
+                }
+            ],
+            "contacts": {
+                "phones": [
+                    {
+                        "title": {
+                            "ru": "Специалист отдела",
+                            "en": "Department Specialist"
+                        },
+                        "value": "+7 (391) 206-27-79"
+                    }
+                ],
+                "emails": []
+            },
             "links": null
         },
         {
             "id": 23,
             "required": true,
             "position": 7,
-            "title": "Отметиться во втором отделе",
+            "title": {
+                "ru": "Отметиться во втором отделе",
+                "en": "Register at the Second Department"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "visa_free", "visa_required"],
@@ -265,11 +468,20 @@
                 "sunday": ["08:30-13:00", "14:00-17:00"]
             },
             "proof": null,
-            "description": "Для парней необходимо отметиться в отделе мобилизационной подготовки и воинского учета.",
+            "description": {
+                "ru": "Для парней необходимо отметиться в отделе мобилизационной подготовки и воинского учета.",
+                "en": "For male students, it is necessary to register at the Department of Mobilization Training and Military Registration."
+            },
             "address": [
                 {
-                    "title": "Отдел мобилизационной подготовки и воинского учета",
-                    "value": "пр. Свободный, каб 42-19"
+                    "title": {
+                        "ru": "Отдел мобилизационной подготовки и воинского учета",
+                        "en": "Department of Mobilization Training and Military Registration"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный, каб 42-19",
+                        "en": "42-19 Svobodny Ave."
+                    }
                 }
             ],
             "contacts": null,
@@ -279,7 +491,10 @@
             "id": 8,
             "required": true,
             "position": 8,
-            "title": "Пройти обязательное медицинское освидетельствование",
+            "title": {
+                "ru": "Пройти обязательное медицинское освидетельствование",
+                "en": "Complete mandatory medical examination"
+            },
             "blocks": [9],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
@@ -293,44 +508,91 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Обязательное медицинское освидетельствование необходимо для легального нахождения в РФ.",
+            "description": {
+                "ru": "Обязательное медицинское освидетельствование необходимо для легального нахождения в РФ.",
+                "en": "Mandatory medical examination is required for legal stay in the Russian Federation."
+            },
             "documents": [
-                "оригинал документа, удостоверяющего личность (национальный паспорт, заграничный паспорт, ID)",
-                "копия документа удостоверяющего личность (все страницы с отметками) в 2 экз.",
-                "оригинал миграционной карты с отметкой о дате пересечения границы РФ"
+                {
+                    "ru": "оригинал документа, удостоверяющего личность (национальный паспорт, заграничный паспорт, ID)",
+                    "en": "original identity document (national passport, international passport, ID)"
+                },
+                {
+                    "ru": "копия документа удостоверяющего личность (все страницы с отметками) в 2 экз.",
+                    "en": "copy of identity document (all pages with marks) in 2 copies"
+                },
+                {
+                    "ru": "оригинал миграционной карты с отметкой о дате пересечения границы РФ",
+                    "en": "original migration card with a mark of the date of crossing the border of the Russian Federation"
+                }
             ],
             "medical_procedures": [
-                "исследование мочи для теста на приём запрещённых препаратов",
-                "исследование крови на ВИЧ-инфекцию и наличие сифилиса",
-                "прохождение флюорографии для выявления туберкулёза",
-                "психиатр-нарколог",
-                "терапевт",
-                "дерматовенеролог",
-                "фтизиатр"
+                {
+                    "ru": "исследование мочи для теста на приём запрещённых препаратов",
+                    "en": "urine test for prohibited substances"
+                },
+                {
+                    "ru": "исследование крови на ВИЧ-инфекцию и наличие сифилиса",
+                    "en": "blood test for HIV infection and syphilis"
+                },
+                {
+                    "ru": "прохождение флюорографии для выявления туберкулёза",
+                    "en": "fluorography for tuberculosis detection"
+                },
+                {
+                    "ru": "психиатр-нарколог",
+                    "en": "psychiatrist-narcologist"
+                },
+                {
+                    "ru": "терапевт",
+                    "en": "therapist"
+                },
+                {
+                    "ru": "дерматовенеролог",
+                    "en": "dermatovenerologist"
+                },
+                {
+                    "ru": "фтизиатр",
+                    "en": "phthisiologist"
+                }
             ],
             "address": [
                 {
-                    "title": "Профмедцентр",
-                    "value": "ул. Шумяцкого, д. 12"
+                    "title": {
+                        "ru": "Профмедцентр",
+                        "en": "Professional Medical Center"
+                    },
+                    "value": {
+                        "ru": "ул. Шумяцкого, д. 12",
+                        "en": "12 Shumyatskogo St."
+                    }
                 }
             ],
             "contacts": {
                 "phones": [
                     {
-                        "title": "Профмедцентр",
+                        "title": {
+                            "ru": "Профмедцентр",
+                            "en": "Professional Medical Center"
+                        },
                         "value": "+7 (391) 205-44-00"
                     }
                 ],
                 "emails": []
             },
-            "cost": "3000 рублей наличными",
-            "links": null
+            "cost": {
+                "ru": "3000 рублей наличными",
+                "en": "3000 rubles in cash"
+            }
         },
         {
             "id": 9,
             "required": true,
             "position": 9,
-            "title": "Забрать результаты медосмотра",
+            "title": {
+                "ru": "Забрать результаты медосмотра",
+                "en": "Pick up medical examination results"
+            },
             "blocks": [],
             "blocked_by": [8],
             "tags": ["male", "female", "visa_free", "visa_required"],
@@ -344,21 +606,39 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Справки о прохождении медосмотра требуются для прохождения дактилоскопии (а эту процедуру нужно пройти в течение 90 дней после пересечения границы РФ)\n\nЧерез 2 дня получаешь 2 документа:\n«Медицинское заключение о наличии (об отсутствии) инфекционных заболеваний» установленного образца, согласно приложению 3 к приказу Министерства здравоохранения РФ от 19.11.2021г. №1079н\n«Медицинское заключение о наличии (об отсутствии) заболевания наркоманией» установленного образца, согласно приложению 2 к приказу Министерства здравоохранения РФ от 19.11.2021г. №1079н",
+            "description": {
+                "ru": "Справки о прохождении медосмотра требуются для прохождения дактилоскопии (а эту процедуру нужно пройти в течение 90 дней после пересечения границы РФ)\n\nЧерез 2 дня получаешь 2 документа:\n«Медицинское заключение о наличии (об отсутствии) инфекционных заболеваний» установленного образца, согласно приложению 3 к приказу Министерства здравоохранения РФ от 19.11.2021г. №1079н\n«Медицинское заключение о наличии (об отсутствии) заболевания наркоманией» установленного образца, согласно приложению 2 к приказу Министерства здравоохранения РФ от 19.11.2021г. №1079н",
+                "en": "Medical examination certificates are required for fingerprinting (this procedure must be completed within 90 days after crossing the Russian border)\n\nAfter 2 days you will receive 2 documents:\n'Medical certificate of presence (absence) of infectious diseases' of the established form, according to Appendix 3 to the order of the Ministry of Health of the Russian Federation dated 19.11.2021 No. 1079n\n'Medical certificate of presence (absence) of drug addiction' of the established form, according to Appendix 2 to the order of the Ministry of Health of the Russian Federation dated 19.11.2021 No. 1079n"
+            },
             "documents": [
-                "Медицинское заключение о наличии (об отсутствии) инфекционных заболеваний",
-                "Медицинское заключение о наличии (об отсутствии) заболевания наркоманией"
+                {
+                    "ru": "Медицинское заключение о наличии (об отсутствии) инфекционных заболеваний",
+                    "en": "Medical certificate of presence (absence) of infectious diseases"
+                },
+                {
+                    "ru": "Медицинское заключение о наличии (об отсутствии) заболевания наркоманией",
+                    "en": "Medical certificate of presence (absence) of drug addiction"
+                }
             ],
             "address": [
                 {
-                    "title": "Профмедцентр",
-                    "value": "ул. Шумяцкого, д. 12"
+                    "title": {
+                        "ru": "Профмедцентр",
+                        "en": "Professional Medical Center"
+                    },
+                    "value": {
+                        "ru": "ул. Шумяцкого, д. 12",
+                        "en": "12 Shumyatskogo St."
+                    }
                 }
             ],
             "contacts": {
                 "phones": [
                     {
-                        "title": "Профмедцентр",
+                        "title": {
+                            "ru": "Профмедцентр",
+                            "en": "Professional Medical Center"
+                        },
                         "value": "+7 (391) 205-44-00"
                     }
                 ],
@@ -370,69 +650,12 @@
             "id": 10,
             "required": true,
             "position": 10,
-            "title": "Забрать сертификат об отсутствии ВИЧ",
-            "blocks": [],
-            "blocked_by": [8],
-            "tags": ["male", "female", "visa_free", "visa_required"],
-            "schedule": {
-                "monday": ["08:00-17:00"],
-                "tuesday": ["08:00-17:00"],
-                "wednesday": ["08:00-17:00"],
-                "thursday": ["08:00-17:00"],
-                "friday": ["08:00-17:00"],
-                "saturday": [],
-                "sunday": []
+            "title": {
+                "ru": "Получить сертификат об отсутствии ВИЧ",
+                "en": "Get HIV-free Certificate"
             },
-            "proof": null,
-            "description": "Забрать сертификат об отсутствии ВИЧ. Вы можете получить его по одному из указанных адресов.",
-            "address": [
-                {
-                    "title": null,
-                    "value": "ул. Калинина, д. 79"
-                },
-                {
-                    "title": null,
-                    "value": "ул. Тельмана, д. 28"
-                }
-            ],
-            "contacts": null,
-            "links": null
-        },
-        {
-            "id": 11,
-            "required": true,
-            "position": 11,
-            "title": "Забрать временную регистрацию",
             "blocks": [],
-            "blocked_by": [4],
-            "tags": ["male", "female", "visa_free", "visa_required"],
-            "schedule": {
-                "monday": ["09:00-12:00"],
-                "tuesday": ["13:00-16:00"],
-                "wednesday": ["09:00-12:00"],
-                "thursday": ["13:00-16:00"],
-                "friday": ["09:00-12:00"],
-                "saturday": [],
-                "sunday": []
-            },
-            "proof": null,
-            "description": "Предварительно позвоните в протокольный отдел и уточните, готова ли ваша временная регистрация. Если да, то приходите и заберите документ.",
-            "address": [
-                {
-                    "title": "Протокольный отдел",
-                    "value": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03"
-                }
-            ],
-            "contacts": null,
-            "links": null
-        },
-        {
-            "id": 12,
-            "required": true,
-            "position": 12,
-            "title": "Пройти процедуру дактилоскопии и фотографирования",
-            "blocks": [],
-            "blocked_by": [9, 10],
+            "blocked_by": [],
             "tags": ["male", "female", "visa_required"],
             "schedule": {
                 "monday": ["08:00-17:00"],
@@ -444,34 +667,195 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Дактилоскопическая карта является обязательным документом, позволяющим иностранцам находиться в России более 90 дней. Она действует 10 лет, но требует ежегодного продления. Запись на процедуру возможна только после получения результатов медицинского осмотра. Результаты будут готовы через 2 дня.",
+            "description": {
+                "ru": "Сертификат об отсутствии ВИЧ необходим для оформления визы.",
+                "en": "HIV-free certificate is required for visa processing."
+            },
             "documents": [
-                "Паспорт (оригинал)",
-                "Копия паспорта (все страницы с отметками)",
-                "Нотариально заверенный перевод паспорта (оригинал)",
-                "Копия нотариально заверенного перевода паспорта",
-                "Медицинская справка (оригинал)",
-                "Копия медицинской справки",
-                "Миграционная карта (оригинал)",
-                "Копия миграционной карты",
-                "Регистрация",
-                "Копия регистрации"
-            ],
-            "cost": "Сервисный сбор за оказание услуги - 1800 рублей",
-            "address": [
                 {
-                    "title": null,
-                    "value": "ул. Калинина, д. 79"
+                    "ru": "паспорт",
+                    "en": "passport"
+                },
+                {
+                    "ru": "миграционная карта",
+                    "en": "migration card"
                 }
             ],
-            "contacts": null,
+            "address": [
+                {
+                    "title": {
+                        "ru": "Центр СПИД",
+                        "en": "AIDS Center"
+                    },
+                    "value": {
+                        "ru": "ул. Карла Маркса, 45",
+                        "en": "45 Karl Marx St."
+                    }
+                }
+            ],
+            "contacts": {
+                "phones": [
+                    {
+                        "title": {
+                            "ru": "Регистратура",
+                            "en": "Reception"
+                        },
+                        "value": "+7 (391) 226-84-08"
+                    }
+                ],
+                "emails": []
+            },
+            "cost": {
+                "ru": "2500 рублей",
+                "en": "2500 rubles"
+            }
+        },
+        {
+            "id": 11,
+            "required": true,
+            "position": 11,
+            "title": {
+                "ru": "Получить ИНН",
+                "en": "Get Tax ID (INN)"
+            },
+            "blocks": [],
+            "blocked_by": [],
+            "tags": ["male", "female", "visa_free", "visa_required"],
+            "schedule": {
+                "monday": ["09:00-18:00"],
+                "tuesday": ["09:00-18:00"],
+                "wednesday": ["09:00-18:00"],
+                "thursday": ["09:00-18:00"],
+                "friday": ["09:00-17:00"],
+                "saturday": [],
+                "sunday": []
+            },
+            "proof": null,
+            "description": {
+                "ru": "ИНН (идентификационный номер налогоплательщика) необходим для получения стипендии и других выплат.",
+                "en": "Tax ID (INN) is required to receive scholarships and other payments."
+            },
+            "documents": [
+                {
+                    "ru": "паспорт",
+                    "en": "passport"
+                },
+                {
+                    "ru": "нотариально заверенный перевод паспорта",
+                    "en": "notarized translation of passport"
+                },
+                {
+                    "ru": "миграционная карта",
+                    "en": "migration card"
+                },
+                {
+                    "ru": "регистрация",
+                    "en": "registration"
+                }
+            ],
+            "address": [
+                {
+                    "title": {
+                        "ru": "Налоговая инспекция",
+                        "en": "Tax Office"
+                    },
+                    "value": {
+                        "ru": "ул. Партизана Железняка, 46",
+                        "en": "46 Partizana Zheleznyaka St."
+                    }
+                }
+            ],
+            "contacts": {
+                "phones": [
+                    {
+                        "title": {
+                            "ru": "Справочная",
+                            "en": "Information"
+                        },
+                        "value": "+7 (391) 263-90-60"
+                    }
+                ],
+                "emails": []
+            },
+            "links": null
+        },
+        {
+            "id": 12,
+            "required": true,
+            "position": 12,
+            "title": {
+                "ru": "Получить СНИЛС",
+                "en": "Get Insurance Number (SNILS)"
+            },
+            "blocks": [],
+            "blocked_by": [],
+            "tags": ["male", "female", "visa_free", "visa_required"],
+            "schedule": {
+                "monday": ["09:00-18:00"],
+                "tuesday": ["09:00-18:00"],
+                "wednesday": ["09:00-18:00"],
+                "thursday": ["09:00-18:00"],
+                "friday": ["09:00-17:00"],
+                "saturday": [],
+                "sunday": []
+            },
+            "proof": null,
+            "description": {
+                "ru": "СНИЛС (страховой номер индивидуального лицевого счёта) необходим для получения медицинской помощи и других социальных услуг.",
+                "en": "Insurance Number (SNILS) is required for medical care and other social services."
+            },
+            "documents": [
+                {
+                    "ru": "паспорт",
+                    "en": "passport"
+                },
+                {
+                    "ru": "нотариально заверенный перевод паспорта",
+                    "en": "notarized translation of passport"
+                },
+                {
+                    "ru": "миграционная карта",
+                    "en": "migration card"
+                },
+                {
+                    "ru": "регистрация",
+                    "en": "registration"
+                }
+            ],
+            "address": [
+                {
+                    "title": {
+                        "ru": "Пенсионный фонд",
+                        "en": "Pension Fund"
+                    },
+                    "value": {
+                        "ru": "ул. Партизана Железняка, 44г",
+                        "en": "44g Partizana Zheleznyaka St."
+                    }
+                }
+            ],
+            "contacts": {
+                "phones": [
+                    {
+                        "title": {
+                            "ru": "Справочная",
+                            "en": "Information"
+                        },
+                        "value": "+7 (391) 229-00-66"
+                    }
+                ],
+                "emails": []
+            },
             "links": null
         },
         {
             "id": 13,
             "required": true,
             "position": 13,
-            "title": "Забрать дактилоскопическую карту",
+            "title": {
+                "ru": "Забрать дактилоскопическую карту",
+                "en": "Pick up fingerprint card"
+            },
             "blocks": [],
             "blocked_by": [12],
             "tags": ["male", "female", "visa_required"],
@@ -485,11 +869,20 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Дактилоскопическая карта будет готова через два дня.",
+            "description": {
+                "ru": "Дактилоскопическая карта будет готова через два дня.",
+                "en": "The fingerprint card will be ready in two days."
+            },
             "address": [
                 {
-                    "title": null,
-                    "value": "ул. Калинина, д. 79"
+                    "title": {
+                        "ru": "Отдел по вопросам миграции",
+                        "en": "Migration Department"
+                    },
+                    "value": {
+                        "ru": "ул. Калинина, д. 79",
+                        "en": "79 Kalinina St."
+                    }
                 }
             ],
             "contacts": null,
@@ -499,13 +892,19 @@
             "id": 14,
             "required": true,
             "position": 14,
-            "title": "Заказать справку об обучении",
+            "title": {
+                "ru": "Заказать справку об обучении",
+                "en": "Request study certificate"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
             "schedule": null,
             "proof": null,
-            "description": "Справка об обучении необходима для продления регистрации. Заказать справку можно в деканате вашего учебного заведения. Справка будет готова на следующий день.",
+            "description": {
+                "ru": "Справка об обучении необходима для продления регистрации. Заказать справку можно в деканате вашего учебного заведения. Справка будет готова на следующий день.",
+                "en": "A study certificate is required for registration extension. You can request the certificate at your faculty's dean's office. The certificate will be ready the next day."
+            },
             "address": null,
             "contacts": null,
             "links": null
@@ -514,7 +913,10 @@
             "id": 25,
             "required": true,
             "position": 14,
-            "title": "Получение многократной визы",
+            "title": {
+                "ru": "Получение многократной визы",
+                "en": "Getting a Multiple-Entry Visa"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_required"],
@@ -528,24 +930,66 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Документы необходимо отнести в протокольный отдел. Рекомендуется продлить регистрацию за 1,5 месяца до окончания первоначального срока.",
+            "description": {
+                "ru": "Документы необходимо отнести в протокольный отдел. Рекомендуется продлить регистрацию за 1,5 месяца до окончания первоначального срока.",
+                "en": "Documents must be submitted to the protocol department. It is recommended to extend the registration 1.5 months before the initial period expires."
+            },
             "documents": [
-                "Оригинал документа, удостоверяющего личность (паспорт)",
-                "Две копии паспорта (1 - с отметками, 1 - все страницы)",
-                "Оригинал и две копии миграционной карты",
-                "Справка из института о вашем обучении",
-                "Справка из общежития о продленном сроке проживания",
-                "Полис медицинского страхования",
-                "Копия дактокарты (если имеется)",
-                "Визовая анкета (выдается протокольным отделом)",
-                "Четыре фотографии 3х4",
-                "Квитанция об уплате госпошлины (1920 рублей)",
-                "Копия договора на обучение"
+                {
+                    "ru": "Оригинал документа, удостоверяющего личность (паспорт)",
+                    "en": "Original identity document (passport)"
+                },
+                {
+                    "ru": "Две копии паспорта (1 - с отметками, 1 - все страницы)",
+                    "en": "Two copies of passport (1 - with marks, 1 - all pages)"
+                },
+                {
+                    "ru": "Оригинал и две копии миграционной карты",
+                    "en": "Original and two copies of migration card"
+                },
+                {
+                    "ru": "Справка из института о вашем обучении",
+                    "en": "Certificate from the institute about your studies"
+                },
+                {
+                    "ru": "Справка из общежития о продленном сроке проживания",
+                    "en": "Certificate from dormitory about extended period of stay"
+                },
+                {
+                    "ru": "Полис медицинского страхования",
+                    "en": "Medical insurance policy"
+                },
+                {
+                    "ru": "Копия дактокарты (если имеется)",
+                    "en": "Copy of fingerprint card (if available)"
+                },
+                {
+                    "ru": "Визовая анкета (выдается протокольным отделом)",
+                    "en": "Visa application form (issued by protocol department)"
+                },
+                {
+                    "ru": "Четыре фотографии 3х4",
+                    "en": "Four photos 3x4"
+                },
+                {
+                    "ru": "Квитанция об уплате госпошлины (1920 рублей)",
+                    "en": "Receipt of state duty payment (1920 rubles)"
+                },
+                {
+                    "ru": "Копия договора на обучение",
+                    "en": "Copy of education contract"
+                }
             ],
             "address": [
                 {
-                    "title": null,
-                    "value": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03"
+                    "title": {
+                        "ru": "Протокольный отдел",
+                        "en": "Protocol Department"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03",
+                        "en": "79 Svobodny Ave., building 5 (library), room B1-03"
+                    }
                 }
             ],
             "contacts": null,
@@ -555,7 +999,10 @@
             "id": 15,
             "required": true,
             "position": 15,
-            "title": "Продление регистрации",
+            "title": {
+                "ru": "Продление регистрации",
+                "en": "Registration extension"
+            },
             "blocks": [],
             "blocked_by": [11],
             "tags": ["male", "female", "visa_free", "visa_required"],
@@ -569,22 +1016,58 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Документы необходимо отнести в протокольный отдел. Рекомендуется продлить регистрацию за 1,5 месяца до окончания первоначального срока.",
+            "description": {
+                "ru": "Документы необходимо отнести в протокольный отдел. Рекомендуется продлить регистрацию за 1,5 месяца до окончания первоначального срока.",
+                "en": "Documents must be submitted to the protocol department. It is recommended to extend the registration 1.5 months before the initial period expires."
+            },
             "documents": [
-                "Оригинал документа, удостоверяющего личность (паспорт)",
-                "Две копии документа, удостоверяющего личность (1 - страницы с отметками, 1 - все страницы)",
-                "Перевод документа, удостоверяющего личность (кроме студентов из Казахстана и Кыргызстана)",
-                "Оригинал миграционной карты",
-                "Две копии миграционной карты (с обеих сторон)",
-                "Справка из института об обучении с указанием курса и срока обучения",
-                "Справка из общежития (с продленным сроком проживания)",
-                "Медицинский страховой полис",
-                "Копия дактокарты (или справка о прохождении дактилоскопии, если карта не выдана)"
+                {
+                    "ru": "Оригинал документа, удостоверяющего личность (паспорт)",
+                    "en": "Original identity document (passport)"
+                },
+                {
+                    "ru": "Две копии документа, удостоверяющего личность (1 - страницы с отметками, 1 - все страницы)",
+                    "en": "Two copies of identity document (1 - pages with marks, 1 - all pages)"
+                },
+                {
+                    "ru": "Перевод документа, удостоверяющего личность (кроме студентов из Казахстана и Кыргызстана)",
+                    "en": "Translation of identity document (except for students from Kazakhstan and Kyrgyzstan)"
+                },
+                {
+                    "ru": "Оригинал миграционной карты",
+                    "en": "Original migration card"
+                },
+                {
+                    "ru": "Две копии миграционной карты (с обеих сторон)",
+                    "en": "Two copies of migration card (both sides)"
+                },
+                {
+                    "ru": "Справка из института об обучении с указанием курса и срока обучения",
+                    "en": "Certificate from the institute about studies with indication of course and study period"
+                },
+                {
+                    "ru": "Справка из общежития (с продленным сроком проживания)",
+                    "en": "Certificate from dormitory (with extended period of stay)"
+                },
+                {
+                    "ru": "Медицинский страховой полис",
+                    "en": "Medical insurance policy"
+                },
+                {
+                    "ru": "Копия дактокарты (или справка о прохождении дактилоскопии, если карта не выдана)",
+                    "en": "Copy of fingerprint card (or certificate of fingerprinting if card is not issued)"
+                }
             ],
             "address": [
                 {
-                    "title": null,
-                    "value": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03"
+                    "title": {
+                        "ru": "Протокольный отдел",
+                        "en": "Protocol Department"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03",
+                        "en": "79 Svobodny Ave., building 5 (library), room B1-03"
+                    }
                 }
             ],
             "contacts": null,
@@ -594,20 +1077,34 @@
             "id": 24,
             "required": true,
             "position": 15,
-            "title": "Отправить скан справки об обучении в военкомат по месту прописки",
+            "title": {
+                "ru": "Отправить скан справки об обучении в военкомат по месту прописки",
+                "en": "Send a scan of study certificate to the military registration office at the place of registration"
+            },
             "blocks": [],
             "blocked_by": [14, 23],
             "tags": ["male", "visa_free", "visa_required"],
             "schedule": null,
             "proof": null,
-            "description": "Необходимо отсканировать справку об обучении и направить в отдел по месту прописки по электронной почте.",
-            "documents": ["Скан справки об обучении"],
+            "description": {
+                "ru": "Необходимо отсканировать справку об обучении и направить в отдел по месту прописки по электронной почте.",
+                "en": "You need to scan the study certificate and send it to the department at your place of registration by email."
+            },
+            "documents": [
+                {
+                    "ru": "Скан справки об обучении",
+                    "en": "Scan of study certificate"
+                }
+            ],
             "address": null,
             "contacts": {
                 "phones": [],
                 "emails": [
                     {
-                        "title": "Электронная почта военкомата",
+                        "title": {
+                            "ru": "Электронная почта военкомата",
+                            "en": "Military registration office email"
+                        },
                         "value": "example@mail.ru"
                     }
                 ]
@@ -618,7 +1115,10 @@
             "id": 16,
             "required": true,
             "position": 16,
-            "title": "Медосмотр для допуска к занятиям по физкультуре для первокурсников",
+            "title": {
+                "ru": "Медосмотр для допуска к занятиям по физкультуре для первокурсников",
+                "en": "Medical Examination for Physical Education Classes for First-Year Students"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
@@ -632,26 +1132,65 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Медосмотр необходимо пройти каждому первокурснику, чтобы получить справку-допуск к занятиям по физкультуре. Медосмотр можно пройти в медцентре СФУ вместе со своей учебной группой по расписанию, либо в резервный день. После получения справки предоставить ее преподавателю по физкультуре.",
-            "documents": ["Паспорт", "Перевод паспорта"],
+            "description": {
+                "ru": "Медосмотр необходимо пройти каждому первокурснику, чтобы получить справку-допуск к занятиям по физкультуре. Медосмотр можно пройти в медцентре СФУ вместе со своей учебной группой по расписанию, либо в резервный день. После получения справки предоставить ее преподавателю по физкультуре.",
+                "en": "Every first-year student must undergo a medical examination to receive a certificate for physical education classes. The medical examination can be done at the SibFU medical center together with your study group according to the schedule, or on a reserve day. After receiving the certificate, submit it to your physical education teacher."
+            },
+            "documents": [
+                {
+                    "ru": "Паспорт",
+                    "en": "Passport"
+                },
+                {
+                    "ru": "Перевод паспорта",
+                    "en": "Passport translation"
+                }
+            ],
             "medical_procedures": [
-                "Общий анализ крови",
-                "Анализ крови на сахар",
-                "Взятие крови",
-                "Флюорография (если не сделана в этом году)",
-                "ЭКГ (можно исключить, если есть выписка об имеющихся заболеваниях)",
-                "Заключение терапевта"
+                {
+                    "ru": "Общий анализ крови",
+                    "en": "Complete blood count"
+                },
+                {
+                    "ru": "Анализ крови на сахар",
+                    "en": "Blood sugar test"
+                },
+                {
+                    "ru": "Взятие крови",
+                    "en": "Blood sampling"
+                },
+                {
+                    "ru": "Флюорография (если не сделана в этом году)",
+                    "en": "Fluorography (if not done this year)"
+                },
+                {
+                    "ru": "ЭКГ (можно исключить, если есть выписка об имеющихся заболеваниях)",
+                    "en": "ECG (can be excluded if there is an extract about existing diseases)"
+                },
+                {
+                    "ru": "Заключение терапевта",
+                    "en": "Therapist's conclusion"
+                }
             ],
             "address": [
                 {
-                    "title": "Медицинский центр СФУ",
-                    "value": "пр. Свободный, 82, стр. 13"
+                    "title": {
+                        "ru": "Медицинский центр СФУ",
+                        "en": "SibFU Medical Center"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный, 82, стр. 13",
+                        "en": "82/13 Svobodny Ave."
+                    }
                 }
             ],
             "contacts": {
                 "phones": [
                     {
-                        "title": "Телефон для справок",
+                        "title": {
+                            "ru": "Телефон для справок",
+                            "en": "Information phone"
+                        },
                         "value": "8(391)274-31-51, 8(391)277-33-55"
                     }
                 ],
@@ -663,7 +1202,10 @@
             "id": 17,
             "required": true,
             "position": 17,
-            "title": "Забрать регистрацию",
+            "title": {
+                "ru": "Забрать регистрацию",
+                "en": "Pick up registration"
+            },
             "blocks": [],
             "blocked_by": [4],
             "tags": ["male", "female", "visa_free", "visa_required"],
@@ -677,19 +1219,39 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Предварительно позвоните и узнайте, готова ли ваша регистрация. Обычно процесс оформления занимает около месяца.",
-            "documents": ["Паспорт для идентификации"],
+            "description": {
+                "ru": "Предварительно позвоните и узнайте, готова ли ваша регистрация. Обычно процесс оформления занимает около месяца.",
+                "en": "Call in advance to find out if your registration is ready. Usually, the process takes about a month."
+            },
+            "documents": [
+                {
+                    "ru": "Паспорт для идентификации",
+                    "en": "Passport for identification"
+                }
+            ],
             "address": [
                 {
-                    "title": null,
-                    "value": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03"
+                    "title": {
+                        "ru": "Протокольный отдел",
+                        "en": "Protocol Department"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный, 79, корп. 5 (библиотека), ауд. Б1-03",
+                        "en": "79 Svobodny Ave., building 5 (library), room B1-03"
+                    }
                 }
             ],
             "contacts": {
                 "phones": [
                     {
-                        "title": "Контактный телефон",
-                        "value": "Уточните номер телефона для проверки готовности регистрации"
+                        "title": {
+                            "ru": "Контактный телефон",
+                            "en": "Contact phone"
+                        },
+                        "value": {
+                            "ru": "Уточните номер телефона для проверки готовности регистрации",
+                            "en": "Please check the phone number for registration status"
+                        }
                     }
                 ],
                 "emails": []
@@ -700,7 +1262,10 @@
             "id": 18,
             "required": true,
             "position": 18,
-            "title": "ИНН и СНИЛС",
+            "title": {
+                "ru": "ИНН и СНИЛС",
+                "en": "Tax ID and Insurance Number"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
@@ -714,12 +1279,21 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "После оформления заявления вам должны сказать, когда необходимо прийти и забрать готовые документы. Или специалист вам предоставит QR-код, с помощью которого можно отследить готовность документов, используя Telegram или портал \"Госуслуги\". ИНН и СНИЛС будут готовы через неделю.",
+            "description": {
+                "ru": "После оформления заявления вам должны сказать, когда необходимо прийти и забрать готовые документы. Или специалист вам предоставит QR-код, с помощью которого можно отследить готовность документов, используя Telegram или портал \"Госуслуги\". ИНН и СНИЛС будут готовы через неделю.",
+                "en": "After submitting the application, you will be told when to come and pick up the ready documents. Or the specialist will provide you with a QR code that can be used to track the readiness of documents using Telegram or the \"Gosuslugi\" portal. Tax ID and Insurance Number will be ready in a week."
+            },
             "documents": null,
             "address": [
                 {
-                    "title": null,
-                    "value": "ул. Телевизорная, дом 1, строение 9, MixMax, этаж 2"
+                    "title": {
+                        "ru": "МФЦ",
+                        "en": "Multifunctional Center"
+                    },
+                    "value": {
+                        "ru": "ул. Телевизорная, дом 1, строение 9, MixMax, этаж 2",
+                        "en": "1/9 Televizornaya St., MixMax, 2nd floor"
+                    }
                 }
             ],
             "contacts": null,
@@ -729,14 +1303,29 @@
             "id": 19,
             "required": true,
             "position": 19,
-            "title": "Получение стипендиальной карты",
+            "title": {
+                "ru": "Получение стипендиальной карты",
+                "en": "Getting a Scholarship Card"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
             "schedule": null,
             "proof": null,
-            "description": "Безвизовые иностранные студенты могут получить карту ВТБ в университете в определенные дни. Для получения карты необходимо предоставить следующие документы.",
-            "documents": ["Паспорт иностранного гражданина", "Нотариально заверенный перевод паспорта"],
+            "description": {
+                "ru": "Безвизовые иностранные студенты могут получить карту ВТБ в университете в определенные дни. Для получения карты необходимо предоставить следующие документы.",
+                "en": "Visa-free international students can get a VTB card at the university on specific days. To get the card, you need to provide the following documents."
+            },
+            "documents": [
+                {
+                    "ru": "Паспорт иностранного гражданина",
+                    "en": "Foreign citizen passport"
+                },
+                {
+                    "ru": "Нотариально заверенный перевод паспорта",
+                    "en": "Notarized translation of passport"
+                }
+            ],
             "address": null,
             "contacts": null,
             "links": null
@@ -745,7 +1334,10 @@
             "id": 20,
             "required": true,
             "position": 20,
-            "title": "Забрать ИНН и СНИЛС",
+            "title": {
+                "ru": "Забрать ИНН и СНИЛС",
+                "en": "Pick up Tax ID and Insurance Number"
+            },
             "blocks": [],
             "blocked_by": [18],
             "tags": ["male", "female", "visa_free", "visa_required"],
@@ -759,17 +1351,38 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Для получения ИНН и СНИЛС вам понадобятся следующие документы.",
+            "description": {
+                "ru": "Для получения ИНН и СНИЛС вам понадобятся следующие документы.",
+                "en": "To receive your Tax ID and Insurance Number, you will need the following documents."
+            },
             "documents": [
-                "Паспорт",
-                "Нотариально-заверенный перевод паспорта, сделанный в России",
-                "Регистрация (бланк миграционного учета)",
-                "Миграционная карта"
+                {
+                    "ru": "Паспорт",
+                    "en": "Passport"
+                },
+                {
+                    "ru": "Нотариально-заверенный перевод паспорта, сделанный в России",
+                    "en": "Notarized translation of passport made in Russia"
+                },
+                {
+                    "ru": "Регистрация (бланк миграционного учета)",
+                    "en": "Registration (migration registration form)"
+                },
+                {
+                    "ru": "Миграционная карта",
+                    "en": "Migration card"
+                }
             ],
             "address": [
                 {
-                    "title": null,
-                    "value": "ул. Телевизорная, дом 1, строение 9, MixMax, этаж 2"
+                    "title": {
+                        "ru": "МФЦ",
+                        "en": "Multifunctional Center"
+                    },
+                    "value": {
+                        "ru": "ул. Телевизорная, дом 1, строение 9, MixMax, этаж 2",
+                        "en": "1/9 Televizornaya St., MixMax, 2nd floor"
+                    }
                 }
             ],
             "contacts": null,
@@ -779,7 +1392,10 @@
             "id": 21,
             "required": false,
             "position": 21,
-            "title": "Компенсация проезда и полиса ДМС",
+            "title": {
+                "ru": "Компенсация проезда и полиса ДМС",
+                "en": "Travel and Medical Insurance Policy Compensation"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
@@ -793,64 +1409,232 @@
                 "sunday": []
             },
             "proof": null,
-            "description": "Согласно приказу о программе поддержки первокурсников «Университетская долина – 2024», студенты первого курса, обучающиеся за счет бюджетных ассигнований федерального бюджета или по квоте от правительства РФ и зачисленные на программы бакалавриата/специалитета в 2024 году, могут возместить стоимость страховки (до 4 500 руб., при условии, что страховка соответствует требованиям университета, однократно) и оплату расходов за проезд до Красноярска (до 15 000 руб., однократно).",
+            "description": {
+                "ru": "Согласно приказу о программе поддержки первокурсников «Университетская долина – 2024», студенты первого курса, обучающиеся за счет бюджетных ассигнований федерального бюджета или по квоте от правительства РФ и зачисленные на программы бакалавриата/специалитета в 2024 году, могут возместить стоимость страховки (до 4 500 руб., при условии, что страховка соответствует требованиям университета, однократно) и оплату расходов за проезд до Красноярска (до 15 000 руб., однократно).",
+                "en": "According to the order on the support program for first-year students 'University Valley - 2024', first-year students studying at the expense of federal budget allocations or under a quota from the Russian government and enrolled in bachelor's/specialist's programs in 2024 can be reimbursed for insurance costs (up to 4,500 rubles, provided that the insurance meets university requirements, one-time) and travel expenses to Krasnoyarsk (up to 15,000 rubles, one-time)."
+            },
             "documents": [
-                "заявление (шаблон)",
-                "копия ИНН",
-                "копия страхового полиса",
-                "копия билетов/чеков о покупке билетов с указанием стоимости (иностранную валюту перевести в рубли)"
+                {
+                    "ru": "заявление (шаблон)",
+                    "en": "application form (template)"
+                },
+                {
+                    "ru": "копия ИНН",
+                    "en": "copy of Tax ID"
+                },
+                {
+                    "ru": "копия страхового полиса",
+                    "en": "copy of insurance policy"
+                },
+                {
+                    "ru": "копия билетов/чеков о покупке билетов с указанием стоимости (иностранную валюту перевести в рубли)",
+                    "en": "copy of tickets/receipts for ticket purchase with cost indication (foreign currency to be converted to rubles)"
+                }
             ],
             "address": [
                 {
-                    "title": "Центр адаптации и воспитательной работы",
-                    "value": "пр. Свободный 82А, каб. 2-24/1-2-24/4"
+                    "title": {
+                        "ru": "Центр адаптации и воспитательной работы",
+                        "en": "Center for Adaptation and Educational Work"
+                    },
+                    "value": {
+                        "ru": "пр. Свободный 82А, каб. 2-24/1-2-24/4",
+                        "en": "82A Svobodny Ave., room 2-24/1-2-24/4"
+                    }
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": [
+                {
+                    "url": "http://example.com/compensation_form",
+                    "description": {
+                        "ru": "Шаблон заявления на компенсацию",
+                        "en": "Compensation application form template"
+                    }
+                },
+                {
+                    "url": "http://example.com/insurance_requirements",
+                    "description": {
+                        "ru": "Требования к страховому полису",
+                        "en": "Insurance policy requirements"
+                    }
+                }
+            ]
         },
         {
             "id": 26,
             "required": true,
             "position": 26,
-            "title": "Вступить в студенческие объединения",
+            "title": {
+                "ru": "Вступить в студенческие объединения",
+                "en": "Join student organizations"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
             "schedule": null,
             "proof": null,
-            "description": "Дорогие студенты, вы только что начали свое увлекательное путешествие в новую страну, и, возможно, чувствуете себя немного одиноко или потерянно. Не переживайте — у нас есть отличное решение! Мы приглашаем вас вступить в студенческие объединения.\n\nНе упустите возможность расширить свой круг общения и сделать ваше пребывание здесь незабываемым!\nПрисоединяйтесь к нам, и давайте вместе создавать яркие воспоминания!",
+            "description": {
+                "ru": "Дорогие студенты, вы только что начали свое увлекательное путешествие в новую страну, и, возможно, чувствуете себя немного одиноко или потерянно. Не переживайте — у нас есть отличное решение! Мы приглашаем вас вступить в студенческие объединения.\n\nНе упустите возможность расширить свой круг общения и сделать ваше пребывание здесь незабываемым!\nПрисоединяйтесь к нам, и давайте вместе создавать яркие воспоминания!",
+                "en": "Dear students, you have just begun your exciting journey to a new country, and you may feel a bit lonely or lost. Don't worry - we have a great solution! We invite you to join student organizations.\n\nDon't miss the opportunity to expand your social circle and make your stay here unforgettable!\nJoin us, and let's create bright memories together!"
+            },
             "clubs": [
-                "Центр дружбы народов",
-                "Творческие коллективы",
-                "Молодёжные центры институтов",
-                "Бизнес-клуб",
-                "Волонтёрский центр",
-                "Лига КВН СФУ",
-                "Киберспортивная лига",
-                "Клуб дебатов",
-                "Клуб интеллектуальных игр",
-                "Туристический клуб",
-                "Студенческие отряды",
-                "Служба сопровождения мероприятий",
-                "Профсоюзная организация студентов",
-                "Экологический клуб Green Project SibFU"
+                {
+                    "ru": "Центр дружбы народов",
+                    "en": "Center for Friendship of Peoples"
+                },
+                {
+                    "ru": "Творческие коллективы",
+                    "en": "Creative Teams"
+                },
+                {
+                    "ru": "Молодёжные центры институтов",
+                    "en": "Youth Centers of Institutes"
+                },
+                {
+                    "ru": "Бизнес-клуб",
+                    "en": "Business Club"
+                },
+                {
+                    "ru": "Волонтёрский центр",
+                    "en": "Volunteer Center"
+                },
+                {
+                    "ru": "Лига КВН СФУ",
+                    "en": "SibFU KVN League"
+                },
+                {
+                    "ru": "Киберспортивная лига",
+                    "en": "Esports League"
+                },
+                {
+                    "ru": "Клуб дебатов",
+                    "en": "Debate Club"
+                },
+                {
+                    "ru": "Клуб интеллектуальных игр",
+                    "en": "Intellectual Games Club"
+                },
+                {
+                    "ru": "Туристический клуб",
+                    "en": "Tourist Club"
+                },
+                {
+                    "ru": "Студенческие отряды",
+                    "en": "Student Teams"
+                },
+                {
+                    "ru": "Служба сопровождения мероприятий",
+                    "en": "Event Support Service"
+                },
+                {
+                    "ru": "Профсоюзная организация студентов",
+                    "en": "Student Union"
+                },
+                {
+                    "ru": "Экологический клуб Green Project SibFU",
+                    "en": "Green Project SibFU Environmental Club"
+                }
             ],
             "links": [
-                { "title": "Центр дружбы народов", "url": null },
-                { "title": "Творческие коллективы", "url": null },
-                { "title": "Молодёжные центры институтов", "url": null },
-                { "title": "Бизнес-клуб", "url": null },
-                { "title": "Волонтёрский центр", "url": null },
-                { "title": "Лига КВН СФУ", "url": null },
-                { "title": "Киберспортивная лига", "url": null },
-                { "title": "Клуб дебатов", "url": null },
-                { "title": "Клуб интеллектуальных игр", "url": null },
-                { "title": "Туристический клуб", "url": null },
-                { "title": "Студенческие отряды", "url": null },
-                { "title": "Служба сопровождения мероприятий", "url": null },
-                { "title": "Профсоюзная организация студентов", "url": null },
-                { "title": "Экологический клуб Green Project SibFU", "url": null }
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Центр дружбы народов",
+                        "en": "Center for Friendship of Peoples"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Творческие коллективы",
+                        "en": "Creative Teams"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Молодёжные центры институтов",
+                        "en": "Youth Centers of Institutes"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Бизнес-клуб",
+                        "en": "Business Club"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Волонтёрский центр",
+                        "en": "Volunteer Center"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Лига КВН СФУ",
+                        "en": "SibFU KVN League"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Киберспортивная лига",
+                        "en": "Esports League"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Клуб дебатов",
+                        "en": "Debate Club"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Клуб интеллектуальных игр",
+                        "en": "Intellectual Games Club"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Туристический клуб",
+                        "en": "Tourist Club"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Студенческие отряды",
+                        "en": "Student Teams"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Служба сопровождения мероприятий",
+                        "en": "Event Support Service"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Профсоюзная организация студентов",
+                        "en": "Student Union"
+                    }
+                },
+                {
+                    "url": null,
+                    "description": {
+                        "ru": "Экологический клуб Green Project SibFU",
+                        "en": "Green Project SibFU Environmental Club"
+                    }
+                }
             ],
             "contacts": null
         },
@@ -858,22 +1642,44 @@
             "id": 27,
             "required": false,
             "position": 27,
-            "title": "Экскурсия по Красноярску",
+            "title": {
+                "ru": "Экскурсия по кампусу",
+                "en": "Campus Tour"
+            },
             "blocks": [],
             "blocked_by": [],
             "tags": ["male", "female", "visa_free", "visa_required"],
-            "schedule": {
-                "monday": [],
-                "tuesday": [],
-                "wednesday": [],
-                "thursday": [],
-                "friday": ["16:00-19:00"],
-                "saturday": [],
-                "sunday": []
-            },
+            "schedule": null,
             "proof": null,
-            "description": "Экскурсионное бюро СФУ приглашает на обзорную экскурсия по Красноярску.\n Экскурсоводы - студенты Гуманитарного института - отлично знают своё дело (слушали - знаем) и смогут создать атмосферу настоящего путешествия. \n Дата : 13 декабря  \n Время: 16:00 \n Место : Отъезжаем от библиотеки СФУ",
-            "contacts": null,
+            "description": {
+                "ru": "Приглашаем вас на экскурсию по кампусу СФУ! Вы познакомитесь с основными корпусами университета, узнаете где находятся важные для вас места и сможете задать все интересующие вопросы.",
+                "en": "We invite you to a tour of the SibFU campus! You will get to know the main buildings of the university, learn where important places are located, and can ask all your questions."
+            },
+            "documents": null,
+            "address": [
+                {
+                    "title": {
+                        "ru": "Место встречи",
+                        "en": "Meeting Point"
+                    },
+                    "value": {
+                        "ru": "Главный вход, пр. Свободный, 79",
+                        "en": "Main entrance, 79 Svobodny Ave."
+                    }
+                }
+            ],
+            "contacts": {
+                "phones": [
+                    {
+                        "title": {
+                            "ru": "Организатор",
+                            "en": "Organizer"
+                        },
+                        "value": "+7 (391) 206-27-79"
+                    }
+                ],
+                "emails": []
+            },
             "links": null
         }
     ]
