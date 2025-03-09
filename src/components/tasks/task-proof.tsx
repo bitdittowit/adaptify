@@ -78,8 +78,7 @@ export function ProofTask({ task }: ProofTaskProps) {
                     <FormField
                         key={`${check.type}_${check.name}_${i}`}
                         control={form.control}
-                        // @ts-expect-error я так решил
-                        name={check.name}
+                        name={check.name as keyof z.infer<typeof FormSchema>}
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>
