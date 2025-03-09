@@ -13,6 +13,13 @@
         "profile": "Profile",
         "logout": "Logout"
     },
+    "level": {
+        "nextLevel": "Level {level}",
+        "congratulations": "Congratulations! You've reached Level {level}",
+        "experienceNeeded": "You need {experience} more experience points to reach this level",
+        "unlocked": "You've unlocked this level! Keep going!",
+        "viewTasks": "View Available Tasks"
+    },
     "input": {
         "filter": "Filter tasks..."
     },
