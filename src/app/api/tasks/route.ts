@@ -1,8 +1,9 @@
+import { getServerSession } from 'next-auth';
 import { NextResponse } from 'next/server';
 
 import { db } from '@vercel/postgres';
 
-async function getDefaultUser() {
+async function getUserTasks(email: string) {
     const client = db;
 
     try {
@@ -21,12 +22,12 @@ async function getDefaultUser() {
           FROM users u
           LEFT JOIN user_tasks ut ON u.id = ut.user_id
           LEFT JOIN tasks t ON ut.document_task_id = t.id
-          WHERE u.name = $1 
+          WHERE u.email = $1 
             AND ut.available = TRUE
             AND ut.status != 'finished'
           GROUP BY u.id;
         `,
-            ['John Doe'],
+            [email],
         );
 
         if (userQuery.rows.length === 0) {
@@ -34,7 +35,6 @@ async function getDefaultUser() {
         }
 
         const user = userQuery.rows[0];
-        console.log('user', user);
         user.arrival_date = user.arrival_date ? new Date(user.arrival_date) : null;
 
         return user;
@@ -46,7 +46,12 @@ async function getDefaultUser() {
 
 export async function GET() {
     try {
-        const user = await getDefaultUser();
+        const session = await getServerSession();
+        if (!session?.user?.email) {
+            return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        }
+
+        const user = await getUserTasks(session.user.email);
 
         if (!user) {
             return NextResponse.json({ error: 'User not found' }, { status: 404 });

@@ -16,6 +16,8 @@
         "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": ["npm run lint:fix"]
     },
     "dependencies": {
+        "@auth/core": "^0.38.0",
+        "@auth/nextjs": "^0.0.0-380f8d56",
         "@hookform/resolvers": "^3.9.1",
         "@radix-ui/react-avatar": "^1.1.1",
         "@radix-ui/react-checkbox": "^1.1.2",
@@ -23,6 +25,7 @@
         "@radix-ui/react-dialog": "^1.1.2",
         "@radix-ui/react-dropdown-menu": "^2.1.4",
         "@radix-ui/react-label": "^2.1.0",
+        "@radix-ui/react-select": "^2.1.6",
         "@radix-ui/react-separator": "^1.1.0",
         "@radix-ui/react-slot": "^1.1.0",
         "@radix-ui/react-tooltip": "^1.1.4",
@@ -35,6 +38,7 @@
         "date-holidays": "^3.23.13",
         "lucide-react": "^0.468.0",
         "next": "15.0.3",
+        "next-auth": "^4.24.11",
         "next-intl": "^3.26.3",
         "react": "19.0.0-rc-66855b96-20241106",
         "react-day-picker": "^8.10.1",

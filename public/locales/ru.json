@@ -71,5 +71,32 @@
     "pagination": {
         "previous": "Предыдущая",
         "next": "Следующая"
+    },
+    "auth": {
+        "login": {
+            "title": "Вход в систему",
+            "googleButton": "Войти через Google"
+        }
+    },
+    "onboarding": {
+        "title": "Завершите настройку профиля",
+        "country": {
+            "label": "Страна",
+            "placeholder": "Выберите страну"
+        },
+        "studyGroup": {
+            "label": "Учебная группа",
+            "placeholder": "Выберите группу"
+        },
+        "submit": {
+            "default": "Продолжить",
+            "loading": "Сохранение..."
+        }
+    },
+    "countries": {
+        "kz": "Казахстан",
+        "uz": "Узбекистан",
+        "kg": "Киргизия",
+        "tj": "Таджикистан"
     }
 }

@@ -2,14 +2,17 @@ import { useTranslations } from 'next-intl';
 
 import { CalendarDays, ListChecks, Route } from 'lucide-react';
 
+import { useSession } from './use-session';
+
 export const useGetAppSideBarData = () => {
     const t = useTranslations('sidebar');
+    const { user } = useSession();
 
     const data = {
         user: {
-            name: 'John Doe',
-            email: 'm@example.com',
-            avatar: '',
+            name: user.name || 'Guest',
+            email: user.email || '',
+            image: user.image,
         },
         navMain: [
             {
