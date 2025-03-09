@@ -44,7 +44,8 @@
         "title": "Title",
         "date": "Date",
         "noResults": "No results.",
-        "userExperienceUpdated": "User experience updated: {result}"
+        "userExperienceUpdated": "User experience updated: {result}",
+        "blockedTasks": "Tasks that will be unlocked after completion"
     },
     "calendar": {
         "tasks": "Tasks",
