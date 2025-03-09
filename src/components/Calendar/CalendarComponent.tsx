@@ -41,17 +41,13 @@ export const CalendarComponent = () => {
             (isWeekend(day) || Boolean(holidays.isHoliday(day))),
     };
 
+    const tasksForDay = date ? getTasksForDay(mockTasks as Task[], date) : [];
+
     return (
         <BaseCalendar
             components={{
                 Day: props => <Day {...props} tasks={getTasksForDay(mockTasks as Task[], props.date)} />,
-                Footer: props => (
-                    <Footer
-                        {...props}
-                        tasks={getTasksForDay(mockTasks as Task[], date || new Date())}
-                        displayMonth={date}
-                    />
-                ),
+                Footer: props => <Footer {...props} tasks={tasksForDay} displayMonth={date} />,
             }}
             mode="single"
             selected={date}

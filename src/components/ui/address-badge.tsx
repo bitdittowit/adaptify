@@ -21,7 +21,7 @@ export function AddressBadge({ addresses }: AddressBadgeProps) {
             <h2 className="text-lg font-semibold">{t('task.addresses')}</h2>
             <div className="flex flex-col gap-2">
                 {addresses.map(address => {
-                    const key = `${address.title?.ru || ''}-${address.value?.ru || ''}`;
+                    const key = `${address.title?.ru || ''}-${address.value.ru}`;
                     return (
                         <div key={key} className="flex items-start gap-2">
                             <MapPin className="h-5 w-5 mt-0.5" />
