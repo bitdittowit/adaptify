@@ -31,6 +31,10 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
             task.status = STATUS.FINISHED;
         }
     };
+    console.log('task.documents', task.documents);
+    console.log('task.schedule', task.schedule);
+    console.log('task.address', task.address);
+    console.log('task.contacts', task.contacts);
 
     const renderTaskBadges = (task: Task) => {
         return (

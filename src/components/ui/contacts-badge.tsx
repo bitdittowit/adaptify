@@ -34,7 +34,15 @@ export function ContactsBadge({ contacts }: ContactsBadgeProps) {
                                     defaultValue={t('task.noPhoneTitle')}
                                     className="font-medium"
                                 />
-                                <span className="text-muted-foreground">{phone.value}</span>
+                                {typeof phone.value === 'string' ? (
+                                    <span className="text-muted-foreground">{phone.value}</span>
+                                ) : (
+                                    <LocalizedText
+                                        text={phone.value}
+                                        defaultValue={t('task.noPhoneTitle')}
+                                        className="text-muted-foreground"
+                                    />
+                                )}
                             </div>
                         </div>
                     );

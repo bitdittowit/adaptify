@@ -1,3 +1,5 @@
+import { useTranslations } from 'next-intl';
+
 import { LocalizedText } from '@/components/ui/localized-text';
 import type { Task } from '@/types';
 
@@ -9,18 +11,23 @@ interface FooterProps {
 }
 
 export const Footer = ({ tasks, displayMonth }: FooterProps) => {
+    const t = useTranslations();
     const getDay = (date: Date) => DAYS[date.getDay()];
 
     return (
         <tfoot className="footer">
-            {tasks?.map(({ title, id, schedule }) => (
-                <tr key={id}>
-                    <td>
-                        <LocalizedText text={title} />:{' '}
-                        <b>{schedule?.[getDay(displayMonth || new Date())]?.join(', ')}</b>
-                    </td>
-                </tr>
-            ))}
+            {tasks?.map(({ title, id, schedule }) => {
+                const day = getDay(displayMonth || new Date());
+                const timeRanges = schedule?.[day];
+                return (
+                    <tr key={id}>
+                        <td>
+                            <LocalizedText text={title} />:
+                            <span>{timeRanges ? timeRanges.join(', ') : t('task.noSchedule')}</span>
+                        </td>
+                    </tr>
+                );
+            })}
         </tfoot>
     );
 };
