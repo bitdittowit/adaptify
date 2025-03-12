@@ -69,6 +69,8 @@
         "sunday": "Воскресенье"
     },
     "calendar": {
+        "loading": "Загрузка задач...",
+        "error": "Ошибка при загрузке задач",
         "tasks": "Задачи",
         "styles": {
             "weekend": "text-destructive",

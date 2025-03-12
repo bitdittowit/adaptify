@@ -69,6 +69,8 @@
         "sunday": "Sunday"
     },
     "calendar": {
+        "loading": "Loading tasks...",
+        "error": "Error loading tasks",
         "tasks": "Tasks",
         "styles": {
             "weekend": "text-destructive",

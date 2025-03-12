@@ -63,11 +63,18 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
             <CardContent className="grid gap-4">{renderTaskBadges(task)}</CardContent>
             <CardFooter className="gap-4">
                 <TaskStatus status={task.status} />
-                {task.status !== STATUS.FINISHED && (
-                    <Button className="w-full" onClick={markAsDone}>
-                        <Check /> {t('task.markAsDone')}
-                    </Button>
-                )}
+                {task.status !== STATUS.FINISHED &&
+                    (task.id === 2 ? (
+                        task.proof_status === 'proofed' && (
+                            <Button className="w-full" onClick={markAsDone}>
+                                <Check /> {t('task.markAsDone')}
+                            </Button>
+                        )
+                    ) : (
+                        <Button className="w-full" onClick={markAsDone}>
+                            <Check /> {t('task.markAsDone')}
+                        </Button>
+                    ))}
             </CardFooter>
         </Card>
     );

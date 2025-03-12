@@ -73,6 +73,10 @@ export interface BaseTask {
     contacts: Contacts | null;
     cost?: Cost;
     clubs?: LocalizedText[];
+    // New fields for task scheduling
+    priority: number; // 1-5, where 1 is highest priority
+    deadline_days: number | null; // Number of days after arrival to complete the task, null if no strict deadline
+    duration_minutes: number; // Approximate duration of the task in minutes
 }
 
 export interface Task extends BaseTask {
