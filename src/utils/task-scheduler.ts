@@ -2,7 +2,7 @@ import { addDays, addMinutes, format, isAfter, isBefore, isWeekend, parse, start
 import Holidays from 'date-holidays';
 
 import { daysOfWeek } from '@/constants/days-of-week';
-import type { Schedule, Task } from '@/types';
+import type { SchedulableTask, Schedule } from '@/types';
 
 const holidays = new Holidays('RU');
 
@@ -36,7 +36,12 @@ function getAvailableTimeSlots(date: Date, schedule: Schedule): TimeSlot[] {
 /**
  * Check if a time slot is available for a task
  */
-function isSlotAvailable(slot: TimeSlot, taskDuration: number, existingTasks: Task[], maxTasksPerDay: number): boolean {
+function isSlotAvailable(
+    slot: TimeSlot,
+    taskDuration: number,
+    existingTasks: SchedulableTask[],
+    maxTasksPerDay: number,
+): boolean {
     // Check if we already have maximum tasks for this day
     const tasksOnThisDay = existingTasks.filter(
         task => startOfDay(new Date(task.picked_date)).getTime() === startOfDay(slot.start).getTime(),
@@ -72,8 +77,8 @@ function isSlotAvailable(slot: TimeSlot, taskDuration: number, existingTasks: Ta
  */
 function findEarliestAvailableSlot(
     startDate: Date,
-    task: Task,
-    existingTasks: Task[],
+    task: SchedulableTask,
+    existingTasks: SchedulableTask[],
     maxDaysToCheck = 30,
     maxTasksPerDay = 3,
 ): Date | null {
@@ -104,7 +109,7 @@ function findEarliestAvailableSlot(
 /**
  * Compare tasks by their blocking status
  */
-function compareByBlockingStatus(a: Task, b: Task): number {
+function compareByBlockingStatus(a: SchedulableTask, b: SchedulableTask): number {
     if (a.blocked_by.length > 0 && b.blocked_by.length === 0) {
         return 1;
     }
@@ -117,14 +122,14 @@ function compareByBlockingStatus(a: Task, b: Task): number {
 /**
  * Compare tasks by their priority
  */
-function compareByPriority(a: Task, b: Task): number {
+function compareByPriority(a: SchedulableTask, b: SchedulableTask): number {
     return a.priority - b.priority;
 }
 
 /**
  * Compare tasks by their deadline
  */
-function compareByDeadline(a: Task, b: Task): number {
+function compareByDeadline(a: SchedulableTask, b: SchedulableTask): number {
     if (a.deadline_days === null && b.deadline_days === null) {
         return 0;
     }
@@ -140,7 +145,7 @@ function compareByDeadline(a: Task, b: Task): number {
 /**
  * Sort tasks by priority, deadline and dependencies
  */
-function sortTasks(tasks: Task[]): Task[] {
+function sortTasks(tasks: SchedulableTask[]): SchedulableTask[] {
     return [...tasks].sort((a, b) => {
         const blockingComparison = compareByBlockingStatus(a, b);
         if (blockingComparison !== 0) {
@@ -162,7 +167,12 @@ function sortTasks(tasks: Task[]): Task[] {
 /**
  * Try to schedule a single task
  */
-function tryScheduleTask(task: Task, arrivalDate: Date, scheduledTasks: Task[], maxRetries = 3): Task | null {
+function tryScheduleTask(
+    task: SchedulableTask,
+    arrivalDate: Date,
+    scheduledTasks: SchedulableTask[],
+    maxRetries = 3,
+): SchedulableTask | null {
     let retries = 0;
 
     while (retries < maxRetries) {
@@ -199,10 +209,10 @@ function tryScheduleTask(task: Task, arrivalDate: Date, scheduledTasks: Task[], 
  * Process a single task from the remaining tasks queue
  */
 function processRemainingTask(
-    task: Task,
-    remainingTasks: Task[],
-    scheduledTasks: Task[],
-    newlyScheduledTasks: Task[],
+    task: SchedulableTask,
+    remainingTasks: SchedulableTask[],
+    scheduledTasks: SchedulableTask[],
+    newlyScheduledTasks: SchedulableTask[],
     arrivalDate: Date,
 ): void {
     if (task.blocked_by.some(id => !scheduledTasks.find(t => t.id === id))) {
@@ -222,15 +232,15 @@ function processRemainingTask(
  * Process unscheduled tasks and try to schedule them if possible
  */
 function processUnscheduledTasks(
-    unscheduledTasks: Task[],
-    scheduledTasks: Task[],
+    unscheduledTasks: SchedulableTask[],
+    scheduledTasks: SchedulableTask[],
     arrivalDate: Date,
     maxAttempts = 3,
-): [Task[], Task[]] {
+): [SchedulableTask[], SchedulableTask[]] {
     let attempts = 0;
     let previousUnscheduledCount = unscheduledTasks.length;
     const remainingTasks = [...unscheduledTasks];
-    const newlyScheduledTasks: Task[] = [];
+    const newlyScheduledTasks: SchedulableTask[] = [];
 
     while (remainingTasks.length > 0 && attempts < maxAttempts) {
         const task = remainingTasks.shift();
@@ -254,9 +264,12 @@ function processUnscheduledTasks(
 /**
  * Try to schedule initial tasks that aren't blocked
  */
-function scheduleInitialTasks(sortedTasks: Task[], arrivalDate: Date): [Task[], Task[]] {
-    const scheduledTasks: Task[] = [];
-    const unscheduledTasks: Task[] = [];
+function scheduleInitialTasks(
+    sortedTasks: SchedulableTask[],
+    arrivalDate: Date,
+): [SchedulableTask[], SchedulableTask[]] {
+    const scheduledTasks: SchedulableTask[] = [];
+    const unscheduledTasks: SchedulableTask[] = [];
 
     for (const task of sortedTasks) {
         if (task.blocked_by.some(id => !scheduledTasks.find(t => t.id === id))) {
@@ -278,7 +291,7 @@ function scheduleInitialTasks(sortedTasks: Task[], arrivalDate: Date): [Task[], 
 /**
  * Schedule tasks for a student based on their arrival date
  */
-export function scheduleTasks(tasks: Task[], arrivalDate: Date): Task[] {
+export function scheduleTasks(tasks: SchedulableTask[], arrivalDate: Date): SchedulableTask[] {
     const sortedTasks = sortTasks(tasks);
     const [scheduledTasks, unscheduledTasks] = scheduleInitialTasks(sortedTasks, arrivalDate);
     const [newlyScheduledTasks, remainingTasks] = processUnscheduledTasks(

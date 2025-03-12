@@ -87,6 +87,10 @@ export interface Task extends BaseTask {
     available: boolean;
 }
 
+export interface SchedulableTask extends Task {
+    user_task_id: number;
+}
+
 export type DayOfWeek = 'monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday';
 
 // 'HH:MM-HH:MM'
