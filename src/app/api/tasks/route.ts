@@ -26,7 +26,8 @@ async function getUserTasks(email: string) {
               'contacts', t.contacts,
               'cost', t.cost,
               'proof_status', ut.proof_status,
-              'available', ut.available
+              'available', ut.available,
+              'picked_date', ut.picked_date
             )) AS tasks
           FROM users u
           LEFT JOIN user_tasks ut ON u.id = ut.user_id

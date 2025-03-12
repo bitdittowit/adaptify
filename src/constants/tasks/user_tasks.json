@@ -35,7 +35,10 @@
                         "en": "Download for Android"
                     }
                 }
-            ]
+            ],
+            "priority": 1,
+            "deadline_days": 1,
+            "duration_minutes": 30
         },
         {
             "id": 2,
@@ -50,7 +53,7 @@
             "tags": ["male", "female", "visa_free", "visa_required"],
             "schedule": null,
             "proof": {
-                "action": "/api/set/arrival_date",
+                "action": "/api/users/arrival-date",
                 "checks": [
                     {
                         "name": "arrival_date",
@@ -70,7 +73,10 @@
             "documents": null,
             "address": null,
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 1,
+            "deadline_days": 1,
+            "duration_minutes": 5
         },
         {
             "id": 3,
@@ -152,7 +158,10 @@
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 1,
+            "deadline_days": 3,
+            "duration_minutes": 120
         },
         {
             "id": 22,
@@ -214,7 +223,10 @@
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 1,
+            "deadline_days": 3,
+            "duration_minutes": 120
         },
         {
             "id": 4,
@@ -268,15 +280,10 @@
                 }
             ],
             "contacts": null,
-            "links": [
-                {
-                    "url": "http://example.com/образец_заполнения_договора",
-                    "description": {
-                        "ru": "Образец заполнения договора",
-                        "en": "Contract filling sample"
-                    }
-                }
-            ]
+            "links": null,
+            "priority": 1,
+            "deadline_days": 1,
+            "duration_minutes": 60
         },
         {
             "id": 5,
@@ -322,7 +329,10 @@
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 2,
+            "deadline_days": 5,
+            "duration_minutes": 45
         },
         {
             "id": 6,
@@ -376,7 +386,10 @@
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 2,
+            "deadline_days": 14,
+            "duration_minutes": 60
         },
         {
             "id": 7,
@@ -445,7 +458,10 @@
                 ],
                 "emails": []
             },
-            "links": null
+            "links": null,
+            "priority": 2,
+            "deadline_days": 5,
+            "duration_minutes": 60
         },
         {
             "id": 23,
@@ -485,7 +501,10 @@
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 2,
+            "deadline_days": 7,
+            "duration_minutes": 45
         },
         {
             "id": 8,
@@ -583,7 +602,10 @@
             "cost": {
                 "ru": "3000 рублей наличными",
                 "en": "3000 rubles in cash"
-            }
+            },
+            "priority": 1,
+            "deadline_days": 7,
+            "duration_minutes": 240
         },
         {
             "id": 9,
@@ -644,7 +666,10 @@
                 ],
                 "emails": []
             },
-            "links": null
+            "links": null,
+            "priority": 1,
+            "deadline_days": 9,
+            "duration_minutes": 30
         },
         {
             "id": 10,
@@ -708,7 +733,10 @@
             "cost": {
                 "ru": "2500 рублей",
                 "en": "2500 rubles"
-            }
+            },
+            "priority": 2,
+            "deadline_days": 14,
+            "duration_minutes": 120
         },
         {
             "id": 11,
@@ -777,7 +805,10 @@
                 ],
                 "emails": []
             },
-            "links": null
+            "links": null,
+            "priority": 3,
+            "deadline_days": 14,
+            "duration_minutes": 60
         },
         {
             "id": 12,
@@ -846,7 +877,10 @@
                 ],
                 "emails": []
             },
-            "links": null
+            "links": null,
+            "priority": 3,
+            "deadline_days": 14,
+            "duration_minutes": 60
         },
         {
             "id": 13,
@@ -886,7 +920,10 @@
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 2,
+            "deadline_days": 16,
+            "duration_minutes": 30
         },
         {
             "id": 14,
@@ -907,7 +944,10 @@
             },
             "address": null,
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 2,
+            "deadline_days": 7,
+            "duration_minutes": 30
         },
         {
             "id": 25,
@@ -993,7 +1033,10 @@
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 1,
+            "deadline_days": 30,
+            "duration_minutes": 120
         },
         {
             "id": 15,
@@ -1071,7 +1114,10 @@
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 2,
+            "deadline_days": 45,
+            "duration_minutes": 90
         },
         {
             "id": 24,
@@ -1079,7 +1125,7 @@
             "position": 15,
             "title": {
                 "ru": "Отправить скан справки об обучении в военкомат по месту прописки",
-                "en": "Send a scan of study certificate to the military registration office at the place of registration"
+                "en": "Send a scan of study certificate to the military registration office"
             },
             "blocks": [],
             "blocked_by": [14, 23],
@@ -1109,7 +1155,10 @@
                     }
                 ]
             },
-            "links": null
+            "links": null,
+            "priority": 3,
+            "deadline_days": 14,
+            "duration_minutes": 30
         },
         {
             "id": 16,
@@ -1196,7 +1245,10 @@
                 ],
                 "emails": []
             },
-            "links": null
+            "links": null,
+            "priority": 3,
+            "deadline_days": 14,
+            "duration_minutes": 180
         },
         {
             "id": 17,
@@ -1256,7 +1308,10 @@
                 ],
                 "emails": []
             },
-            "links": null
+            "links": null,
+            "priority": 1,
+            "deadline_days": 30,
+            "duration_minutes": 30
         },
         {
             "id": 18,
@@ -1297,7 +1352,10 @@
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 3,
+            "deadline_days": null,
+            "duration_minutes": 45
         },
         {
             "id": 19,
@@ -1328,7 +1386,10 @@
             ],
             "address": null,
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 2,
+            "deadline_days": 14,
+            "duration_minutes": 45
         },
         {
             "id": 20,
@@ -1386,7 +1447,10 @@
                 }
             ],
             "contacts": null,
-            "links": null
+            "links": null,
+            "priority": 3,
+            "deadline_days": 7,
+            "duration_minutes": 30
         },
         {
             "id": 21,
@@ -1459,7 +1523,10 @@
                         "en": "Insurance policy requirements"
                     }
                 }
-            ]
+            ],
+            "priority": 4,
+            "deadline_days": 30,
+            "duration_minutes": 45
         },
         {
             "id": 26,
@@ -1636,7 +1703,10 @@
                     }
                 }
             ],
-            "contacts": null
+            "contacts": null,
+            "priority": 5,
+            "deadline_days": null,
+            "duration_minutes": 60
         },
         {
             "id": 27,
@@ -1680,7 +1750,10 @@
                 ],
                 "emails": []
             },
-            "links": null
+            "links": null,
+            "priority": 4,
+            "deadline_days": null,
+            "duration_minutes": 120
         }
     ]
 }

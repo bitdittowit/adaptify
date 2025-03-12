@@ -3,11 +3,18 @@
 import { type FormEvent, useEffect, useState } from 'react';
 
 import { useSession } from 'next-auth/react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
+import { format } from 'date-fns';
+import { enUS, ru } from 'date-fns/locale';
+import { CalendarIcon } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
 const STUDY_GROUPS = ['КИ21-22Б', 'КИ22-23Б', 'КИ23-24Б', 'КИ24-25Б'];
 
@@ -22,8 +29,10 @@ export default function OnboardingPage() {
     const [country, setCountry] = useState('');
     const [studyGroup, setStudyGroup] = useState('');
     const [sex, setSex] = useState('');
+    const [arrivalDate, setArrivalDate] = useState<Date | undefined>();
     const t = useTranslations('onboarding');
     const tCountries = useTranslations('countries');
+    const locale = useLocale();
 
     useEffect(() => {
         const userCountry = session?.user?.country;
@@ -51,11 +60,21 @@ export default function OnboardingPage() {
 
         setLoading(true);
         try {
-            console.log('Sending data:', { country, study_group: studyGroup, sex });
+            console.log('Sending data:', {
+                country,
+                study_group: studyGroup,
+                sex,
+                arrival_date: arrivalDate,
+            });
             const response = await fetch('/api/users/onboarding', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ country, study_group: studyGroup, sex }),
+                body: JSON.stringify({
+                    country,
+                    study_group: studyGroup,
+                    sex,
+                    arrival_date: arrivalDate ? arrivalDate.toISOString() : null,
+                }),
             });
 
             const data = await response.json();
@@ -67,7 +86,13 @@ export default function OnboardingPage() {
 
             await update({
                 ...session,
-                user: { ...session?.user, country, study_group: studyGroup, sex },
+                user: {
+                    ...session?.user,
+                    country,
+                    study_group: studyGroup,
+                    sex,
+                    arrival_date: arrivalDate,
+                },
             });
 
             window.location.href = '/';
@@ -144,6 +169,41 @@ export default function OnboardingPage() {
                                 ))}
                             </SelectContent>
                         </Select>
+                    </div>
+
+                    <div className="space-y-2">
+                        <label htmlFor="arrival-date" className="text-sm font-medium">
+                            {t('arrivalDate.label')}
+                        </label>
+                        <p className="text-sm text-muted-foreground mb-2">{t('arrivalDate.description')}</p>
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    id="arrival-date"
+                                    variant="outline"
+                                    className={cn(
+                                        'w-full justify-start text-left font-normal',
+                                        !arrivalDate && 'text-muted-foreground',
+                                    )}
+                                >
+                                    <CalendarIcon className="mr-2 h-4 w-4" />
+                                    {arrivalDate
+                                        ? format(arrivalDate, 'PPP', {
+                                              locale: locale === 'ru' ? ru : enUS,
+                                          })
+                                        : t('arrivalDate.placeholder')}
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                                <Calendar
+                                    mode="single"
+                                    selected={arrivalDate}
+                                    onSelect={setArrivalDate}
+                                    initialFocus
+                                    disabled={date => date < new Date()}
+                                />
+                            </PopoverContent>
+                        </Popover>
                     </div>
 
                     <Button type="submit" className="w-full" disabled={isSubmitDisabled}>

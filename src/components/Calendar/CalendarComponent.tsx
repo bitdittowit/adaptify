@@ -9,29 +9,20 @@ import { ru } from 'date-fns/locale/ru';
 import Holidays from 'date-holidays';
 
 import { Calendar as BaseCalendar } from '@/components/ui/calendar';
-import mockData from '@/constants/tasks/user_tasks.json';
-import { type BaseTask, STATUS, type Task } from '@/types';
-import { getRandomDateInMonth, getRandomInRange, getTasksForDay } from '@/utils/calendar-utils';
+import { useTasks } from '@/hooks/api/use-tasks';
+import { STATUS } from '@/types';
+import { getTasksForDay } from '@/utils/calendar-utils';
 
 import { Day } from './Day/Day';
 import { Footer } from './Footer/Footer';
 
 const holidays = new Holidays('RU');
-const mockTasks = (mockData.tasks as BaseTask[])
-    .map(task => ({
-        ...task,
-        status: STATUS.OPEN,
-        picked_date: getRandomDateInMonth(),
-        experience_points: getRandomInRange(1, 10),
-        proof_status: 'not_proofed',
-        available: true,
-    }))
-    .filter(({ picked_date }) => !(isWeekend(picked_date) || Boolean(holidays.isHoliday(picked_date))));
 
 export const CalendarComponent = () => {
     const [date, setDate] = useState<Date | undefined>(new Date());
     const locale = useLocale();
     const t = useTranslations('calendar');
+    const { tasks, isLoading, error } = useTasks();
 
     const predicates = {
         past: (day: Date) => !isToday(day) && isPast(day) && isSameMonth(day, date || new Date()),
@@ -41,12 +32,29 @@ export const CalendarComponent = () => {
             (isWeekend(day) || Boolean(holidays.isHoliday(day))),
     };
 
-    const tasksForDay = date ? getTasksForDay(mockTasks as Task[], date) : [];
+    // Если данные загружаются или есть ошибка, показываем соответствующее состояние
+    if (isLoading) {
+        return <div>{t('loading')}</div>;
+    }
+
+    if (error) {
+        return <div>{t('error')}</div>;
+    }
+
+    // Фильтруем задачи, оставляя только те, у которых есть picked_date и которые не выпадают на выходные
+    const availableTasks = tasks.filter(
+        task =>
+            task.picked_date &&
+            task.status !== STATUS.FINISHED &&
+            !(isWeekend(new Date(task.picked_date)) || Boolean(holidays.isHoliday(new Date(task.picked_date)))),
+    );
+
+    const tasksForDay = date ? getTasksForDay(availableTasks, date) : [];
 
     return (
         <BaseCalendar
             components={{
-                Day: props => <Day {...props} tasks={getTasksForDay(mockTasks as Task[], props.date)} />,
+                Day: props => <Day {...props} tasks={getTasksForDay(availableTasks, props.date)} />,
                 Footer: props => <Footer {...props} tasks={tasksForDay} displayMonth={date} />,
             }}
             mode="single"

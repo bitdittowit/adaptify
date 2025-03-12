@@ -69,6 +69,8 @@
         "sunday": "Sunday"
     },
     "calendar": {
+        "loading": "Loading tasks...",
+        "error": "Error loading tasks",
         "tasks": "Tasks",
         "styles": {
             "weekend": "text-destructive",
@@ -117,6 +119,12 @@
                 "male": "Male",
                 "female": "Female"
             }
+        },
+        "arrivalDate": {
+            "label": "Arrival Date (optional)",
+            "placeholder": "Select date",
+            "description": "Specify the date for which you have purchased tickets and plan to arrive in Krasnoyarsk",
+            "required": "Please select your arrival date"
         },
         "submit": {
             "default": "Continue",

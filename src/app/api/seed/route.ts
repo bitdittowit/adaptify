@@ -65,7 +65,10 @@ async function createTasksTable() {
             address JSONB DEFAULT NULL,
             contacts JSONB DEFAULT NULL,
             cost JSONB DEFAULT NULL,
-            clubs JSONB DEFAULT NULL
+            clubs JSONB DEFAULT NULL,
+            priority INT CHECK (priority BETWEEN 1 AND 5),
+            deadline_days INT DEFAULT NULL,
+            duration_minutes INT NOT NULL DEFAULT 60
         );`,
     );
     console.log('tasks created');
@@ -79,7 +82,7 @@ async function createUserTasksTable() {
             user_id INT REFERENCES users(id) ON DELETE CASCADE,
             document_task_id INT REFERENCES tasks(id),
             status VARCHAR(10) CHECK (status IN ('open', 'pending', 'finished')),
-            picked_date TIMESTAMP DEFAULT NOW(),
+            picked_date TIMESTAMP DEFAULT NULL,
             experience_points INT DEFAULT 0,
             proof_status VARCHAR(12) CHECK (proof_status IN ('not_proofed', 'checking', 'proofed')) DEFAULT 'not_proofed'
         );`,
