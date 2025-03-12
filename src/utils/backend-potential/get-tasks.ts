@@ -1,18 +1,18 @@
-import { type BaseTask, type ProofStatus, STATUS, type Sex, type Task, type VisaType } from '@/types';
-
-import { scheduleTasks } from '../task-scheduler';
+import type { BaseTask, ProofStatus, STATUS, Sex, Task, VisaType } from '@/types';
+import { scheduleTasks } from '@/utils/task-scheduler';
 
 const convertRawToUserTask = (tasks: BaseTask[], arrivalDate: Date): Task[] => {
-    const baseTasks = tasks.map(task => ({
+    const baseTasks = tasks.map((task, index) => ({
         ...task,
-        status: STATUS.OPEN,
-        experience_points: 200,
+        user_task_id: index + 1,
+        picked_date: arrivalDate,
+        available: true,
+        status: 'not_started' as STATUS,
         proof_status: 'not_proofed' as ProofStatus,
-        available: false,
-        picked_date: new Date(0), // Will be set by scheduler
-        priority: 3, // Default priority
+        experience_points: 200,
+        priority: 3,
         deadline_days: null,
-        duration_minutes: 60, // Default duration
+        duration_minutes: 60,
     }));
 
     return scheduleTasks(baseTasks, arrivalDate);
