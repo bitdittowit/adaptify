@@ -1,7 +1,8 @@
 'use client';
 
-import { type FormEvent, useState } from 'react';
+import { type FormEvent, useEffect, useState } from 'react';
 
+import { useSession } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -22,6 +23,7 @@ const SEX_OPTIONS = ['male', 'female'] as const;
 
 export default function OnboardingPage() {
     const router = useRouter();
+    const { data: session, update } = useSession();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [country, setCountry] = useState('');
@@ -32,22 +34,37 @@ export default function OnboardingPage() {
     const tCountries = useTranslations('countries');
     const locale = useLocale();
 
+    useEffect(() => {
+        const userCountry = session?.user?.country;
+        const userStudyGroup = session?.user?.study_group;
+        const userSex = session?.user?.sex;
+        const hasRequiredData = Boolean(userCountry && userStudyGroup && userSex);
+
+        if (hasRequiredData) {
+            router.replace('/');
+        }
+    }, [session, router]);
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        setError(null);
 
-        if (loading) {
+        const hasCountry = Boolean(country);
+        const hasStudyGroup = Boolean(studyGroup);
+        const hasSex = Boolean(sex);
+        const hasRequiredFields = hasCountry && hasStudyGroup && hasSex;
+
+        if (!hasRequiredFields) {
+            setError('Country, study group and sex are required');
             return;
         }
 
         setLoading(true);
-        setError(null);
 
         try {
             const response = await fetch('/api/users/onboarding', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     country,
                     study_group: studyGroup,
@@ -56,12 +73,24 @@ export default function OnboardingPage() {
                 }),
             });
 
+            const data = await response.json();
+
             if (!response.ok) {
-                const data = await response.json();
                 throw new Error(data.error || 'Failed to update profile');
             }
 
-            router.push('/tasks');
+            await update({
+                ...session,
+                user: {
+                    ...session?.user,
+                    country,
+                    study_group: studyGroup,
+                    sex,
+                    arrival_date: arrivalDate,
+                },
+            });
+
+            window.location.href = '/';
         } catch (error) {
             setError(error instanceof Error ? error.message : 'Failed to update profile');
         } finally {
@@ -158,13 +187,14 @@ export default function OnboardingPage() {
                                         : t('arrivalDate.placeholder')}
                                 </Button>
                             </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0" align="start">
+                            <PopoverContent className="w-[340px] p-0" align="start">
                                 <Calendar
                                     mode="single"
                                     selected={arrivalDate}
                                     onSelect={setArrivalDate}
                                     initialFocus
                                     disabled={date => date < new Date()}
+                                    className="rounded-md border"
                                 />
                             </PopoverContent>
                         </Popover>
