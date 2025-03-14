@@ -26,10 +26,16 @@ import { Input } from '@/components/ui/input';
 import { LocalizedText } from '@/components/ui/localized-text';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useGetTasks } from '@/hooks/api/entities/tasks/use-get-tasks';
+import { useBreakpoint, useIsMobile } from '@/hooks/use-mobile';
 import type { LocalizedText as LocalizedTextType, Task } from '@/types';
+
+import { TaskCard } from './task-card';
 
 export function TasksTable() {
     const t = useTranslations();
+    const isMobile = useIsMobile();
+    const breakpoint = useBreakpoint();
+    const isSmallerThanSm = breakpoint === 'xs' || breakpoint === 'sm';
 
     const columns: ColumnDef<Task>[] = [
         {
@@ -99,6 +105,23 @@ export function TasksTable() {
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
     const { data, loading } = useGetTasks();
 
+    // Настраиваем видимость колонок на разных устройствах
+    React.useEffect(() => {
+        if (isMobile) {
+            // На мобильных устройствах скрываем менее важные колонки
+            setColumnVisibility({
+                id: false,
+                position: false,
+                description: !isSmallerThanSm, // Скрываем описание на очень маленьких экранах
+            });
+        } else {
+            // На десктопе показываем все колонки кроме id
+            setColumnVisibility({
+                id: false,
+            });
+        }
+    }, [isMobile, isSmallerThanSm]);
+
     const table = useReactTable({
         data,
         columns,
@@ -112,7 +135,7 @@ export function TasksTable() {
         state: {
             sorting,
             columnFilters,
-            columnVisibility: { ...columnVisibility, id: false },
+            columnVisibility,
         },
     });
 
@@ -120,6 +143,50 @@ export function TasksTable() {
         return <div>{t('common.loading')}</div>;
     }
 
+    // Показываем карточки вместо таблицы на мобильных устройствах
+    if (isSmallerThanSm) {
+        return (
+            <div className="w-full">
+                <div className="flex items-center py-4 justify-end">
+                    <Input
+                        placeholder={t('input.filter')}
+                        value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
+                        onChange={event => table.getColumn('title')?.setFilterValue(event.target.value)}
+                        className="max-w-sm"
+                    />
+                </div>
+                <div className="space-y-4">
+                    {table.getRowModel().rows?.length ? (
+                        table.getRowModel().rows.map(row => <TaskCard key={row.getValue('id')} task={row.original} />)
+                    ) : (
+                        <div className="text-center py-10">{t('task.noResults')}</div>
+                    )}
+                </div>
+                <div className="flex items-center justify-end space-x-2 py-4">
+                    <div className="flex space-x-2">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => table.previousPage()}
+                            disabled={!table.getCanPreviousPage()}
+                        >
+                            {t('pagination.previous')}
+                        </Button>
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => table.nextPage()}
+                            disabled={!table.getCanNextPage()}
+                        >
+                            {t('pagination.next')}
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // Таблица для больших экранов
     return (
         <div className="w-full">
             <div className="flex items-center py-4 justify-end">
@@ -130,7 +197,7 @@ export function TasksTable() {
                     className="max-w-sm"
                 />
             </div>
-            <div className="rounded-md border overflow-x-auto" style={{ maxWidth: 'calc(100vw - 40px)' }}>
+            <div className="rounded-md border overflow-x-auto">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map(headerGroup => (

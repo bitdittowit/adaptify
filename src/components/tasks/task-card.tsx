@@ -14,6 +14,7 @@ import { DocumentsBadge } from '@/components/ui/documents-badge';
 import { LocalizedText } from '@/components/ui/localized-text';
 import { ScheduleBadge } from '@/components/ui/schedule-badge';
 import { useApiPost } from '@/hooks/api/use-api-post';
+import { useBreakpoint } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { STATUS, type Task } from '@/types';
 
@@ -22,6 +23,8 @@ type TaskCardProps = ComponentProps<typeof Card> & { task: Task };
 export function TaskCard({ className, task, ...props }: TaskCardProps) {
     const t = useTranslations();
     const { postData } = useApiPost<{ id: number }>();
+    const breakpoint = useBreakpoint();
+    const isXsScreen = breakpoint === 'xs';
 
     const markAsDone = async () => {
         const data = { id: task.id };
@@ -33,43 +36,60 @@ export function TaskCard({ className, task, ...props }: TaskCardProps) {
 
     const renderTaskBadges = (task: Task) => {
         return (
-            <>
+            <div className={cn('flex flex-wrap gap-2', isXsScreen ? 'justify-center' : '')}>
                 {task.documents && <DocumentsBadge documents={task.documents} />}
                 {task.schedule && <ScheduleBadge schedule={task.schedule} />}
                 {task.address && <AddressBadge addresses={task.address} />}
                 {task.contacts && <ContactsBadge contacts={task.contacts} />}
-            </>
+            </div>
+        );
+    };
+
+    // Вынесем рендер кнопки подтверждения для снижения сложности
+    const renderDoneButton = () => {
+        if (task.status === STATUS.FINISHED) {
+            return null;
+        }
+
+        if (task.id === 2 && task.proof_status !== 'proofed') {
+            return null;
+        }
+
+        return (
+            <Button className={cn('gap-1', isXsScreen ? 'h-10 py-2' : '')} onClick={markAsDone}>
+                <Check className={isXsScreen ? 'h-4 w-4' : ''} />
+                {t('task.markAsDone')}
+            </Button>
         );
     };
 
     return (
-        <Card className={cn('w-[380px] h-[max-content]', className)} {...props}>
-            <CardContent className="grid gap-4 mt-4">
+        <Card
+            className={cn('w-full h-[max-content] border shadow-sm', isXsScreen ? 'p-3' : 'p-4', className)}
+            {...props}
+        >
+            <CardContent className={cn('grid gap-2', isXsScreen ? 'mt-2' : 'mt-4')}>
                 {task.picked_date && <DateBadge date={task.picked_date} />}
             </CardContent>
-            <CardHeader className="mt-[-40px] flex">
-                <CardTitle className="mb-1">
+            <CardHeader className={cn('mt-[-40px] flex', isXsScreen ? 'p-3' : 'p-5')}>
+                <CardTitle className={cn('mb-1', isXsScreen ? 'text-lg' : 'text-xl')}>
                     <LocalizedText text={task.title} />
                 </CardTitle>
-                <CardDescription style={{ whiteSpace: 'pre-line' }}>
+                <CardDescription
+                    className={isXsScreen ? 'text-sm line-clamp-2' : ''}
+                    style={{ whiteSpace: 'pre-line' }}
+                >
                     <LocalizedText text={task.description} />
                 </CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-4">{renderTaskBadges(task)}</CardContent>
-            <CardFooter className="gap-4">
-                <TaskStatus status={task.status} />
-                {task.status !== STATUS.FINISHED &&
-                    (task.id === 2 ? (
-                        task.proof_status === 'proofed' && (
-                            <Button className="w-full" onClick={markAsDone}>
-                                <Check /> {t('task.markAsDone')}
-                            </Button>
-                        )
-                    ) : (
-                        <Button className="w-full" onClick={markAsDone}>
-                            <Check /> {t('task.markAsDone')}
-                        </Button>
-                    ))}
+            <CardContent className={cn('grid gap-2', isXsScreen ? 'px-3 py-2' : 'p-5')}>
+                {renderTaskBadges(task)}
+            </CardContent>
+            <CardFooter className={cn('gap-2', isXsScreen ? 'px-3 pt-0 pb-3 flex-col items-stretch' : 'flex-row')}>
+                <div className={cn('flex items-center justify-between', isXsScreen ? 'w-full' : '')}>
+                    <TaskStatus status={task.status} />
+                </div>
+                {renderDoneButton()}
             </CardFooter>
         </Card>
     );
