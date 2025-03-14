@@ -42,7 +42,7 @@ export default function Page() {
                 <Card className="bg-card shadow-sm border">
                     <CardHeader className="pb-0">
                         <CardTitle className="text-xl md:text-2xl text-center md:text-left">
-                            {t('sidebar.taskList')}
+                            {t('sidebar.taskList.default')}
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -59,7 +59,7 @@ export default function Page() {
                 <Card className="bg-card shadow-sm border">
                     <CardHeader className="pb-0">
                         <CardTitle className="text-xl md:text-2xl text-center md:text-left">
-                            {t('sidebar.taskList')}
+                            {t('sidebar.taskList.default')}
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -75,7 +75,7 @@ export default function Page() {
             <Card className="bg-card shadow-sm border">
                 <CardHeader className="pb-0">
                     <CardTitle className="text-xl md:text-2xl text-center md:text-left">
-                        {t('sidebar.taskList')}
+                        {t('sidebar.taskList.default')}
                     </CardTitle>
                 </CardHeader>
                 <CardContent>

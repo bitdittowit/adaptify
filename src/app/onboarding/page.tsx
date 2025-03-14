@@ -1,8 +1,7 @@
 'use client';
 
-import { type FormEvent, useEffect, useState } from 'react';
+import { type FormEvent, useState } from 'react';
 
-import { useSession } from 'next-auth/react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
 
@@ -23,7 +22,6 @@ const SEX_OPTIONS = ['male', 'female'] as const;
 
 export default function OnboardingPage() {
     const router = useRouter();
-    const { data: session, update } = useSession();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [country, setCountry] = useState('');
@@ -34,70 +32,37 @@ export default function OnboardingPage() {
     const tCountries = useTranslations('countries');
     const locale = useLocale();
 
-    useEffect(() => {
-        const userCountry = session?.user?.country;
-        const userStudyGroup = session?.user?.study_group;
-        const userSex = session?.user?.sex;
-        const hasRequiredData = Boolean(userCountry && userStudyGroup && userSex);
-
-        if (hasRequiredData) {
-            router.replace('/');
-        }
-    }, [session, router]);
-
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        setError(null);
 
-        const hasCountry = Boolean(country);
-        const hasStudyGroup = Boolean(studyGroup);
-        const hasSex = Boolean(sex);
-        const hasAllFields = hasCountry && hasStudyGroup && hasSex;
-
-        if (!hasAllFields) {
+        if (loading) {
             return;
         }
 
         setLoading(true);
+        setError(null);
+
         try {
-            console.log('Sending data:', {
-                country,
-                study_group: studyGroup,
-                sex,
-                arrival_date: arrivalDate,
-            });
             const response = await fetch('/api/users/onboarding', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                },
                 body: JSON.stringify({
                     country,
                     study_group: studyGroup,
                     sex,
-                    arrival_date: arrivalDate ? arrivalDate.toISOString() : null,
+                    arrival_date: arrivalDate,
                 }),
             });
 
-            const data = await response.json();
-            console.log('Response:', data);
-
             if (!response.ok) {
+                const data = await response.json();
                 throw new Error(data.error || 'Failed to update profile');
             }
 
-            await update({
-                ...session,
-                user: {
-                    ...session?.user,
-                    country,
-                    study_group: studyGroup,
-                    sex,
-                    arrival_date: arrivalDate,
-                },
-            });
-
-            window.location.href = '/';
+            router.push('/tasks');
         } catch (error) {
-            console.error('Error updating profile:', error);
             setError(error instanceof Error ? error.message : 'Failed to update profile');
         } finally {
             setLoading(false);
@@ -107,8 +72,7 @@ export default function OnboardingPage() {
     const hasCountry = Boolean(country);
     const hasStudyGroup = Boolean(studyGroup);
     const hasSex = Boolean(sex);
-    // biome-ignore lint/complexity/useSimplifiedLogicExpression: <explanation>
-    const isSubmitDisabled = !hasCountry || !hasStudyGroup || !hasSex || loading;
+    const isSubmitDisabled = loading || !(hasCountry && hasStudyGroup && hasSex);
 
     return (
         <div className="flex min-h-screen items-center justify-center">

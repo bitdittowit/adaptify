@@ -1,8 +1,17 @@
 {
     "sidebar": {
-        "routeMap": "Прогресс",
-        "taskList": "Список задач",
-        "taskCalendar": "Календарь задач",
+        "routeMap": {
+            "default": "Прогресс",
+            "mobile": "Прогресс"
+        },
+        "taskList": {
+            "default": "Список задач",
+            "mobile": "Задачи"
+        },
+        "taskCalendar": {
+            "default": "Календарь задач",
+            "mobile": "Календарь"
+        },
         "projects": "Проекты",
         "more": "Ещё",
         "viewProject": "Просмотр проекта",
@@ -48,6 +57,7 @@
         "userExperienceUpdated": "Опыт пользователя обновлен: {result}",
         "blockedTasks": "Задачи, которые разблокируются после выполнения",
         "schedule": "Расписание",
+        "timeSlots": "слота",
         "noSchedule": "Неприемный день",
         "noTitle": "Без названия",
         "noDescription": "Без описания",
@@ -74,7 +84,8 @@
         "thursday": "Четверг",
         "friday": "Пятница",
         "saturday": "Суббота",
-        "sunday": "Воскресенье"
+        "sunday": "Воскресенье",
+        "days": "дн."
     },
     "months": {
         "january": "Январь",
@@ -107,7 +118,11 @@
     },
     "common": {
         "loading": "Загрузка...",
-        "back": "Назад"
+        "back": "Назад",
+        "navigation": {
+            "previous": "Пред.",
+            "next": "След."
+        }
     },
     "proof": {
         "submit": "Проверить",

@@ -1,8 +1,17 @@
 {
     "sidebar": {
-        "routeMap": "Progress",
-        "taskList": "Task List",
-        "taskCalendar": "Task Calendar",
+        "routeMap": {
+            "default": "Progress",
+            "mobile": "Progress"
+        },
+        "taskList": {
+            "default": "Task List",
+            "mobile": "Tasks"
+        },
+        "taskCalendar": {
+            "default": "Task Calendar",
+            "mobile": "Calendar"
+        },
         "projects": "Projects",
         "more": "More",
         "viewProject": "View Project",
@@ -48,6 +57,7 @@
         "userExperienceUpdated": "User experience updated: {result}",
         "blockedTasks": "Tasks that will be unlocked after completion",
         "schedule": "Schedule",
+        "timeSlots": "slots",
         "noSchedule": "No appointments",
         "noTitle": "No title",
         "noDescription": "No description",
@@ -74,7 +84,8 @@
         "thursday": "Thursday",
         "friday": "Friday",
         "saturday": "Saturday",
-        "sunday": "Sunday"
+        "sunday": "Sunday",
+        "days": "days"
     },
     "months": {
         "january": "January",
@@ -106,7 +117,12 @@
         }
     },
     "common": {
-        "loading": "Loading..."
+        "loading": "Loading...",
+        "back": "Back",
+        "navigation": {
+            "previous": "Previous",
+            "next": "Next"
+        }
     },
     "proof": {
         "submit": "Verify"

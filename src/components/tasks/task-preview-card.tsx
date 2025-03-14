@@ -42,21 +42,47 @@ export function TaskPreviewCard({ className, task, ...props }: TaskPreviewCardPr
                             <LocalizedText text={task.title} />
                         </h3>
                         {scheduleDays.length > 0 && (
-                            <div className="flex items-center gap-1.5 text-muted-foreground">
-                                <Clock className={cn('shrink-0', isMobile ? 'h-3 w-3' : 'h-4 w-4')} />
-                                <div className={cn('flex gap-1 flex-wrap', isMobile ? 'text-[10px]' : 'text-xs')}>
-                                    {scheduleDays.map(day => (
-                                        <Badge
-                                            key={day}
-                                            variant="outline"
-                                            className={cn(
-                                                'px-1 py-0 h-auto font-normal',
-                                                isMobile ? 'text-[10px]' : 'text-xs',
-                                            )}
-                                        >
-                                            {t(`days.${day}`).slice(0, 2)}
-                                        </Badge>
-                                    ))}
+                            <div className="flex flex-col gap-1.5">
+                                <div className="flex items-center gap-1.5 text-muted-foreground">
+                                    <Clock className={cn('shrink-0', isMobile ? 'h-3 w-3' : 'h-4 w-4')} />
+                                    <span className={cn('text-xs', isMobile ? 'text-[10px]' : '')}>
+                                        {t('task.schedule')}
+                                    </span>
+                                </div>
+                                <div className="flex flex-wrap gap-1">
+                                    {scheduleDays.map(day => {
+                                        const timeRanges = schedule[day];
+                                        const timeRangeText =
+                                            timeRanges.length > 1
+                                                ? `${timeRanges.length} ${t('task.timeSlots')}`
+                                                : timeRanges[0];
+
+                                        return (
+                                            <div key={day} className="flex items-center gap-1">
+                                                <Badge
+                                                    variant="outline"
+                                                    className={cn(
+                                                        'px-1 py-0 h-auto font-normal',
+                                                        isMobile ? 'text-[10px]' : 'text-xs',
+                                                        day === 'saturday' || day === 'sunday'
+                                                            ? 'text-destructive'
+                                                            : '',
+                                                    )}
+                                                >
+                                                    {t(`days.${day}`).slice(0, 2)}
+                                                </Badge>
+                                                <Badge
+                                                    variant="secondary"
+                                                    className={cn(
+                                                        'px-1 py-0 h-auto font-normal',
+                                                        isMobile ? 'text-[10px]' : 'text-xs',
+                                                    )}
+                                                >
+                                                    {timeRangeText}
+                                                </Badge>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         )}
