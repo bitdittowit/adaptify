@@ -43,8 +43,8 @@
         "experience": "Experience",
         "title": "Title",
         "date": "Date",
-        "noResults": "No results.",
-        "noTasks": "You don't have any available tasks yet",
+        "noResults": "No results",
+        "noTasks": "No tasks",
         "userExperienceUpdated": "User experience updated: {result}",
         "blockedTasks": "Tasks that will be unlocked after completion",
         "schedule": "Schedule",
@@ -57,7 +57,15 @@
         "noEmailTitle": "No title",
         "addresses": "Addresses",
         "contacts": "Contacts",
-        "documents": "Documents"
+        "documents": "Documents",
+        "search": "Search by title or description...",
+        "filterByStatus": "Filter by status",
+        "status": {
+            "all": "All tasks",
+            "open": "Open",
+            "pending": "In progress",
+            "finished": "Finished"
+        }
     },
     "days": {
         "monday": "Monday",
