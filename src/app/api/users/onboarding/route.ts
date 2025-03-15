@@ -23,8 +23,7 @@ export async function POST(request: NextRequest) {
         const hasCountry = Boolean(country);
         const hasStudyGroup = Boolean(study_group);
         const hasSex = Boolean(sex);
-        // biome-ignore lint/complexity/useSimplifiedLogicExpression: Explicit check for required fields
-        const isMissingData = !hasCountry || !hasStudyGroup || !hasSex;
+        const isMissingData = !(hasCountry && hasStudyGroup && hasSex);
 
         if (isMissingData) {
             console.log('Missing required data');

@@ -2,8 +2,11 @@ import { useLocale } from 'next-intl';
 
 import { CalendarClock } from 'lucide-react';
 
+import { cn } from '@/lib/utils';
+
 interface DateBadgeProps {
     date: Date | string;
+    className?: string;
 }
 
 function formatDate(date: Date | string, locale: string) {
@@ -17,15 +20,13 @@ function formatDate(date: Date | string, locale: string) {
     return formatter.format(dateObj);
 }
 
-export function DateBadge({ date }: DateBadgeProps) {
+export function DateBadge({ date, className }: DateBadgeProps) {
     const locale = useLocale();
 
     return (
-        <div className="flex items-center space-x-4 rounded-md border p-4">
-            <CalendarClock />
-            <div className="flex-1 space-y-1">
-                <p className="text-sm font-medium leading-none">{formatDate(date, locale)}</p>
-            </div>
+        <div className={cn('flex items-center gap-2 text-muted-foreground', className)}>
+            <CalendarClock className="h-4 w-4 shrink-0" />
+            <span className="text-sm">{formatDate(date, locale)}</span>
         </div>
     );
 }

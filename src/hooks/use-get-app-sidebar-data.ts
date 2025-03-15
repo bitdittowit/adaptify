@@ -16,17 +16,26 @@ export const useGetAppSideBarData = () => {
         },
         navMain: [
             {
-                title: t('routeMap'),
+                title: {
+                    default: t('routeMap.default'),
+                    mobile: t('routeMap.mobile'),
+                },
                 url: '/',
                 icon: Route,
             },
             {
-                title: t('taskList'),
+                title: {
+                    default: t('taskList.default'),
+                    mobile: t('taskList.mobile'),
+                },
                 url: '/tasks',
                 icon: ListChecks,
             },
             {
-                title: t('taskCalendar'),
+                title: {
+                    default: t('taskCalendar.default'),
+                    mobile: t('taskCalendar.mobile'),
+                },
                 url: '/calendar',
                 icon: CalendarDays,
             },

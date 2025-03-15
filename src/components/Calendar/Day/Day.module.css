@@ -3,4 +3,48 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
+    position: relative;
+    padding-bottom: 2px;
+}
+
+/* Стили для мобильных устройств */
+.mobileDay {
+    padding-bottom: 0;
+}
+
+/* Добавление дополнительного пространства для индикаторов */
+.day > div:first-child {
+    margin-bottom: 2px;
+}
+
+/* Стили для мобильных устройств: меньший отступ */
+.mobileDay > div:first-child {
+    margin-bottom: 0;
+}
+
+/* Стили для индикаторов задач */
+.day > div:last-child {
+    position: absolute;
+    bottom: 2px;
+    transition: all 0.2s ease;
+}
+
+/* Позиционирование индикаторов на мобильных устройствах */
+.mobileDay > div:last-child {
+    bottom: -1px;
+    right: -1px;
+    font-size: 0.55rem;
+    transform: scale(0.9);
+    position: absolute;
+}
+
+/* Анимация при наведении */
+.day:hover > div:last-child {
+    transform: scale(1.1);
+}
+
+/* Переопределение для мобильных, чтобы предотвратить перекрытие */
+.mobileDay:hover > div:last-child {
+    transform: scale(0.9);
 }

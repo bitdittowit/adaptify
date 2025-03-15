@@ -62,5 +62,51 @@
     }
     body {
         @apply bg-background text-foreground;
+        /* Улучшаем адаптивность текста для мобильных устройств */
+        font-size: 16px;
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+    }
+    /* Улучшаем адаптивность сенсорных элементов на мобильных устройствах */
+    @media (max-width: 640px) {
+        button,
+        [role="button"],
+        a,
+        input,
+        select,
+        textarea {
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        /* Предотвращаем слишком маленькие элементы на мобильных */
+        .interactive-element {
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        /* Увеличиваем отступы для лучшего взаимодействия на touch-устройствах */
+        .p-mobile {
+            padding: 0.75rem !important;
+        }
+
+        /* Увеличиваем размер текста */
+        body {
+            font-size: 16px;
+        }
+
+        /* Уменьшаем margin на мобильных */
+        .mobile-compact {
+            margin: 0.5rem !important;
+        }
+    }
+}
+
+/* Предотвращаем overflow для всех таблиц на мобильных устройствах */
+@media (max-width: 640px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 }

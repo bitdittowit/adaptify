@@ -2,37 +2,55 @@ import { useTranslations } from 'next-intl';
 
 import { Calendar } from 'lucide-react';
 
-import { daysOfWeek } from '@/constants/days-of-week';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 import type { Schedule } from '@/types';
 
 interface ScheduleBadgeProps {
     schedule: Schedule;
+    className?: string;
 }
 
-export function ScheduleBadge({ schedule }: ScheduleBadgeProps) {
+const daysOfWeek = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'] as const;
+
+export function ScheduleBadge({ schedule, className }: ScheduleBadgeProps) {
     const t = useTranslations();
 
+    const activeDays = daysOfWeek.filter(day => schedule[day].length > 0);
+
+    if (activeDays.length === 0) {
+        return null;
+    }
+
     return (
-        <div className="border p-4 rounded-md grid gap-4">
-            <div className="flex items-center space-x-2">
-                <Calendar className="h-5 w-5" />
-                <h2 className="text-foreground font-semibold leading-none tracking-tight">{t('task.schedule')}</h2>
+        <div className={cn('flex flex-col gap-2', className)}>
+            <div className="flex items-center gap-2 text-muted-foreground">
+                <Calendar className="h-4 w-4 shrink-0" />
+                <span className="text-sm">{t('task.schedule')}</span>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-                {daysOfWeek.map(day => (
-                    <div key={day} className="flex-1">
-                        <p className="text-sm font-medium leading-none">{t(`days.${day}`)}</p>
-                        {schedule[day].length > 0 ? (
-                            <ul className="list-none">
-                                {schedule[day].map(timeRange => (
-                                    <li key={`${day}-${timeRange}`} className="text-sm">
-                                        {timeRange}
-                                    </li>
-                                ))}
-                            </ul>
-                        ) : (
-                            <p className="text-sm text-muted-foreground">{t('task.noSchedule')}</p>
-                        )}
+            <div className="grid gap-2 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {activeDays.map(day => (
+                    <div key={day} className="flex flex-col gap-1.5">
+                        <Badge
+                            variant="outline"
+                            className={cn(
+                                'px-2 py-0.5 h-auto font-normal text-xs w-fit',
+                                day === 'saturday' || day === 'sunday' ? 'text-destructive' : '',
+                            )}
+                        >
+                            {t(`days.${day}`)}
+                        </Badge>
+                        <div className="flex flex-wrap gap-1.5">
+                            {schedule[day].map(timeRange => (
+                                <Badge
+                                    key={timeRange}
+                                    variant="secondary"
+                                    className="px-2 py-0.5 h-auto font-normal text-xs"
+                                >
+                                    {timeRange}
+                                </Badge>
+                            ))}
+                        </div>
                     </div>
                 ))}
             </div>

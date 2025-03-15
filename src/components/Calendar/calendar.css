@@ -1,0 +1,89 @@
+.calendar-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+.calendar-custom {
+    --rdp-accent-color: var(--primary);
+    --rdp-background-color: var(--primary-foreground);
+    width: 100%;
+}
+
+/* Улучшенные стили для ячеек календаря */
+.calendar-custom table {
+    border-collapse: separate;
+    border-spacing: 0.5rem;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* Принудительно растягиваем ячейки по ширине */
+.calendar-custom table tr {
+    width: 100%;
+}
+
+.calendar-custom table td {
+    width: calc(100% / 7);
+    aspect-ratio: 1 / 1;
+    padding: 0;
+}
+
+/* Принудительно растягиваем кнопки дней */
+.calendar-custom table button.rdp-button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Стили для адаптивности */
+@media (max-width: 640px) {
+    .calendar-custom {
+        padding: 0.5rem !important;
+    }
+
+    .calendar-custom table {
+        border-spacing: 0.25rem;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .calendar-custom table td {
+        padding: 0;
+        min-width: 2.5rem;
+    }
+
+    /* Уменьшаем масштаб для мобильных устройств */
+    .calendar-custom thead th {
+        font-size: 0.875rem;
+        padding: 0.25rem;
+    }
+
+    .calendar-custom table button.rdp-button {
+        padding: 0.25rem;
+        font-size: 0.875rem;
+    }
+
+    /* Увеличиваем высоту контейнера для задач */
+    .tasks-container {
+        max-height: 250px !important;
+        overflow-y: auto;
+    }
+}
+
+/* Анимации при загрузке */
+.calendar-wrapper {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,8 +1,17 @@
 {
     "sidebar": {
-        "routeMap": "Progress",
-        "taskList": "Task List",
-        "taskCalendar": "Task Calendar",
+        "routeMap": {
+            "default": "Progress",
+            "mobile": "Progress"
+        },
+        "taskList": {
+            "default": "Task List",
+            "mobile": "Tasks"
+        },
+        "taskCalendar": {
+            "default": "Task Calendar",
+            "mobile": "Calendar"
+        },
         "projects": "Projects",
         "more": "More",
         "viewProject": "View Project",
@@ -13,51 +22,107 @@
         "profile": "Profile",
         "logout": "Logout"
     },
+    "profile": {
+        "editProfile": "Edit Profile",
+        "level": "Level",
+        "learningProgress": "Learning Progress",
+        "currentLevel": "Current Level",
+        "experiencePoints": "Experience Points",
+        "progressToLevel": "Progress to Level {level}",
+        "tabs": {
+            "info": "Information",
+            "achievements": "Achievements",
+            "stats": "Statistics"
+        },
+        "personalInfo": {
+            "title": "Personal Information",
+            "name": "Name",
+            "email": "Email",
+            "studyGroup": "Study Group",
+            "country": "Country",
+            "arrivalDate": "Arrival Date"
+        },
+        "achievements": {
+            "title": "Achievements",
+            "firstSteps": {
+                "title": "First Steps",
+                "description": "Completed first task"
+            },
+            "excellent": {
+                "title": "Excellent",
+                "description": "Completed 10 tasks in a row"
+            },
+            "purposeful": {
+                "title": "Purposeful",
+                "description": "Reached level 5"
+            },
+            "master": {
+                "title": "Master",
+                "description": "Earned 1000 experience points"
+            },
+            "unlocked": "Unlocked"
+        },
+        "stats": {
+            "title": "Statistics",
+            "tasksCompleted": "Tasks Completed",
+            "experienceEarned": "Experience Points",
+            "daysInSystem": "Days in System"
+        }
+    },
     "level": {
         "nextLevel": "Level {level}",
         "congratulations": "Congratulations! You've reached level {level}",
         "experienceNeeded": "You need {experience} more experience points to reach this level",
-        "unlocked": "You've unlocked this level! Keep up the good work!",
-        "viewTasks": "View available tasks"
+        "unlocked": "You've unlocked this level! Keep it up!",
+        "viewTasks": "View Available Tasks"
     },
     "input": {
         "filter": "Search..."
     },
     "language-switcher": {
-        "choose": "Choose language",
+        "choose": "Choose Language",
         "ru": "Russian",
         "en": "English"
     },
     "theme-switcher": {
-        "choose": "Choose theme",
+        "choose": "Choose Theme",
         "light": "Light",
         "dark": "Dark",
         "system": "System"
     },
     "task": {
         "details": "Details",
-        "markAsDone": "Mark as completed",
+        "markAsDone": "Mark as Done",
         "loading": "Loading...",
         "error": "Error loading task: {message}",
         "verify": "Verify",
         "experience": "Experience",
         "title": "Title",
         "date": "Date",
-        "noResults": "No results.",
-        "noTasks": "You don't have any available tasks yet",
+        "noResults": "No Results",
+        "noTasks": "No Tasks",
         "userExperienceUpdated": "User experience updated: {result}",
-        "blockedTasks": "Tasks that will be unlocked after completion",
+        "blockedTasks": "Tasks that will unlock after completion",
         "schedule": "Schedule",
-        "noSchedule": "No appointments",
-        "noTitle": "No title",
-        "noDescription": "No description",
-        "noAddressTitle": "No title",
-        "noAddressValue": "No address",
-        "noPhoneTitle": "No title",
-        "noEmailTitle": "No title",
+        "timeSlots": "slots",
+        "noSchedule": "No reception day",
+        "noTitle": "No Title",
+        "noDescription": "No Description",
+        "noAddressTitle": "No Title",
+        "noAddressValue": "No Address",
+        "noPhoneTitle": "No Title",
+        "noEmailTitle": "No Title",
         "addresses": "Addresses",
         "contacts": "Contacts",
-        "documents": "Documents"
+        "documents": "Documents",
+        "search": "Search by title or description...",
+        "filterByStatus": "Filter by Status",
+        "status": {
+            "all": "All Tasks",
+            "open": "Open",
+            "pending": "In Progress",
+            "finished": "Completed"
+        }
     },
     "days": {
         "monday": "Monday",
@@ -66,7 +131,22 @@
         "thursday": "Thursday",
         "friday": "Friday",
         "saturday": "Saturday",
-        "sunday": "Sunday"
+        "sunday": "Sunday",
+        "days": "days"
+    },
+    "months": {
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
     },
     "calendar": {
         "loading": "Loading tasks...",
@@ -84,10 +164,16 @@
         }
     },
     "common": {
-        "loading": "Loading..."
+        "loading": "Loading...",
+        "back": "Back",
+        "navigation": {
+            "previous": "Prev",
+            "next": "Next"
+        }
     },
     "proof": {
-        "submit": "Verify"
+        "submit": "Verify",
+        "title": "Completion Report"
     },
     "errors": {
         "validation": "What are you doing!?"
@@ -106,15 +192,15 @@
         "title": "Complete Your Profile",
         "country": {
             "label": "Country",
-            "placeholder": "Select your country"
+            "placeholder": "Select country"
         },
         "studyGroup": {
             "label": "Study Group",
-            "placeholder": "Select your study group"
+            "placeholder": "Select study group"
         },
         "sex": {
-            "label": "Sex",
-            "placeholder": "Select your sex",
+            "label": "Gender",
+            "placeholder": "Select gender",
             "options": {
                 "male": "Male",
                 "female": "Female"
@@ -123,8 +209,8 @@
         "arrivalDate": {
             "label": "Arrival Date (optional)",
             "placeholder": "Select date",
-            "description": "Specify the date for which you have purchased tickets and plan to arrive in Krasnoyarsk",
-            "required": "Please select your arrival date"
+            "description": "Specify the date when you bought tickets and plan to arrive in Krasnoyarsk",
+            "required": "Please select arrival date"
         },
         "submit": {
             "default": "Continue",

@@ -17,19 +17,31 @@ import {
     getSortedRowModel,
     useReactTable,
 } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
+import { ArrowUpDown, Search } from 'lucide-react';
 
 import { TaskStatus } from '@/components/tasks/task-status';
 import { Button } from '@/components/ui/button';
 import { DateBadge } from '@/components/ui/date-badge';
 import { Input } from '@/components/ui/input';
 import { LocalizedText } from '@/components/ui/localized-text';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { useGetTasks } from '@/hooks/api/entities/tasks/use-get-tasks';
+import { useBreakpoint, useIsMobile } from '@/hooks/use-mobile';
+import { cn } from '@/lib/utils';
 import type { LocalizedText as LocalizedTextType, Task } from '@/types';
+import { STATUS } from '@/types';
+
+import { TaskCard } from './task-card';
 
 export function TasksTable() {
     const t = useTranslations();
+    const isMobile = useIsMobile();
+    const breakpoint = useBreakpoint();
+    const isSmallerThanSm = breakpoint === 'xs' || breakpoint === 'sm';
+
+    const [search, setSearch] = React.useState('');
+    const [statusFilter, setStatusFilter] = React.useState<STATUS | 'all'>('all');
 
     const columns: ColumnDef<Task>[] = [
         {
@@ -99,8 +111,43 @@ export function TasksTable() {
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
     const { data, loading } = useGetTasks();
 
+    // Настраиваем видимость колонок на разных устройствах
+    React.useEffect(() => {
+        if (isMobile) {
+            // На мобильных устройствах скрываем менее важные колонки
+            setColumnVisibility({
+                id: false,
+                position: false,
+                description: !isSmallerThanSm, // Скрываем описание на очень маленьких экранах
+            });
+        } else {
+            // На десктопе показываем все колонки кроме id
+            setColumnVisibility({
+                id: false,
+            });
+        }
+    }, [isMobile, isSmallerThanSm]);
+
+    // Фильтруем задачи по поиску и статусу
+    const filteredData = React.useMemo(() => {
+        if (!data) {
+            return [];
+        }
+
+        return data.filter(task => {
+            const matchesSearch =
+                search === '' ||
+                task.title.ru.toLowerCase().includes(search.toLowerCase()) ||
+                task.description.ru.toLowerCase().includes(search.toLowerCase());
+
+            const matchesStatus = statusFilter === 'all' || task.status === statusFilter;
+
+            return matchesSearch && matchesStatus;
+        });
+    }, [data, search, statusFilter]);
+
     const table = useReactTable({
-        data,
+        data: filteredData,
         columns,
         onSortingChange: setSorting,
         onColumnFiltersChange: setColumnFilters,
@@ -112,7 +159,7 @@ export function TasksTable() {
         state: {
             sorting,
             columnFilters,
-            columnVisibility: { ...columnVisibility, id: false },
+            columnVisibility,
         },
     });
 
@@ -120,17 +167,72 @@ export function TasksTable() {
         return <div>{t('common.loading')}</div>;
     }
 
-    return (
-        <div className="w-full">
-            <div className="flex items-center py-4 justify-end">
+    const renderFilters = () => (
+        <div className={cn('flex gap-2', isSmallerThanSm ? 'flex-col' : 'items-center')}>
+            <div className="relative flex-1">
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
-                    placeholder={t('input.filter')}
-                    value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}
-                    onChange={event => table.getColumn('title')?.setFilterValue(event.target.value)}
-                    className="max-w-sm"
+                    placeholder={t('task.search')}
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
+                    className="pl-8"
                 />
             </div>
-            <div className="rounded-md border overflow-x-auto" style={{ maxWidth: 'calc(100vw - 40px)' }}>
+            <Select value={statusFilter} onValueChange={value => setStatusFilter(value as STATUS | 'all')}>
+                <SelectTrigger className={cn('w-[180px]', isSmallerThanSm && 'w-full')}>
+                    <SelectValue placeholder={t('task.filterByStatus')} />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectItem value="all">{t('task.status.all')}</SelectItem>
+                    <SelectItem value={STATUS.OPEN}>{t('task.status.open')}</SelectItem>
+                    <SelectItem value={STATUS.PENDING}>{t('task.status.pending')}</SelectItem>
+                    <SelectItem value={STATUS.FINISHED}>{t('task.status.finished')}</SelectItem>
+                </SelectContent>
+            </Select>
+        </div>
+    );
+
+    // Показываем карточки вместо таблицы на мобильных устройствах
+    if (isSmallerThanSm) {
+        return (
+            <div className="w-full">
+                <div className="py-4">{renderFilters()}</div>
+                <div className="space-y-4">
+                    {table.getRowModel().rows?.length ? (
+                        table.getRowModel().rows.map(row => <TaskCard key={row.getValue('id')} task={row.original} />)
+                    ) : (
+                        <div className="text-center py-10">{t('task.noResults')}</div>
+                    )}
+                </div>
+                <div className="flex items-center justify-end space-x-2 py-4">
+                    <div className="flex space-x-2">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => table.previousPage()}
+                            disabled={!table.getCanPreviousPage()}
+                        >
+                            {t('pagination.previous')}
+                        </Button>
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => table.nextPage()}
+                            disabled={!table.getCanNextPage()}
+                        >
+                            {t('pagination.next')}
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    // Таблица для больших экранов
+    return (
+        <div className="w-full">
+            <div className="py-4">{renderFilters()}</div>
+            <div className="rounded-md border overflow-x-auto">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map(headerGroup => (

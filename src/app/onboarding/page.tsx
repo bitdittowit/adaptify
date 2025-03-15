@@ -52,20 +52,16 @@ export default function OnboardingPage() {
         const hasCountry = Boolean(country);
         const hasStudyGroup = Boolean(studyGroup);
         const hasSex = Boolean(sex);
-        const hasAllFields = hasCountry && hasStudyGroup && hasSex;
+        const hasRequiredFields = hasCountry && hasStudyGroup && hasSex;
 
-        if (!hasAllFields) {
+        if (!hasRequiredFields) {
+            setError('Country, study group and sex are required');
             return;
         }
 
         setLoading(true);
+
         try {
-            console.log('Sending data:', {
-                country,
-                study_group: studyGroup,
-                sex,
-                arrival_date: arrivalDate,
-            });
             const response = await fetch('/api/users/onboarding', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -73,12 +69,11 @@ export default function OnboardingPage() {
                     country,
                     study_group: studyGroup,
                     sex,
-                    arrival_date: arrivalDate ? arrivalDate.toISOString() : null,
+                    arrival_date: arrivalDate,
                 }),
             });
 
             const data = await response.json();
-            console.log('Response:', data);
 
             if (!response.ok) {
                 throw new Error(data.error || 'Failed to update profile');
@@ -97,7 +92,6 @@ export default function OnboardingPage() {
 
             window.location.href = '/';
         } catch (error) {
-            console.error('Error updating profile:', error);
             setError(error instanceof Error ? error.message : 'Failed to update profile');
         } finally {
             setLoading(false);
@@ -107,8 +101,7 @@ export default function OnboardingPage() {
     const hasCountry = Boolean(country);
     const hasStudyGroup = Boolean(studyGroup);
     const hasSex = Boolean(sex);
-    // biome-ignore lint/complexity/useSimplifiedLogicExpression: <explanation>
-    const isSubmitDisabled = !hasCountry || !hasStudyGroup || !hasSex || loading;
+    const isSubmitDisabled = loading || !(hasCountry && hasStudyGroup && hasSex);
 
     return (
         <div className="flex min-h-screen items-center justify-center">
@@ -194,13 +187,14 @@ export default function OnboardingPage() {
                                         : t('arrivalDate.placeholder')}
                                 </Button>
                             </PopoverTrigger>
-                            <PopoverContent className="w-auto p-0" align="start">
+                            <PopoverContent className="w-[340px] p-0" align="start">
                                 <Calendar
                                     mode="single"
                                     selected={arrivalDate}
                                     onSelect={setArrivalDate}
                                     initialFocus
                                     disabled={date => date < new Date()}
+                                    className="rounded-md border"
                                 />
                             </PopoverContent>
                         </Popover>

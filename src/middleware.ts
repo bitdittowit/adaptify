@@ -7,8 +7,7 @@ export default withAuth(
         const isOnboarding = req.nextUrl.pathname === '/onboarding';
         const hasCountry = Boolean(token?.country);
         const hasStudyGroup = Boolean(token?.study_group);
-        // biome-ignore lint/complexity/useSimplifiedLogicExpression: <explanation>
-        const needsOnboarding = !hasCountry || !hasStudyGroup;
+        const needsOnboarding = !(hasCountry && hasStudyGroup);
 
         if (needsOnboarding && !isOnboarding) {
             return NextResponse.redirect(new URL('/onboarding', req.url));

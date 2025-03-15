@@ -31,6 +31,9 @@ function createTask(
         links: null,
         address: null,
         contacts: null,
+        priority: 0,
+        deadline_days: null,
+        duration_minutes: 0,
     };
 }
 

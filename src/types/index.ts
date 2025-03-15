@@ -115,7 +115,7 @@ export interface CheckTask {
     type: CheckTaskType;
 }
 
-export type CheckTaskType = 'date' | 'string' | 'number';
+export type CheckTaskType = 'date' | 'text' | 'number';
 
 export interface Coordinates {
     x: number;
@@ -130,4 +130,11 @@ export interface Position {
 export interface Level {
     id: number;
     position: Position;
+}
+
+export interface ProofCheck {
+    type: 'date' | 'number' | 'text';
+    name: string;
+    title: LocalizedText;
+    placeholder?: string;
 }

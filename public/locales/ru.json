@@ -1,8 +1,17 @@
 {
     "sidebar": {
-        "routeMap": "Прогресс",
-        "taskList": "Список задач",
-        "taskCalendar": "Календарь задач",
+        "routeMap": {
+            "default": "Прогресс",
+            "mobile": "Прогресс"
+        },
+        "taskList": {
+            "default": "Список задач",
+            "mobile": "Задачи"
+        },
+        "taskCalendar": {
+            "default": "Календарь задач",
+            "mobile": "Календарь"
+        },
         "projects": "Проекты",
         "more": "Ещё",
         "viewProject": "Просмотр проекта",
@@ -12,6 +21,53 @@
         "notifications": "Уведомления",
         "profile": "Профиль",
         "logout": "Выйти"
+    },
+    "profile": {
+        "editProfile": "Редактировать профиль",
+        "level": "Уровень",
+        "learningProgress": "Прогресс обучения",
+        "currentLevel": "Текущий уровень",
+        "experiencePoints": "Очков опыта",
+        "progressToLevel": "Прогресс до уровня {level}",
+        "tabs": {
+            "info": "Информация",
+            "achievements": "Достижения",
+            "stats": "Статистика"
+        },
+        "personalInfo": {
+            "title": "Личная информация",
+            "name": "Имя",
+            "email": "Email",
+            "studyGroup": "Учебная группа",
+            "country": "Страна",
+            "arrivalDate": "Дата прилета"
+        },
+        "achievements": {
+            "title": "Достижения",
+            "firstSteps": {
+                "title": "Первые шаги",
+                "description": "Выполнил первое задание"
+            },
+            "excellent": {
+                "title": "Отличник",
+                "description": "Выполнил 10 заданий подряд"
+            },
+            "purposeful": {
+                "title": "Целеустремленный",
+                "description": "Достиг 5 уровня"
+            },
+            "master": {
+                "title": "Мастер",
+                "description": "Набрал 1000 очков опыта"
+            },
+            "unlocked": "Получено"
+        },
+        "stats": {
+            "title": "Статистика",
+            "tasksCompleted": "Выполнено задач",
+            "experienceEarned": "Очков опыта",
+            "daysInSystem": "Дней в системе"
+        }
     },
     "level": {
         "nextLevel": "Уровень {level}",
@@ -43,11 +99,12 @@
         "experience": "Опыт",
         "title": "Название",
         "date": "Дата",
-        "noResults": "Нет результатов.",
-        "noTasks": "У вас пока нет доступных задач",
+        "noResults": "Нет результатов",
+        "noTasks": "Нет задач",
         "userExperienceUpdated": "Опыт пользователя обновлен: {result}",
         "blockedTasks": "Задачи, которые разблокируются после выполнения",
         "schedule": "Расписание",
+        "timeSlots": "слота",
         "noSchedule": "Неприемный день",
         "noTitle": "Без названия",
         "noDescription": "Без описания",
@@ -57,7 +114,15 @@
         "noEmailTitle": "Без названия",
         "addresses": "Адреса",
         "contacts": "Контакты",
-        "documents": "Документы"
+        "documents": "Документы",
+        "search": "Поиск по названию или описанию...",
+        "filterByStatus": "Фильтр по статусу",
+        "status": {
+            "all": "Все задачи",
+            "open": "Открыто",
+            "pending": "В процессе",
+            "finished": "Завершено"
+        }
     },
     "days": {
         "monday": "Понедельник",
@@ -66,7 +131,22 @@
         "thursday": "Четверг",
         "friday": "Пятница",
         "saturday": "Суббота",
-        "sunday": "Воскресенье"
+        "sunday": "Воскресенье",
+        "days": "дн."
+    },
+    "months": {
+        "january": "Январь",
+        "february": "Февраль",
+        "march": "Март",
+        "april": "Апрель",
+        "may": "Май",
+        "june": "Июнь",
+        "july": "Июль",
+        "august": "Август",
+        "september": "Сентябрь",
+        "october": "Октябрь",
+        "november": "Ноябрь",
+        "december": "Декабрь"
     },
     "calendar": {
         "loading": "Загрузка задач...",
@@ -84,10 +164,16 @@
         }
     },
     "common": {
-        "loading": "Загрузка..."
+        "loading": "Загрузка...",
+        "back": "Назад",
+        "navigation": {
+            "previous": "Пред.",
+            "next": "След."
+        }
     },
     "proof": {
-        "submit": "Проверить"
+        "submit": "Проверить",
+        "title": "Отчет о выполнении"
     },
     "errors": {
         "validation": "ты что творишь!?"
