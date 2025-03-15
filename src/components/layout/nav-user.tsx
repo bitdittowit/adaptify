@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 
 import { BadgeCheck, Bell, ChevronsUpDown, LogOut } from 'lucide-react';
 
@@ -73,9 +74,11 @@ export function NavUser({
                                 <Bell className="mr-2 h-4 w-4" />
                                 <span>{t('notifications')}</span>
                             </DropdownMenuItem>
-                            <DropdownMenuItem>
-                                <BadgeCheck className="mr-2 h-4 w-4" />
-                                <span>{t('profile')}</span>
+                            <DropdownMenuItem asChild>
+                                <Link href="/profile">
+                                    <BadgeCheck className="mr-2 h-4 w-4" />
+                                    <span>{t('profile')}</span>
+                                </Link>
                             </DropdownMenuItem>
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />

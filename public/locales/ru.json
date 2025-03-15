@@ -22,6 +22,53 @@
         "profile": "Профиль",
         "logout": "Выйти"
     },
+    "profile": {
+        "editProfile": "Редактировать профиль",
+        "level": "Уровень",
+        "learningProgress": "Прогресс обучения",
+        "currentLevel": "Текущий уровень",
+        "experiencePoints": "Очков опыта",
+        "progressToLevel": "Прогресс до уровня {level}",
+        "tabs": {
+            "info": "Информация",
+            "achievements": "Достижения",
+            "stats": "Статистика"
+        },
+        "personalInfo": {
+            "title": "Личная информация",
+            "name": "Имя",
+            "email": "Email",
+            "studyGroup": "Учебная группа",
+            "country": "Страна",
+            "arrivalDate": "Дата прилета"
+        },
+        "achievements": {
+            "title": "Достижения",
+            "firstSteps": {
+                "title": "Первые шаги",
+                "description": "Выполнил первое задание"
+            },
+            "excellent": {
+                "title": "Отличник",
+                "description": "Выполнил 10 заданий подряд"
+            },
+            "purposeful": {
+                "title": "Целеустремленный",
+                "description": "Достиг 5 уровня"
+            },
+            "master": {
+                "title": "Мастер",
+                "description": "Набрал 1000 очков опыта"
+            },
+            "unlocked": "Получено"
+        },
+        "stats": {
+            "title": "Статистика",
+            "tasksCompleted": "Выполнено задач",
+            "experienceEarned": "Очков опыта",
+            "daysInSystem": "Дней в системе"
+        }
+    },
     "level": {
         "nextLevel": "Уровень {level}",
         "congratulations": "Поздравляем! Вы достигли уровня {level}",
