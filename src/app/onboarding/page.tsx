@@ -28,7 +28,7 @@ import {
 import { cn } from '@/lib/utils';
 
 // Example study groups: КИ21-22Б, КИ22-23Б, КИ23-24Б, КИ24-25Б
-const STUDY_GROUP_PATTERN = /^КИ\d{2}-\d{2}Б$/;
+const STUDY_GROUP_PATTERN = /[А-ЯЁа-яё\d]+[-–—][А-ЯЁа-яё\d]+/;
 
 const COUNTRY_CODES = [
   'kz',
