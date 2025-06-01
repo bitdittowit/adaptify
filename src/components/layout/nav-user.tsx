@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
-import { BadgeCheck, Bell, ChevronsUpDown, LogOut } from 'lucide-react';
+import { BadgeCheck, Bell, ChevronsUpDown, LogOut, Shield } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -16,6 +16,7 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar } from '@/components/ui/sidebar';
+import { useIsAdmin } from '@/hooks/use-admin';
 import { useSession } from '@/hooks/use-session';
 
 export function NavUser({
@@ -26,6 +27,7 @@ export function NavUser({
     const { isMobile } = useSidebar();
     const t = useTranslations('sidebar');
     const { signOut } = useSession();
+    const isAdmin = useIsAdmin();
     const initials = user.name
         .split(' ')
         .map(n => n[0])
@@ -80,6 +82,14 @@ export function NavUser({
                                     <span>{t('profile')}</span>
                                 </Link>
                             </DropdownMenuItem>
+                            {isAdmin && (
+                                <DropdownMenuItem asChild>
+                                    <Link href="/admin">
+                                        <Shield className="mr-2 h-4 w-4" />
+                                        <span>{t('admin')}</span>
+                                    </Link>
+                                </DropdownMenuItem>
+                            )}
                         </DropdownMenuGroup>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={signOut}>

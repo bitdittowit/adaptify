@@ -20,6 +20,7 @@
         "toggle": "Переключить",
         "notifications": "Уведомления",
         "profile": "Профиль",
+        "admin": "Панель администратора",
         "logout": "Выйти"
     },
     "profile": {
@@ -134,6 +135,15 @@
         "sunday": "Воскресенье",
         "days": "дн."
     },
+    "daysShort": {
+        "monday": "Пн",
+        "tuesday": "Вт",
+        "wednesday": "Ср",
+        "thursday": "Чт",
+        "friday": "Пт",
+        "saturday": "Сб",
+        "sunday": "Вс"
+    },
     "months": {
         "january": "Январь",
         "february": "Февраль",
@@ -222,5 +232,60 @@
         "uz": "Узбекистан",
         "kg": "Кыргызстан",
         "tj": "Таджикистан"
+    },
+    "admin": {
+        "dashboard": "Панель администратора",
+        "welcome": "Здравствуйте, {name}! Вы вошли как администратор.",
+        "tabs": {
+            "users": "Студенты",
+            "tasks": "Задачи"
+        },
+        "users": {
+            "title": "Студенты",
+            "description": "{count} студентов в {groupCount} учебных группах",
+            "noUsers": "Студенты не найдены",
+            "noUsersDescription": "В системе нет доступных студентов.",
+            "filteredDescription": "Показано {count} из {total} студентов",
+            "error": "Ошибка загрузки студентов",
+            "errorPermission": "У вас нет прав для доступа к этим данным. Требуются права администратора.",
+            "tryAgain": "Попробовать снова",
+            "loading": "Загрузка данных студентов...",
+            "expandAll": "Развернуть все",
+            "collapseAll": "Свернуть все",
+            "filters": {
+                "title": "Фильтры",
+                "reset": "Сбросить все",
+                "apply": "Применить фильтры",
+                "search": "Поиск",
+                "searchPlaceholder": "Поиск по имени или email...",
+                "gender": "Пол",
+                "genderMale": "Мужской",
+                "genderFemale": "Женский",
+                "country": "Страна",
+                "selectCountry": "Выберите страну",
+                "level": "Уровень",
+                "levelValue": "Уровень {level}",
+                "levelRange": "Диапазон уровней: {min} - {max}",
+                "role": "Роль",
+                "arrivalDate": "Дата прилета",
+                "dateSelectRange": "Выберите диапазон дат",
+                "clearDates": "Очистить даты",
+                "emptyValue": "Не указано"
+            },
+            "table": {
+                "name": "Имя",
+                "email": "Email",
+                "country": "Страна",
+                "level": "Уровень",
+                "role": "Роль",
+                "unassigned": "Без группы"
+            }
+        },
+        "tasks": {
+            "title": "Управление задачами",
+            "description": "Управление задачами, требованиями и назначениями",
+            "comingSoon": "Управление задачами скоро появится",
+            "comingSoonDescription": "Этот функционал находится в разработке и будет доступен в следующем обновлении."
+        }
     }
 }

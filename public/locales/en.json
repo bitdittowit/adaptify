@@ -20,6 +20,7 @@
         "toggle": "Toggle",
         "notifications": "Notifications",
         "profile": "Profile",
+        "admin": "Admin Dashboard",
         "logout": "Logout"
     },
     "profile": {
@@ -134,6 +135,15 @@
         "sunday": "Sunday",
         "days": "days"
     },
+    "daysShort": {
+        "monday": "Mon",
+        "tuesday": "Tue",
+        "wednesday": "Wed",
+        "thursday": "Thu",
+        "friday": "Fri",
+        "saturday": "Sat",
+        "sunday": "Sun"
+    },
     "months": {
         "january": "January",
         "february": "February",
@@ -222,5 +232,60 @@
         "uz": "Uzbekistan",
         "kg": "Kyrgyzstan",
         "tj": "Tajikistan"
+    },
+    "admin": {
+        "dashboard": "Admin Dashboard",
+        "welcome": "Welcome, {name}! You are logged in as an admin.",
+        "tabs": {
+            "users": "User Management",
+            "tasks": "Task Management"
+        },
+        "users": {
+            "title": "User Management",
+            "description": "{count} users across {groupCount} study groups",
+            "filteredDescription": "Showing {count} of {total} students",
+            "noUsers": "No students found",
+            "noUsersDescription": "No students available in the system.",
+            "error": "Error loading students",
+            "errorPermission": "You don't have permission to access this data. Admin access is required.",
+            "tryAgain": "Try Again",
+            "loading": "Loading user data...",
+            "expandAll": "Expand All",
+            "collapseAll": "Collapse All",
+            "filters": {
+                "title": "Filters",
+                "reset": "Reset All",
+                "apply": "Apply Filters",
+                "search": "Search",
+                "searchPlaceholder": "Search by name or email...",
+                "gender": "Gender",
+                "genderMale": "Male",
+                "genderFemale": "Female",
+                "country": "Country",
+                "selectCountry": "Select a country",
+                "level": "Level",
+                "levelValue": "Level {level}",
+                "levelRange": "Level range: {min} - {max}",
+                "role": "Role",
+                "arrivalDate": "Arrival Date",
+                "dateSelectRange": "Select date range",
+                "clearDates": "Clear dates",
+                "emptyValue": "Not specified"
+            },
+            "table": {
+                "name": "Name",
+                "email": "Email",
+                "country": "Country",
+                "level": "Level",
+                "role": "Role",
+                "unassigned": "Unassigned"
+            }
+        },
+        "tasks": {
+            "title": "Task Management",
+            "description": "Manage tasks, requirements, and assignments",
+            "comingSoon": "Task Management Coming Soon",
+            "comingSoonDescription": "This feature is under development and will be available in a future update."
+        }
     }
 }
