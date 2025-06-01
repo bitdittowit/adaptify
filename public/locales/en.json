@@ -206,7 +206,8 @@
         },
         "studyGroup": {
             "label": "Study Group",
-            "placeholder": "Select study group"
+            "placeholder": "Enter study group (e.g. КИ21-22Б)",
+            "validationError": "Should match pattern КИxx-xxБ (e.g. КИ21-22Б)"
         },
         "sex": {
             "label": "Gender",
@@ -231,7 +232,17 @@
         "kz": "Kazakhstan",
         "uz": "Uzbekistan",
         "kg": "Kyrgyzstan",
-        "tj": "Tajikistan"
+        "tj": "Tajikistan",
+        "by": "Belarus",
+        "ua": "Ukraine",
+        "md": "Moldova",
+        "am": "Armenia",
+        "az": "Azerbaijan",
+        "ge": "Georgia",
+        "ee": "Estonia",
+        "lv": "Latvia",
+        "lt": "Lithuania",
+        "tm": "Turkmenistan"
     },
     "admin": {
         "dashboard": "Admin Dashboard",
