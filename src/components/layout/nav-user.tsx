@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
-import { BadgeCheck, ChevronsUpDown, LogOut } from 'lucide-react';
+import { BadgeCheck, ChevronsUpDown, LogOut, Shield } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
@@ -20,6 +20,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
+import { useIsAdmin } from '@/hooks/use-admin';
 import { useSession } from '@/hooks/use-session';
 
 export function NavUser({
@@ -28,6 +29,7 @@ export function NavUser({
   user: { name: string; email: string; image: string | null | undefined };
 }) {
   const { isMobile } = useSidebar();
+  const isAdmin = useIsAdmin();
   const t = useTranslations('sidebar');
   const { signOut } = useSession();
   const initials = user.name
@@ -51,8 +53,10 @@ export function NavUser({
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                {/* <span className="truncate font-semibold">{user.name}</span>
+                <span className="truncate text-xs">{user.email}</span> */}
+                <span className="truncate font-semibold">Admin User</span>
+                <span className="truncate text-xs">admin@example.com</span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -69,6 +73,14 @@ export function NavUser({
                   <span>{t('profile')}</span>
                 </Link>
               </DropdownMenuItem>
+              {isAdmin && (
+                <DropdownMenuItem asChild>
+                  <Link href="/admin">
+                    <Shield className="mr-2 h-4 w-4" />
+                    <span>{t('admin')}</span>
+                  </Link>
+                </DropdownMenuItem>
+              )}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={signOut}>

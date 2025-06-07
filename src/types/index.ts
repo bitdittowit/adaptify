@@ -1,6 +1,8 @@
 export interface User {
     id: number;
     name: string;
+    email: string;
+    image?: string | null;
     sex: Sex;
     country: Country;
     arrival_date: Date | null;
@@ -8,6 +10,7 @@ export interface User {
     experience: number;
     level: number;
     tasks: Task[];
+    role: Role;
 }
 
 export interface UserLevelSummary {
@@ -138,3 +141,5 @@ export interface ProofCheck {
     title: LocalizedText;
     placeholder?: string;
 }
+
+export type Role = 'admin' | 'user';

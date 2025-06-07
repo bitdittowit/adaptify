@@ -10,6 +10,10 @@ const handler = NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
         }),
     ],
+    session: {
+        strategy: 'jwt',
+        maxAge: 30 * 24 * 60 * 60, // 30 days
+    },
     callbacks: {
         async jwt({ token, user, trigger, session }) {
             if (trigger === 'update' && session) {
@@ -20,7 +24,7 @@ const handler = NextAuth({
             if (user?.email) {
                 try {
                     const result = await db.query(
-                        'SELECT id, sex, country, study_group, experience, level FROM users WHERE email = $1',
+                        'SELECT id, role, sex, country, study_group, experience, level FROM users WHERE email = $1',
                         [user.email],
                     );
 
@@ -47,12 +51,12 @@ const handler = NextAuth({
                 const result = await db.query('SELECT * FROM users WHERE email = $1', [user.email]);
 
                 if (result.rows.length === 0) {
-                    // Create new user
+                    // Create new user with default role 'user'
                     const newUser = await db.query(
-                        `INSERT INTO users (name, email, image, completed_tasks)
-                        VALUES ($1, $2, $3, $4)
+                        `INSERT INTO users (name, email, image, completed_tasks, role)
+                        VALUES ($1, $2, $3, $4, $5)
                         RETURNING id`,
-                        [user.name ?? 'New User', user.email, user.image ?? null, []],
+                        [user.name ?? 'New User', user.email, user.image ?? null, [], 'user'],
                     );
 
                     const userId = newUser.rows[0].id;
@@ -84,8 +88,9 @@ const handler = NextAuth({
                 return false;
             }
         },
-        session({ session, token }) {
-            const updatedSession = {
+        async session({ session, token }) {
+            // Return session with custom properties from token
+            return {
                 ...session,
                 user: {
                     ...session.user,
@@ -95,11 +100,12 @@ const handler = NextAuth({
                     sex: token.sex,
                     experience: token.experience,
                     level: token.level,
+                    role: token.role,
                 },
             };
-            return updatedSession;
         },
     },
+    debug: false, // Set to true only during local development
     pages: {
         signIn: '/login',
     },
