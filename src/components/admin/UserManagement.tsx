@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 import { useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
@@ -71,25 +71,7 @@ export function UserManagement() {
         router.refresh();
     };
 
-    useEffect(() => {
-        if (users && Array.isArray(users)) {
-            setAllUsers(users);
-
-            // Update level range based on available levels
-            const levels = getUniqueLevels();
-            if (levels.length > 0) {
-                setLevelRange([Math.min(...levels), Math.max(...levels)]);
-            }
-
-            applyFilters(users, filters);
-        }
-    }, [users]);
-
-    useEffect(() => {
-        applyFilters(allUsers, filters);
-    }, [filters]);
-
-    const applyFilters = (usersToFilter: User[], currentFilters: Filters) => {
+    const applyFilters = useCallback((usersToFilter: User[], currentFilters: Filters) => {
         if (!(usersToFilter && Array.isArray(usersToFilter))) {
             return;
         }
@@ -146,7 +128,42 @@ export function UserManagement() {
         }, {});
 
         setUsersByGroup(grouped);
-    };
+    }, [levelRange, t]);
+
+    const getUniqueLevels = useCallback(() => {
+        // Define a reasonable range of levels (1-10)
+        const supportedLevels = Array.from({ length: 10 }, (_, i) => i + 1);
+
+        // If there are users, add any levels from the DB not in our predefined list
+        if (allUsers && Array.isArray(allUsers)) {
+            const levelsFromDB = [...new Set(allUsers.map(user => user.level))];
+            levelsFromDB.forEach(level => {
+                if (!supportedLevels.includes(level)) {
+                    supportedLevels.push(level);
+                }
+            });
+        }
+
+        return supportedLevels.sort((a, b) => a - b);
+    }, [allUsers]);
+
+    useEffect(() => {
+        if (users && Array.isArray(users)) {
+            setAllUsers(users);
+
+            // Update level range based on available levels
+            const levels = getUniqueLevels();
+            if (levels.length > 0) {
+                setLevelRange([Math.min(...levels), Math.max(...levels)]);
+            }
+
+            applyFilters(users, filters);
+        }
+    }, [users, filters, applyFilters, getUniqueLevels]);
+
+    useEffect(() => {
+        applyFilters(allUsers, filters);
+    }, [filters, allUsers, applyFilters]);
 
     const resetFilters = () => {
         setFilters({ name: '', country: [], level: [], role: [], sex: [] });
@@ -177,24 +194,6 @@ export function UserManagement() {
         }
 
         return supportedCountries;
-    };
-
-    const getUniqueLevels = () => {
-        // Define a reasonable range of levels (1-10)
-        const supportedLevels = Array.from({ length: 10 }, (_, i) => i + 1);
-
-        // If there are users, add any levels from the DB not in our predefined list
-        if (allUsers && Array.isArray(allUsers)) {
-            const levelsFromDB = [...new Set(allUsers.map(user => user.level))];
-            // biome-ignore lint/complexity/noForEach: <explanation>
-            levelsFromDB.forEach(level => {
-                if (!supportedLevels.includes(level)) {
-                    supportedLevels.push(level);
-                }
-            });
-        }
-
-        return supportedLevels.sort((a, b) => a - b);
     };
 
     const getUniqueRoles = () => {
@@ -233,12 +232,15 @@ export function UserManagement() {
     }
 
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-    const toggleFilterValue = (field: keyof Filters, value: any) => {
+    const toggleFilterValue = (
+        field: keyof Filters,
+        value: string | number | Sex | Role
+    ) => {
         setFilters(prev => {
             // Handle array fields
             if (Array.isArray(prev[field])) {
                 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-                const values = prev[field] as any[];
+                const values = prev[field] as (string | number | Sex | Role)[];
                 const exists = values.includes(value);
 
                 if (exists) {
@@ -249,7 +251,7 @@ export function UserManagement() {
 
             // Handle string field (name)
             if (field === 'name') {
-                return { ...prev, name: value };
+                return { ...prev, name: value as string };
             }
 
             return prev;
