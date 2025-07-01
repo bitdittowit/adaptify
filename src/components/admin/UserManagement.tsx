@@ -130,11 +130,9 @@ export function UserManagement() {
         setUsersByGroup(grouped);
     }, [levelRange, t]);
 
-    const getUniqueLevels = useCallback(() => {
-        // Define a reasonable range of levels (1-10)
+    // getUniqueLevels теперь обычная функция
+    const getUniqueLevels = () => {
         const supportedLevels = Array.from({ length: 10 }, (_, i) => i + 1);
-
-        // If there are users, add any levels from the DB not in our predefined list
         if (allUsers && Array.isArray(allUsers)) {
             const levelsFromDB = [...new Set(allUsers.map(user => user.level))];
             levelsFromDB.forEach(level => {
@@ -143,23 +141,20 @@ export function UserManagement() {
                 }
             });
         }
-
         return supportedLevels.sort((a, b) => a - b);
-    }, [allUsers]);
+    };
 
     useEffect(() => {
         if (users && Array.isArray(users)) {
             setAllUsers(users);
-
             // Update level range based on available levels
             const levels = getUniqueLevels();
             if (levels.length > 0) {
                 setLevelRange([Math.min(...levels), Math.max(...levels)]);
             }
-
             applyFilters(users, filters);
         }
-    }, [users, filters, applyFilters, getUniqueLevels]);
+    }, [users]);
 
     useEffect(() => {
         applyFilters(allUsers, filters);
@@ -167,7 +162,6 @@ export function UserManagement() {
 
     const resetFilters = () => {
         setFilters({ name: '', country: [], level: [], role: [], sex: [] });
-
         // Reset level range
         const levels = getUniqueLevels();
         if (levels.length > 0) {
